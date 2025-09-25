@@ -10,7 +10,7 @@ const SavedContent = () => {
   const { savedItems } = useSavedContent();
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="h-full"> {/* Removed container mx-auto px-4 py-8, added h-full */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Your Saved Content</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
         Revisit the content you've bookmarked for later inspiration.
