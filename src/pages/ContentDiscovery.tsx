@@ -4,7 +4,8 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Filter } from "lucide-react";
-import ContentCard from "@/components/ContentCard"; // Import ContentCard
+import ContentCard from "@/components/ContentCard";
+import FilterSidebar from "@/components/FilterSidebar"; // Import FilterSidebar
 
 const mockContent = [
   {
@@ -64,6 +65,35 @@ const mockContent = [
 ];
 
 const ContentDiscovery = () => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = React.useState(false);
+  const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
+  const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
+
+  const handlePlatformChange = (platform: string, checked: boolean) => {
+    setSelectedPlatforms((prev) =>
+      checked ? [...prev, platform] : prev.filter((p) => p !== platform)
+    );
+  };
+
+  const handleApplyFilters = () => {
+    setAppliedPlatforms(selectedPlatforms);
+    setIsFilterSidebarOpen(false);
+  };
+
+  const handleClearFilters = () => {
+    setSelectedPlatforms([]);
+    setAppliedPlatforms([]);
+    setIsFilterSidebarOpen(false);
+  };
+
+  const filteredContent = mockContent.filter((content) => {
+    const matchesSearch = content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          content.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesPlatform = appliedPlatforms.length === 0 || appliedPlatforms.includes(content.platform);
+    return matchesSearch && matchesPlatform;
+  });
+
   return (
     <div className="min-h-screen p-4 md:p-8 lg:p-12 bg-background text-foreground">
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Discovery Engine</h1>
@@ -78,20 +108,40 @@ const ContentDiscovery = () => {
             type="text"
             placeholder="Search for trending content by topic or keyword..."
             className="w-full pl-10 pr-4 py-2 rounded-md border border-input focus:ring-2 focus:ring-primary focus:border-transparent"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
           <Filter className="h-4 w-4" />
           Filters
+          {appliedPlatforms.length > 0 && (
+            <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+              {appliedPlatforms.length}
+            </span>
+          )}
         </Button>
-        <Button>Search</Button>
+        <Button onClick={() => setAppliedPlatforms(selectedPlatforms)}>Search</Button> {/* Re-apply filters on search button click */}
       </div>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockContent.map((content) => (
-          <ContentCard key={content.id} {...content} />
-        ))}
+        {filteredContent.length > 0 ? (
+          filteredContent.map((content) => (
+            <ContentCard key={content.id} {...content} />
+          ))
+        ) : (
+          <p className="col-span-full text-center text-muted-foreground">No content found matching your criteria.</p>
+        )}
       </div>
+
+      <FilterSidebar
+        isOpen={isFilterSidebarOpen}
+        onOpenChange={setIsFilterSidebarOpen}
+        selectedPlatforms={selectedPlatforms}
+        onPlatformChange={handlePlatformChange}
+        onApplyFilters={handleApplyFilters}
+        onClearFilters={handleClearFilters}
+      />
     </div>
   );
 };
