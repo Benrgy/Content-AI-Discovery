@@ -1,30 +1,20 @@
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appRoutes } from "./routes";
 import Layout from "./components/Layout";
-import { ThemeProvider } from "./components/ThemeProvider";
-import { Toaster as Sonner } from "@/components/ui/sonner"; // Import Toaster
-
-const queryClient = new QueryClient();
+import Providers from "./components/Providers"; // Import the new Providers component
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <TooltipProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              {appRoutes.map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
-              ))}
-            </Route>
-          </Routes>
-        </BrowserRouter>
-        <Sonner /> {/* Moved the Toaster here, outside BrowserRouter */}
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <Providers>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {appRoutes.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </Providers>
 );
 
 export default App;
