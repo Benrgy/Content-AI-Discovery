@@ -15,7 +15,7 @@ const Header = () => {
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <MobileNav /> {/* Mobile navigation toggle */}
+          <MobileNav /> {/* Mobile navigation toggle - now correctly rendered */}
           <Link to="/" className="text-2xl font-bold text-primary">
             ContentAI
           </Link>
