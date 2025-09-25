@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { appRoutes } from "@/routes"; // Import appRoutes
 import { ThemeToggle } from "./ThemeToggle"; // Import ThemeToggle
-import MobileNav from "./MobileNav"; // Import MobileNav
 
 const Header = () => {
   // Filter routes for public navigation based on the new 'inNav' property
@@ -15,7 +14,6 @@ const Header = () => {
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
-          <MobileNav /> {/* Mobile navigation toggle */}
           <Link to="/" className="text-2xl font-bold text-primary">
             ContentAI
           </Link>
