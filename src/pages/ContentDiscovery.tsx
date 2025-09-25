@@ -7,7 +7,22 @@ import { Search, Filter } from "lucide-react";
 import ContentCard from "@/components/ContentCard";
 import FilterSidebar from "@/components/FilterSidebar"; // Import FilterSidebar
 
-const mockContent = [
+interface ContentItem {
+  id: string;
+  title: string;
+  description: string;
+  platform: string;
+  engagement: {
+    likes: number;
+    comments: number;
+    shares: number;
+    views?: number;
+  };
+  imageUrl?: string;
+  link: string;
+}
+
+const mockContent: ContentItem[] = [
   {
     id: "1",
     title: "10 Productivity Hacks for Remote Workers in 2024",
@@ -69,6 +84,33 @@ const ContentDiscovery = () => {
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = React.useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
   const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isError, setIsError] = React.useState(false);
+  const [contentData, setContentData] = React.useState<ContentItem[]>([]);
+
+  React.useEffect(() => {
+    const fetchContent = () => {
+      setIsLoading(true);
+      setIsError(false);
+      // Simulate API call
+      setTimeout(() => {
+        try {
+          // Simulate a random error for demonstration
+          if (Math.random() < 0.1) { // 10% chance of error
+            throw new Error("Failed to fetch content.");
+          }
+          setContentData(mockContent);
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching content:", error);
+          setIsError(true);
+          setIsLoading(false);
+        }
+      }, 1000); // Simulate 1 second loading time
+    };
+
+    fetchContent();
+  }, []);
 
   const handlePlatformChange = (platform: string, checked: boolean) => {
     setSelectedPlatforms((prev) =>
@@ -87,7 +129,7 @@ const ContentDiscovery = () => {
     setIsFilterSidebarOpen(false);
   };
 
-  const filteredContent = mockContent.filter((content) => {
+  const filteredContent = contentData.filter((content) => {
     const matchesSearch = content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           content.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesPlatform = appliedPlatforms.length === 0 || appliedPlatforms.includes(content.platform);
@@ -124,7 +166,11 @@ const ContentDiscovery = () => {
       </div>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredContent.length > 0 ? (
+        {isLoading ? (
+          <p className="col-span-full text-center text-muted-foreground">Loading content...</p>
+        ) : isError ? (
+          <p className="col-span-full text-center text-destructive">Error loading content. Please try again.</p>
+        ) : filteredContent.length > 0 ? (
           filteredContent.map((content) => (
             <ContentCard key={content.id} {...content} />
           ))
