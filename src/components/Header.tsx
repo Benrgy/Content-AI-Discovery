@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { appRoutes } from "@/routes"; // Import appRoutes
+import { ThemeToggle } from "./ThemeToggle"; // Import ThemeToggle
 
 const Header = () => {
   // Filter routes for public navigation based on the new 'inNav' property
@@ -25,6 +26,7 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center space-x-2">
+          <ThemeToggle /> {/* Add the ThemeToggle here */}
           {/* Future user authentication/profile buttons can go here */}
         </div>
       </div>
