@@ -20,9 +20,9 @@ const App = () => (
               ))}
             </Route>
           </Routes>
+          <Sonner /> {/* Moved the Toaster here, inside BrowserRouter */}
         </BrowserRouter>
       </TooltipProvider>
-      <Sonner /> {/* Include the Toaster here, outside the BrowserRouter but inside ThemeProvider */}
     </ThemeProvider>
   </QueryClientProvider>
 );
