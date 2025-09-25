@@ -39,7 +39,7 @@ const ContentGeneration = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center p-4 md:p-8 lg:p-12 bg-background text-foreground">
+    <div className="flex flex-col items-center bg-background text-foreground">
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Generation</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl">
         Unleash AI to create engaging content tailored to your needs.
