@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import { Button } from "@/components/ui/button";
 import { appRoutes } from "@/routes";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
 
 const Header = () => {
+  const location = useLocation(); // Get current location
   const publicRoutes = appRoutes.filter(route => route.inNav);
 
   return (
@@ -15,13 +16,18 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
           <MobileNav />
-          <Link to="/" className="text-2xl font-bold text-primary">
+          <Link to="/" className="text-2xl font-bold text-primary" aria-label="ContentAI Home"> {/* Added aria-label */}
             ContentAI
-            <span className="sr-only">Home</span> {/* Added for accessibility */}
+            <span className="sr-only">Home</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-4">
             {publicRoutes.map((route) => (
-              <Button key={route.path} variant="ghost" asChild>
+              <Button
+                key={route.path}
+                variant="ghost"
+                asChild
+                aria-current={location.pathname === route.path ? "page" : undefined} // Conditionally apply aria-current
+              >
                 <Link to={route.path}>{route.name}</Link>
               </Button>
             ))}
