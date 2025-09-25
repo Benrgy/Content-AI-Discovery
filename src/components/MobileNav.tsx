@@ -1,17 +1,16 @@
 "use client";
 
 import React from "react";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { appRoutes } from "@/routes"; // Import appRoutes
+import { appRoutes } from "@/routes";
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const location = useLocation(); // Get current location
+  const location = useLocation();
 
-  // Filter routes for public navigation
   const publicRoutes = appRoutes.filter(route => route.inNav);
 
   return (
@@ -26,15 +25,15 @@ const MobileNav = () => {
         <SheetHeader>
           <SheetTitle>ContentAI</SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col gap-4 py-4">
+        <nav className="flex flex-col gap-4 py-4" aria-label="Mobile navigation"> {/* Added aria-label */}
           {publicRoutes.map((route) => (
             <Button
               key={route.path}
               variant="ghost"
               className="justify-start text-lg"
               asChild
-              onClick={() => setIsOpen(false)} // Close sheet on navigation
-              aria-current={location.pathname === route.path ? "page" : undefined} // Conditionally apply aria-current
+              onClick={() => setIsOpen(false)}
+              aria-current={location.pathname === route.path ? "page" : undefined}
             >
               <Link to={route.path}>{route.name}</Link>
             </Button>

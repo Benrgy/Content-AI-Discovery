@@ -10,14 +10,14 @@ const SavedContent = () => {
   const { savedItems } = useSavedContent();
 
   return (
-    <div className="h-full"> {/* Removed container mx-auto px-4 py-8, added h-full */}
+    <div className="flex flex-col flex-grow"> {/* Removed h-full, added flex-col flex-grow */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Your Saved Content</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
         Revisit the content you've bookmarked for later inspiration.
       </p>
 
       {savedItems.length === 0 ? (
-        <div className="max-w-xl mx-auto">
+        <div className="max-w-xl mx-auto flex-grow flex items-center justify-center"> {/* Added flex-grow and centering */}
           <Alert>
             <Info className="h-4 w-4" />
             <AlertTitle>No Saved Content</AlertTitle>
