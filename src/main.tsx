@@ -1,10 +1,8 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./globals.css";
-import { StrictMode } from "react"; // Import StrictMode directly
+// StrictMode is now handled by the Providers component, so no direct import needed here.
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  <App /> // App is now wrapped by Providers, which includes StrictMode
 );
