@@ -3,13 +3,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { appRoutes } from "@/routes";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
+import { usePublicRoutes } from "@/hooks/use-public-routes"; // Import the new hook
 
 const Header = () => {
   const location = useLocation();
-  const publicRoutes = appRoutes.filter(route => route.inNav);
+  const publicRoutes = usePublicRoutes(); // Use the new hook
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
@@ -20,7 +20,7 @@ const Header = () => {
             ContentAI
             <span className="sr-only">Home</span>
           </Link>
-          <nav className="hidden md:flex items-center space-x-4" aria-label="Main navigation"> {/* Added aria-label */}
+          <nav className="hidden md:flex items-center space-x-4" aria-label="Main navigation">
             {publicRoutes.map((route) => (
               <Button
                 key={route.path}

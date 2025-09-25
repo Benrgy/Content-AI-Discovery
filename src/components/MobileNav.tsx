@@ -5,13 +5,12 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { appRoutes } from "@/routes";
+import { usePublicRoutes } from "@/hooks/use-public-routes"; // Import the new hook
 
 const MobileNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
-
-  const publicRoutes = appRoutes.filter(route => route.inNav);
+  const publicRoutes = usePublicRoutes(); // Use the new hook
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -25,7 +24,7 @@ const MobileNav = () => {
         <SheetHeader>
           <SheetTitle>ContentAI</SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col gap-4 py-4" aria-label="Mobile navigation"> {/* Added aria-label */}
+        <nav className="flex flex-col gap-4 py-4" aria-label="Mobile navigation">
           {publicRoutes.map((route) => (
             <Button
               key={route.path}
