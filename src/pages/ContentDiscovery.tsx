@@ -3,10 +3,12 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter } from "lucide-react";
+import { Search, Filter, Info, AlertCircle } from "lucide-react";
 import ContentCard from "@/components/ContentCard";
+import ContentCardSkeleton from "@/components/ContentCardSkeleton"; // Import the new skeleton component
 import FilterSidebar from "@/components/FilterSidebar";
-import { mockContent, ContentItem } from "@/data/mockContent"; // Import from new data file
+import { mockContent, ContentItem } from "@/data/mockContent";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"; // Import Alert components
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -97,15 +99,32 @@ const ContentDiscovery = () => {
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading ? (
-          <p className="col-span-full text-center text-muted-foreground">Loading content...</p>
+          // Display multiple skeleton cards during loading
+          Array.from({ length: 6 }).map((_, index) => <ContentCardSkeleton key={index} />)
         ) : isError ? (
-          <p className="col-span-full text-center text-destructive">Error loading content. Please try again.</p>
+          <div className="col-span-full">
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>
+                Failed to load content. Please try refreshing the page.
+              </AlertDescription>
+            </Alert>
+          </div>
         ) : filteredContent.length > 0 ? (
           filteredContent.map((content) => (
             <ContentCard key={content.id} {...content} />
           ))
         ) : (
-          <p className="col-span-full text-center text-muted-foreground">No content found matching your criteria.</p>
+          <div className="col-span-full">
+            <Alert>
+              <Info className="h-4 w-4" />
+              <AlertTitle>No Content Found</AlertTitle>
+              <AlertDescription>
+                No content matches your current search and filter criteria. Try adjusting them.
+              </AlertDescription>
+            </Alert>
+          </div>
         )}
       </div>
 
