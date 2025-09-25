@@ -5,43 +5,18 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Filter, Info, AlertCircle } from "lucide-react";
 import ContentCard from "@/components/ContentCard";
-import ContentCardSkeleton from "@/components/ContentCardSkeleton"; // Import the new skeleton component
+import ContentCardSkeleton from "@/components/ContentCardSkeleton";
 import FilterSidebar from "@/components/FilterSidebar";
-import { mockContent, ContentItem } from "@/data/mockContent";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"; // Import Alert components
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data"; // Import the new hook
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = React.useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
   const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [isError, setIsError] = React.useState(false);
-  const [contentData, setContentData] = React.useState<ContentItem[]>([]);
 
-  React.useEffect(() => {
-    const fetchContent = () => {
-      setIsLoading(true);
-      setIsError(false);
-      // Simulate API call
-      setTimeout(() => {
-        try {
-          // Simulate a random error for demonstration
-          if (Math.random() < 0.1) { // 10% chance of error
-            throw new Error("Failed to fetch content.");
-          }
-          setContentData(mockContent);
-          setIsLoading(false);
-        } catch (error) {
-          console.error("Error fetching content:", error);
-          setIsError(true);
-          setIsLoading(false);
-        }
-      }, 1000); // Simulate 1 second loading time
-    };
-
-    fetchContent();
-  }, []);
+  const { data: contentData, isLoading, isError, refetch } = useContentDiscoveryData();
 
   const handlePlatformChange = (platform: string, checked: boolean) => {
     setSelectedPlatforms((prev) =>
@@ -60,7 +35,7 @@ const ContentDiscovery = () => {
     setIsFilterSidebarOpen(false);
   };
 
-  const filteredContent = contentData.filter((content) => {
+  const filteredContent = (contentData || []).filter((content) => {
     const matchesSearch = content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           content.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesPlatform = appliedPlatforms.length === 0 || appliedPlatforms.includes(content.platform);
@@ -99,7 +74,6 @@ const ContentDiscovery = () => {
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading ? (
-          // Display multiple skeleton cards during loading
           Array.from({ length: 6 }).map((_, index) => <ContentCardSkeleton key={index} />)
         ) : isError ? (
           <div className="col-span-full">
@@ -108,6 +82,7 @@ const ContentDiscovery = () => {
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>
                 Failed to load content. Please try refreshing the page.
+                <Button onClick={() => refetch()} className="ml-4">Retry</Button>
               </AlertDescription>
             </Alert>
           </div>
