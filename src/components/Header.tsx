@@ -3,8 +3,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { appRoutes } from "@/routes"; // Import appRoutes
 
 const Header = () => {
+  const publicRoutes = appRoutes.filter(route => route.isPublic && route.path !== "/");
+
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
       <div className="container flex h-16 items-center justify-between">
@@ -13,13 +16,11 @@ const Header = () => {
             ContentAI
           </Link>
           <nav className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" asChild>
-              <Link to="/discover">Discover Content</Link>
-            </Button>
-            <Button variant="ghost" asChild>
-              <Link to="/generate">Generate Content</Link>
-            </Button>
-            {/* Add more navigation links here as needed */}
+            {publicRoutes.map((route) => (
+              <Button key={route.path} variant="ghost" asChild>
+                <Link to={route.path}>{route.name}</Link>
+              </Button>
+            ))}
           </nav>
         </div>
         <div className="flex items-center space-x-2">
