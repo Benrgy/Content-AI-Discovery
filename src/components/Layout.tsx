@@ -3,7 +3,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import { MadeWithDyad } from "./made-with-dyad";
+import Footer from "./Footer"; // Import the new Footer component
 
 const Layout: React.FC = () => {
   return (
@@ -12,9 +12,7 @@ const Layout: React.FC = () => {
       <main className="flex-grow flex flex-col container mx-auto py-8 px-4">
         <Outlet />
       </main>
-      <footer className="py-4">
-        <MadeWithDyad />
-      </footer>
+      <Footer /> {/* Use the new Footer component */}
     </div>
   );
 };
