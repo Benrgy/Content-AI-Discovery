@@ -13,7 +13,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col items-center justify-center flex-grow rounded-lg p-6">
+    <div className="flex flex-col items-center justify-center rounded-lg p-6 flex-grow"> {/* Removed h-full, added flex-grow */}
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">Oops! Page not found</p>
