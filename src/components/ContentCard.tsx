@@ -3,7 +3,6 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { MessageSquare, Heart, Share2, Eye } from "lucide-react";
 
 interface ContentCardProps {
@@ -38,7 +37,9 @@ const ContentCard: React.FC<ContentCardProps> = ({
             alt={title}
             className="w-full h-full object-cover"
           />
-          <Badge className="absolute top-2 left-2 capitalize">{platform}</Badge>
+          <div className="absolute top-2 left-2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full capitalize">
+            {platform}
+          </div>
         </div>
       )}
       <CardHeader>
