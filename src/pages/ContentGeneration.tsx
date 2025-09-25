@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Copy } from "lucide-react";
 import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
+import { contentPlatforms } from "@/constants/platforms"; // Import the centralized platforms
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -69,12 +70,11 @@ const ContentGeneration = () => {
                   <SelectValue placeholder="Select platform" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="linkedin">LinkedIn</SelectItem>
-                  <SelectItem value="tiktok">TikTok</SelectItem>
-                  <SelectItem value="twitter">Twitter</SelectItem>
-                  <SelectItem value="instagram">Instagram</SelectItem>
-                  <SelectItem value="youtube">YouTube</SelectItem>
-                  <SelectItem value="blog">Blog Post</SelectItem>
+                  {contentPlatforms.map((p) => (
+                    <SelectItem key={p.value} value={p.value}>
+                      {p.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

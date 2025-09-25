@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { contentPlatforms } from "@/constants/platforms"; // Import the centralized platforms
 
 interface FilterSidebarProps {
   isOpen: boolean;
@@ -15,8 +16,6 @@ interface FilterSidebarProps {
   onApplyFilters: () => void;
   onClearFilters: () => void;
 }
-
-const platforms = ["linkedin", "tiktok", "twitter", "instagram", "youtube", "blog"];
 
 const FilterSidebar: React.FC<FilterSidebarProps> = ({
   isOpen,
@@ -38,15 +37,15 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
             <h3 className="text-md font-semibold">Platforms</h3>
-            {platforms.map((platform) => (
-              <div key={platform} className="flex items-center space-x-2">
+            {contentPlatforms.map((platform) => (
+              <div key={platform.value} className="flex items-center space-x-2">
                 <Checkbox
-                  id={`platform-${platform}`}
-                  checked={selectedPlatforms.includes(platform)}
-                  onCheckedChange={(checked) => onPlatformChange(platform, checked as boolean)}
+                  id={`platform-${platform.value}`}
+                  checked={selectedPlatforms.includes(platform.value)}
+                  onCheckedChange={(checked) => onPlatformChange(platform.value, checked as boolean)}
                 />
-                <Label htmlFor={`platform-${platform}`} className="capitalize">
-                  {platform}
+                <Label htmlFor={`platform-${platform.value}`} className="capitalize">
+                  {platform.label}
                 </Label>
               </div>
             ))}
