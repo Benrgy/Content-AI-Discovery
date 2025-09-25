@@ -4,6 +4,7 @@ import React from "react";
 import Index from "./pages/Index";
 import ContentDiscovery from "./pages/ContentDiscovery";
 import ContentGeneration from "./pages/ContentGeneration";
+import SavedContent from "./pages/SavedContent"; // Import the new SavedContent page
 import NotFound from "./pages/NotFound";
 
 interface AppRoute {
@@ -30,6 +31,12 @@ export const appRoutes: AppRoute[] = [
     path: "/generate",
     name: "Generate Content",
     element: <ContentGeneration />,
+    inNav: true,
+  },
+  {
+    path: "/saved", // New route for saved content
+    name: "Saved Content",
+    element: <SavedContent />,
     inNav: true,
   },
   // Add all custom routes above the catch-all "*" route

@@ -3,31 +3,22 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Heart, Share2, Eye } from "lucide-react";
+import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck } from "lucide-react"; // Import Bookmark icons
+import { useSavedContent } from "@/hooks/use-saved-content"; // Import the hook
+import { ContentItem } from "@/data/mockContent"; // Import ContentItem type
 
-interface ContentCardProps {
-  id: string;
-  title: string;
-  description: string;
-  platform: string;
-  engagement: {
-    likes: number;
-    comments: number;
-    shares: number;
-    views?: number;
+interface ContentCardProps extends ContentItem {} // Extend ContentItem directly
+
+const ContentCard: React.FC<ContentCardProps> = (props) => {
+  const { id, title, description, platform, engagement, imageUrl, link } = props;
+  const { isSaved, toggleSaved } = useSavedContent();
+  const saved = isSaved(id);
+
+  const handleToggleSave = (event: React.MouseEvent) => {
+    event.preventDefault(); // Prevent navigating if the card itself is a link
+    toggleSaved(props);
   };
-  imageUrl?: string;
-  link: string;
-}
 
-const ContentCard: React.FC<ContentCardProps> = ({
-  title,
-  description,
-  platform,
-  engagement,
-  imageUrl,
-  link,
-}) => {
   return (
     <Card className="flex flex-col h-full">
       {imageUrl && (
@@ -40,6 +31,19 @@ const ContentCard: React.FC<ContentCardProps> = ({
           <div className="absolute top-2 left-2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full capitalize">
             {platform}
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-2 right-2 bg-background/50 hover:bg-background/70"
+            onClick={handleToggleSave}
+            aria-label={saved ? "Unsave content" : "Save content"}
+          >
+            {saved ? (
+              <BookmarkCheck className="h-5 w-5 text-primary" />
+            ) : (
+              <Bookmark className="h-5 w-5 text-muted-foreground" />
+            )}
+          </Button>
         </div>
       )}
       <CardHeader>
