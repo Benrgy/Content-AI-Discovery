@@ -3,11 +3,12 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck } from "lucide-react"; // Import Bookmark icons
-import { useSavedContent } from "@/hooks/use-saved-content"; // Import the hook
-import { ContentItem } from "@/data/mockContent"; // Import ContentItem type
+import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { useSavedContent } from "@/hooks/use-saved-content";
+import { ContentItem } from "@/data/mockContent";
 
-interface ContentCardProps extends ContentItem {} // Extend ContentItem directly
+interface ContentCardProps extends ContentItem {}
 
 const ContentCard: React.FC<ContentCardProps> = (props) => {
   const { id, title, description, platform, engagement, imageUrl, link } = props;
@@ -15,7 +16,7 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
   const saved = isSaved(id);
 
   const handleToggleSave = (event: React.MouseEvent) => {
-    event.preventDefault(); // Prevent navigating if the card itself is a link
+    event.preventDefault();
     toggleSaved(props);
   };
 
@@ -31,19 +32,26 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
           <div className="absolute top-2 left-2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full capitalize">
             {platform}
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute top-2 right-2 bg-background/50 hover:bg-background/70"
-            onClick={handleToggleSave}
-            aria-label={saved ? "Unsave content" : "Save content"}
-          >
-            {saved ? (
-              <BookmarkCheck className="h-5 w-5 text-primary" />
-            ) : (
-              <Bookmark className="h-5 w-5 text-muted-foreground" />
-            )}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 bg-background/50 hover:bg-background/70"
+                onClick={handleToggleSave}
+                aria-label={saved ? "Unsave content" : "Save content"}
+              >
+                {saved ? (
+                  <BookmarkCheck className="h-5 w-5 text-primary" />
+                ) : (
+                  <Bookmark className="h-5 w-5 text-muted-foreground" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{saved ? "Unsave content" : "Save content"}</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       )}
       <CardHeader>
