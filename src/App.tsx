@@ -4,8 +4,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import ContentDiscovery from "./pages/ContentDiscovery"; // Import the new page
+import ContentDiscovery from "./pages/ContentDiscovery";
+import ContentGeneration from "./pages/ContentGeneration"; // Import the new page
 import NotFound from "./pages/NotFound";
+import Header from "./components/Header"; // Import the Header component
 
 const queryClient = new QueryClient();
 
@@ -15,9 +17,11 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Header /> {/* Render the Header component */}
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/discover" element={<ContentDiscovery />} /> {/* New route */}
+          <Route path="/discover" element={<ContentDiscovery />} />
+          <Route path="/generate" element={<ContentGeneration />} /> {/* New route */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
