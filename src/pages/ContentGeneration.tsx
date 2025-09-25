@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Copy } from "lucide-react";
-import { toast } from "sonner";
+import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -29,13 +29,13 @@ const ContentGeneration = () => {
         `It's crafted to be engaging and relevant to your chosen parameters.`
       );
       setIsLoading(false);
-      toast.success("Content generated successfully!");
+      showSuccess("Content generated successfully!"); // Using utility function
     }, 2000);
   };
 
   const handleCopyContent = () => {
     navigator.clipboard.writeText(generatedContent);
-    toast.info("Generated content copied to clipboard!");
+    showInfo("Generated content copied to clipboard!"); // Using utility function
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ContentItem } from "@/data/mockContent";
-import { toast } from "sonner";
+import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
 
 const LOCAL_STORAGE_KEY = "savedContentItems";
 
@@ -28,10 +28,10 @@ export function useSavedContent() {
   const toggleSaved = (item: ContentItem) => {
     setSavedItems((prevItems) => {
       if (isSaved(item.id)) {
-        toast.info(`Removed "${item.title}" from saved content.`);
+        showInfo(`Removed "${item.title}" from saved content.`); // Using utility function
         return prevItems.filter((savedItem) => savedItem.id !== item.id);
       } else {
-        toast.success(`Saved "${item.title}"!`);
+        showSuccess(`Saved "${item.title}"!`); // Using utility function
         return [...prevItems, item];
       }
     });
