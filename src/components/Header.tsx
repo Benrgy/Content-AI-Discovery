@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/button";
 import { appRoutes } from "@/routes"; // Import appRoutes
 
 const Header = () => {
-  const publicRoutes = appRoutes.filter(route => route.isPublic && route.path !== "/");
+  // Filter routes for public navigation, excluding the root path and the 404 page
+  const publicRoutes = appRoutes.filter(route => 
+    route.path !== "/" && route.path !== "*"
+  );
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
