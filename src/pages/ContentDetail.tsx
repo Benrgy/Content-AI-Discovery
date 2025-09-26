@@ -21,8 +21,8 @@ import { ContentItem } from "@/types/content";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import { showInfo } from "@/utils/toast";
 import { Link } from "react-router-dom";
-import PlatformIcon from "./PlatformIcon";
-import ContentPerformanceMetrics from "./ContentPerformanceMetrics";
+import PlatformIcon from "@/components/PlatformIcon";
+import ContentPerformanceMetrics from "@/components/ContentPerformanceMetrics";
 import { formatNumber } from "@/constants/content-constants";
 import PageLayout from "@/components/PageLayout";
 import { ContentStructuredData } from "@/components/ContentStructuredData";
@@ -200,7 +200,7 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
                   <Badge key={tag} variant="secondary">
                     {tag}
                   </Badge>
-                )}
+                ))}
               </div>
             </div>
           )}
