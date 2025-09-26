@@ -30,7 +30,9 @@ const ContentCard = (props: ContentCardProps) => {
   const handleCopyLink = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    navigator.clipboard.writeText(link);
+    // Copy the internal app link instead of external link
+    const appLink = `${window.location.origin}/content/${id}`;
+    navigator.clipboard.writeText(appLink);
     showInfo("Content link copied to clipboard!");
   };
   
@@ -93,7 +95,7 @@ const ContentCard = (props: ContentCardProps) => {
           <CardTitle className="text-lg line-clamp-2">{title}</CardTitle>
         </div>
         {category && (
-          <Badge variant="secondary" className="mt-1 mb-2">
+          <Badge variant="secondary" className="mt-1 mb-2 capitalize">
             {category}
           </Badge>
         )}
