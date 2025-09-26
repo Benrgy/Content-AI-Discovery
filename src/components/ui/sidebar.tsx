@@ -5,8 +5,6 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
 
-// Fixed import path to match actual file location
-import { useIsMobile } from "../../hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +18,23 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-// Rest of the file remains the same...
+// Simple mobile detection function
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
+
+  return isMobile;
+};
+
 const sidebarMenuButtonVariants = cva(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
@@ -81,42 +95,11 @@ const Sidebar = React.forwardRef<
       "expanded"
     );
 
-    // Mobile only
-    const openMobile = React.useCallback(() => {
-      document.querySelector("body")?.classList.add("overflow-hidden");
-    }, []);
-
-    const closeMobile = React.useCallback(() => {
-      document.querySelector("body")?.classList.remove("overflow-hidden");
-    }, []);
-
-    // Effect to close sidebar on mobile when clicking outside
-    React.useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (isMobile && state === "expanded") {
-          const sidebar = document.querySelector("[data-sidebar]");
-          if (sidebar && !sidebar.contains(event.target as Node)) {
-            closeMobile();
-            setState("collapsed");
-          }
-        }
-      };
-
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [isMobile, state, closeMobile]);
-
     return (
       <TooltipProvider delayDuration={0}>
         {isMobile ? (
           <Sheet open={state === "expanded"} onOpenChange={(open) => {
-            if (open) {
-              openMobile();
-              setState("expanded");
-            } else {
-              closeMobile();
-              setState("collapsed");
-            }
+            setState(open ? "expanded" : "collapsed");
           }}>
             <SheetContent
               data-sidebar="sidebar"
