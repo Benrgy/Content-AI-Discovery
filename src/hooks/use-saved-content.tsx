@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ContentItem } from "@/data/mockContent";
+import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
 import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
 
 const LOCAL_STORAGE_KEY = "savedContentItems";

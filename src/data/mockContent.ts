@@ -1,19 +1,6 @@
 "use client";
 
-export interface ContentItem {
-  id: string;
-  title: string;
-  description: string;
-  platform: string;
-  engagement: {
-    likes: number;
-    comments: number;
-    shares: number;
-    views?: number;
-  };
-  imageUrl?: string;
-  link: string;
-}
+import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
 
 export const mockContent: ContentItem[] = [
   {

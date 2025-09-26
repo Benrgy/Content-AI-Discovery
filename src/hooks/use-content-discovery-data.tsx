@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchContentDiscoveryData } from "@/api/content"; // Import from the new API file
-import { ContentItem } from "@/data/mockContent"; // Still need ContentItem type
+import { fetchContentDiscoveryData } from "@/api/content";
+import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
 
 export function useContentDiscoveryData() {
   return useQuery<ContentItem[], Error>({
