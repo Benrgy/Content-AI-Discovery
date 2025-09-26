@@ -10,6 +10,7 @@ import FilterSidebar from "@/components/FilterSidebar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import EmptyState from "@/components/EmptyState"; // Import the new EmptyState component
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -125,11 +126,11 @@ const ContentDiscovery = () => {
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription className="flex items-center gap-4"> {/* Added flex and gap for button */}
+              <AlertDescription className="flex items-center gap-4">
                 Failed to load content. Please try refreshing the page.
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button onClick={() => refetch()} disabled={isFetching}> {/* Use isFetching for disabled state */}
+                    <Button onClick={() => refetch()} disabled={isFetching}>
                       {isFetching ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -153,13 +154,11 @@ const ContentDiscovery = () => {
           ))
         ) : (
           <div className="col-span-full">
-            <Alert>
-              <Info className="h-4 w-4" />
-              <AlertTitle>No Content Found</AlertTitle>
-              <AlertDescription>
-                No content matches your current search and filter criteria. Try adjusting them.
-              </AlertDescription>
-            </Alert>
+            <EmptyState
+              title="No Content Found"
+              description="No content matches your current search and filter criteria. Try adjusting them."
+              icon={Info}
+            />
           </div>
         )}
       </div>

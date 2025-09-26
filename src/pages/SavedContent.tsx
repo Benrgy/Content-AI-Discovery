@@ -3,11 +3,9 @@
 import React from "react";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import ContentCard from "@/components/ContentCard";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button"; // Import Button
-import { Info } from "lucide-react";
-import { Link } from "react-router-dom"; // Import Link
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import EmptyState from "@/components/EmptyState"; // Import the new EmptyState component
+import { Link } from "react-router-dom"; // Link is still needed for the action button's 'to' prop
+import { Info } from "lucide-react"; // Info icon is still needed if passed explicitly
 
 const SavedContent = () => {
   const { savedItems } = useSavedContent();
@@ -20,25 +18,16 @@ const SavedContent = () => {
       </p>
 
       {savedItems.length === 0 ? (
-        <div className="max-w-xl mx-auto flex items-center justify-center flex-grow">
-          <Alert>
-            <Info className="h-4 w-4" />
-            <AlertTitle>No Saved Content</AlertTitle>
-            <AlertDescription className="flex flex-col items-center gap-4 pt-2"> {/* Added flex-col and gap for button */}
-              You haven't saved any content yet. Discover content and click the save icon to add items here!
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button asChild>
-                    <Link to="/discover">Discover Content</Link>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Explore new content to save</p>
-                </TooltipContent>
-              </Tooltip>
-            </AlertDescription>
-          </Alert>
-        </div>
+        <EmptyState
+          title="No Saved Content"
+          description="You haven't saved any content yet. Discover content and click the save icon to add items here!"
+          icon={Info}
+          actionButton={{
+            text: "Discover Content",
+            to: "/discover",
+            tooltip: "Explore new content to save",
+          }}
+        />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {savedItems.map((content) => (
