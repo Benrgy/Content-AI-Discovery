@@ -7,26 +7,26 @@ import { showSuccess, showInfo } from "@/utils/toast";
 const LOCAL_STORAGE_KEY = "savedContentItems";
 
 export function useSavedContent() {
-  const [savedItems, setSavedItems] = useState<ContentItem[]>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-        return storedItems ? JSON.parse(storedItems) : [];
-      } catch (error) {
-        console.error("Error loading saved content:", error);
-        return [];
-      }
-    }
-    return [];
-  });
+  const [savedItems, setSavedItems] = useState<ContentItem[]>([]);
 
+  // Load from localStorage on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedItems));
-      } catch (error) {
-        console.error("Error saving content:", error);
+    try {
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (stored) {
+        setSavedItems(JSON.parse(stored));
       }
+    } catch (error) {
+      console.error("Error loading saved content:", error);
+    }
+  }, []);
+
+  // Save to localStorage whenever savedItems changes
+  useEffect(() => {
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedItems));
+    } catch (error) {
+      console.error("Error saving content:", error);
     }
   }, [savedItems]);
 

@@ -1,13 +1,13 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import App from "./App.tsx";
-import Providers from "./components/Providers.tsx";
+import App from "./App";
+import Providers from "./components/Providers";
 import "./globals.css";
 
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
-  throw new Error("Root element not found. Make sure there's a div with id='root' in your HTML.");
+  throw new Error("Root element not found");
 }
 
 createRoot(rootElement).render(

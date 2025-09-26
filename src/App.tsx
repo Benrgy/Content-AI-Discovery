@@ -13,22 +13,24 @@ import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import ContentDetail from "./pages/ContentDetail";
 import NotFound from "./pages/NotFound";
 
-const App = () => (
-  <ErrorBoundary>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Index />} />
-          <Route path="discover" element={<ContentDiscovery />} />
-          <Route path="content/:id" element={<ContentDetail />} />
-          <Route path="generate" element={<ContentGeneration />} />
-          <Route path="analytics" element={<AnalyticsDashboard />} />
-          <Route path="saved" element={<SavedContent />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </ErrorBoundary>
-);
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Index />} />
+            <Route path="discover" element={<ContentDiscovery />} />
+            <Route path="content/:id" element={<ContentDetail />} />
+            <Route path="generate" element={<ContentGeneration />} />
+            <Route path="analytics" element={<AnalyticsDashboard />} />
+            <Route path="saved" element={<SavedContent />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
+};
 
 export default App;

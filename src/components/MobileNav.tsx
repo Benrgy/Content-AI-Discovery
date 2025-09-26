@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react"; // Explicitly import useState
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { usePublicRoutes } from "@/hooks/use-public-routes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
+const navigationRoutes = [
+  { path: "/discover", name: "Discover" },
+  { path: "/generate", name: "Generate" },
+  { path: "/analytics", name: "Analytics" },
+  { path: "/saved", name: "Saved" },
+];
+
 const MobileNav = () => {
-  const [isOpen, setIsOpen] = useState(false); // Use useState directly
+  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const publicRoutes = usePublicRoutes();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -20,7 +25,6 @@ const MobileNav = () => {
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="md:hidden">
               <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
         </TooltipTrigger>
@@ -32,24 +36,17 @@ const MobileNav = () => {
         <SheetHeader>
           <SheetTitle>ContentAI</SheetTitle>
         </SheetHeader>
-        <nav className="flex flex-col gap-4 py-4" aria-label="Mobile navigation">
-          {publicRoutes.map((route) => (
-            <Tooltip key={route.path}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="justify-start text-lg"
-                  asChild
-                  onClick={() => setIsOpen(false)}
-                  aria-current={location.pathname === route.path ? "page" : undefined}
-                >
-                  <Link to={route.path}>{route.name}</Link>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Go to {route.name}</p>
-              </TooltipContent>
-            </Tooltip>
+        <nav className="flex flex-col gap-4 py-4">
+          {navigationRoutes.map((route) => (
+            <Button
+              key={route.path}
+              variant="ghost"
+              className="justify-start text-lg"
+              asChild
+              onClick={() => setIsOpen(false)}
+            >
+              <Link to={route.path}>{route.name}</Link>
+            </Button>
           ))}
         </nav>
       </SheetContent>

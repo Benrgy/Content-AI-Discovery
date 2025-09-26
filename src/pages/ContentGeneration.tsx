@@ -24,36 +24,28 @@ const ContentGeneration = () => {
   const { savedItems } = useSavedContent();
   const { history, addToHistory, removeFromHistory } = useGenerationHistory();
   
-  // Get contentId from URL query params
   const queryParams = new URLSearchParams(location.search);
   const contentIdFromUrl = queryParams.get("contentId");
   
-  // Result state
   const [activeTab, setActiveTab] = useState("content");
   const [sidebarTab, setSidebarTab] = useState("saved");
   const [generatedContent, setGeneratedContent] = useState<GeneratedContent | null>(null);
   const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
-  
-  // Reference content
   const [referenceContent, setReferenceContent] = useState<ContentItem | null>(null);
   
-  // Mutations
   const contentMutation = useContentGeneration();
   const imageMutation = useImageGeneration();
   
-  // Set reference content from URL param
   useEffect(() => {
     if (contentIdFromUrl && contentData) {
       const content = contentData.find(item => item.id === contentIdFromUrl);
       if (content) {
         setReferenceContent(content);
-        // Clear URL param after setting reference
         navigate("/generate", { replace: true });
       }
     }
   }, [contentIdFromUrl, contentData, navigate]);
   
-  // Handle content generation
   const handleGenerateContent = async (formData: {
     prompt: string;
     platform: string;
@@ -68,54 +60,48 @@ const ContentGeneration = () => {
       addToHistory(result);
       setActiveTab("content");
       showSuccess("Content generated successfully!");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Content generation error:", error);
-      showError("Failed to generate content. Please try again.");
+      showError(error.message || "Failed to generate content. Please try again.");
     }
   };
   
-  // Handle image generation
   const handleGenerateImages = async (imagePrompt: string) => {
     try {
       const result = await imageMutation.mutateAsync(imagePrompt);
       setGeneratedImages(result);
       setActiveTab("images");
       showSuccess("Images generated successfully!");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Image generation error:", error);
-      showError("Failed to generate images. Please try again.");
+      showError(error.message || "Failed to generate images. Please try again.");
     }
   };
   
-  // Handle clear reference
   const handleClearReference = () => {
     setReferenceContent(null);
     navigate("/generate", { replace: true });
   };
   
-  // Handle select reference
   const handleSelectReference = (item: ContentItem) => {
     setReferenceContent(item);
   };
   
-  // Handle clear all generated content
   const handleClearAll = () => {
     setGeneratedContent(null);
     setGeneratedImages([]);
   };
   
-  // Handle clear generated content
   const handleClearGeneratedContent = () => {
     setGeneratedContent(null);
   };
   
-  // Handle regenerate from history
   const handleRegenerateFromHistory = (content: GeneratedContent) => {
     const formData = {
       prompt: `Regenerate similar content to: "${content.content.substring(0, 100)}..."`,
       platform: content.platform,
-      tone: "professional", // Default
-      length: "medium", // Default
+      tone: "professional",
+      length: "medium",
       includeHashtags: !!content.hashtags,
       includeCTA: !!content.cta
     };
@@ -123,11 +109,9 @@ const ContentGeneration = () => {
     handleGenerateContent(formData);
   };
   
-  // Get content recommendations
   const getRecommendations = (): ContentItem[] => {
     if (!contentData) return [];
     
-    // If we have reference content, recommend similar content
     if (referenceContent) {
       return contentData
         .filter(item => 
@@ -137,7 +121,6 @@ const ContentGeneration = () => {
         .slice(0, 3);
     }
     
-    // Otherwise, recommend top performing content
     return contentData
       .sort((a, b) => (b.performanceScore || 0) - (a.performanceScore || 0))
       .slice(0, 3);
@@ -150,7 +133,6 @@ const ContentGeneration = () => {
       description="Create platform-optimized content with advanced AI generation capabilities."
     >
       <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Generation Form */}
         <div className="lg:col-span-2">
           <ContentGenerationForm
             onGenerateContent={handleGenerateContent}
@@ -162,7 +144,6 @@ const ContentGeneration = () => {
           />
         </div>
         
-        {/* Right Column - Sidebar with tabs */}
         <div className="lg:col-span-1">
           <Tabs value={sidebarTab} onValueChange={setSidebarTab}>
             <TabsList className="grid grid-cols-2 mb-4">
@@ -192,7 +173,6 @@ const ContentGeneration = () => {
             </TabsContent>
           </Tabs>
           
-          {/* Content Recommendations */}
           <div className="mt-6">
             <ContentRecommendations
               title="Content Inspiration"
@@ -204,7 +184,6 @@ const ContentGeneration = () => {
         </div>
       </div>
       
-      {/* Generated Content Display */}
       {(generatedContent || generatedImages.length > 0) && (
         <GeneratedContentDisplay
           generatedContent={generatedContent}

@@ -6,13 +6,18 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
 import NotificationCenter from "./NotificationCenter";
-import { usePublicRoutes } from "@/hooks/use-public-routes";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
+const navigationRoutes = [
+  { path: "/discover", name: "Discover" },
+  { path: "/generate", name: "Generate" },
+  { path: "/analytics", name: "Analytics" },
+  { path: "/saved", name: "Saved" },
+];
+
 const Header = () => {
   const location = useLocation();
-  const publicRoutes = usePublicRoutes();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,17 +43,16 @@ const Header = () => {
           <MobileNav />
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link to="/" className="text-2xl font-bold text-primary" aria-label="ContentAI Home">
+              <Link to="/" className="text-2xl font-bold text-primary">
                 ContentAI
-                <span className="sr-only">Home</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent>
               <p>Go to homepage</p>
             </TooltipContent>
           </Tooltip>
-          <nav className="hidden md:flex items-center space-x-4" aria-label="Main navigation">
-            {publicRoutes.map((route) => (
+          <nav className="hidden md:flex items-center space-x-4">
+            {navigationRoutes.map((route) => (
               <Tooltip key={route.path}>
                 <TooltipTrigger asChild>
                   <Button
@@ -58,7 +62,6 @@ const Header = () => {
                       "text-base",
                       location.pathname === route.path && "border-b-2 border-primary text-primary"
                     )}
-                    aria-current={location.pathname === route.path ? "page" : undefined}
                   >
                     <Link to={route.path}>{route.name}</Link>
                   </Button>

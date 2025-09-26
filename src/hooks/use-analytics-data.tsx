@@ -8,7 +8,7 @@ export function useAnalyticsData() {
   return useQuery<AnalyticsData, Error>({
     queryKey: ["analyticsData"],
     queryFn: fetchAnalyticsData,
-    staleTime: 5 * 60 * 1000, // Data is considered fresh for 5 minutes
-    refetchOnWindowFocus: false, // Prevent refetching on window focus for this example
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 }

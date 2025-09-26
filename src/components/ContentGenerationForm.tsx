@@ -51,7 +51,6 @@ const ContentGenerationForm = ({
   isGeneratingContent,
   isGeneratingImages
 }: ContentGenerationFormProps) => {
-  // Form state
   const [prompt, setPrompt] = useState("");
   const [platform, setPlatform] = useState("linkedin");
   const [tone, setTone] = useState("professional");
@@ -59,9 +58,7 @@ const ContentGenerationForm = ({
   const [includeHashtags, setIncludeHashtags] = useState(true);
   const [includeCTA, setIncludeCTA] = useState(true);
   const [imagePrompt, setImagePrompt] = useState("");
-  const [advancedOptions, setAdvancedOptions] = useState(false);
   
-  // Set form values based on reference content
   useEffect(() => {
     if (referenceContent) {
       setPrompt(`Create content inspired by: "${referenceContent.title}"`);
@@ -70,7 +67,6 @@ const ContentGenerationForm = ({
     }
   }, [referenceContent]);
   
-  // Handle content generation
   const handleGenerateContent = () => {
     if (!prompt.trim()) {
       showError("Please enter a content prompt");
@@ -87,7 +83,6 @@ const ContentGenerationForm = ({
     });
   };
   
-  // Handle image generation
   const handleGenerateImages = () => {
     if (!imagePrompt.trim()) {
       showError("Please enter an image prompt");
@@ -97,12 +92,10 @@ const ContentGenerationForm = ({
     onGenerateImages(imagePrompt);
   };
   
-  // Handle clear prompt
   const handleClearPrompt = () => {
     setPrompt("");
   };
   
-  // Handle clear image prompt
   const handleClearImagePrompt = () => {
     setImagePrompt("");
   };
@@ -119,7 +112,6 @@ const ContentGenerationForm = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
-        {/* Reference Content */}
         {referenceContent && (
           <Alert className="bg-muted">
             <FileText className="h-4 w-4" />
@@ -145,7 +137,6 @@ const ContentGenerationForm = ({
           </Alert>
         )}
         
-        {/* Content Prompt */}
         <div className="grid gap-2 relative">
           <Label htmlFor="prompt">Content Prompt</Label>
           <Textarea
@@ -165,7 +156,6 @@ const ContentGenerationForm = ({
                   size="icon"
                   className="absolute top-8 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
                   onClick={handleClearPrompt}
-                  aria-label="Clear prompt"
                 >
                   <XCircle className="h-5 w-5" />
                 </Button>
@@ -177,7 +167,6 @@ const ContentGenerationForm = ({
           )}
         </div>
         
-        {/* Platform, Tone, Length */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="grid gap-2">
             <Label htmlFor="platform">Platform</Label>
@@ -228,7 +217,6 @@ const ContentGenerationForm = ({
           </div>
         </div>
         
-        {/* Additional Options */}
         <div className="flex flex-wrap gap-6">
           <div className="flex items-center space-x-2">
             <Checkbox 
@@ -248,76 +236,8 @@ const ContentGenerationForm = ({
             />
             <Label htmlFor="includeCTA">Include Call-to-Action</Label>
           </div>
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id="advancedOptions" 
-              checked={advancedOptions} 
-              onCheckedChange={(checked) => setAdvancedOptions(checked as boolean)}
-              disabled={isGeneratingContent}
-            />
-            <Label htmlFor="advancedOptions">Show Advanced Options</Label>
-          </div>
         </div>
         
-        {/* Advanced Options */}
-        {advancedOptions && (
-          <div className="border rounded-md p-4 bg-muted/30">
-            <h3 className="text-sm font-medium mb-3">Advanced Options</h3>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="targetAudience">Target Audience</Label>
-                <Select defaultValue="professionals" disabled={isGeneratingContent}>
-                  <SelectTrigger id="targetAudience">
-                    <SelectValue placeholder="Select target audience" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="professionals">Professionals</SelectItem>
-                    <SelectItem value="students">Students</SelectItem>
-                    <SelectItem value="entrepreneurs">Entrepreneurs</SelectItem>
-                    <SelectItem value="marketers">Marketers</SelectItem>
-                    <SelectItem value="general">General Audience</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="grid gap-2">
-                <Label htmlFor="contentGoal">Content Goal</Label>
-                <Select defaultValue="educate" disabled={isGeneratingContent}>
-                  <SelectTrigger id="contentGoal">
-                    <SelectValue placeholder="Select content goal" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="educate">Educate</SelectItem>
-                    <SelectItem value="entertain">Entertain</SelectItem>
-                    <SelectItem value="inspire">Inspire</SelectItem>
-                    <SelectItem value="convert">Convert</SelectItem>
-                    <SelectItem value="engage">Engage</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id="includeStatistics" 
-                  defaultChecked={true}
-                  disabled={isGeneratingContent}
-                />
-                <Label htmlFor="includeStatistics">Include Statistics/Data</Label>
-              </div>
-              
-              <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id="includeQuestions" 
-                  defaultChecked={true}
-                  disabled={isGeneratingContent}
-                />
-                <Label htmlFor="includeQuestions">Include Engaging Questions</Label>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Image Prompt */}
         <div className="grid gap-2 relative">
           <Label htmlFor="imagePrompt">Image Prompt (Optional)</Label>
           <Input
@@ -336,7 +256,6 @@ const ContentGenerationForm = ({
                   size="icon"
                   className="absolute top-8 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
                   onClick={handleClearImagePrompt}
-                  aria-label="Clear image prompt"
                 >
                   <XCircle className="h-5 w-5" />
                 </Button>
@@ -348,7 +267,6 @@ const ContentGenerationForm = ({
           )}
         </div>
         
-        {/* Generate Buttons */}
         <div className="flex flex-col sm:flex-row gap-3">
           <Button 
             onClick={handleGenerateContent} 

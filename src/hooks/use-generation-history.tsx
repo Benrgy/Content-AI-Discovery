@@ -2,40 +2,36 @@
 
 import { useState, useEffect } from "react";
 import { GeneratedContent } from "@/types/content";
-import { showSuccess, showInfo } from "@/utils/toast";
+import { showInfo } from "@/utils/toast";
 
 const LOCAL_STORAGE_KEY = "contentGenerationHistory";
 const MAX_HISTORY_ITEMS = 20;
 
 export function useGenerationHistory() {
-  const [history, setHistory] = useState<GeneratedContent[]>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const storedHistory = localStorage.getItem(LOCAL_STORAGE_KEY);
-        return storedHistory ? JSON.parse(storedHistory) : [];
-      } catch (error) {
-        console.error("Error loading generation history:", error);
-        return [];
-      }
-    }
-    return [];
-  });
+  const [history, setHistory] = useState<GeneratedContent[]>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
-      } catch (error) {
-        console.error("Error saving generation history:", error);
+    try {
+      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (stored) {
+        setHistory(JSON.parse(stored));
       }
+    } catch (error) {
+      console.error("Error loading generation history:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+    } catch (error) {
+      console.error("Error saving generation history:", error);
     }
   }, [history]);
 
   const addToHistory = (content: GeneratedContent) => {
     setHistory(prevHistory => {
-      // Remove any existing item with the same ID to avoid duplicates
       const filteredHistory = prevHistory.filter(item => item.id !== content.id);
-      // Add new item to the beginning and limit to MAX_HISTORY_ITEMS
       const newHistory = [content, ...filteredHistory].slice(0, MAX_HISTORY_ITEMS);
       return newHistory;
     });
@@ -51,11 +47,7 @@ export function useGenerationHistory() {
 
   const clearHistory = () => {
     setHistory([]);
-    showSuccess("Generation history cleared");
-  };
-
-  const getHistoryItem = (contentId: string) => {
-    return history.find(item => item.id === contentId);
+    showInfo("Generation history cleared");
   };
 
   return { 
@@ -63,7 +55,6 @@ export function useGenerationHistory() {
     addToHistory, 
     removeFromHistory, 
     clearHistory,
-    getHistoryItem,
     historyCount: history.length
   };
 }
