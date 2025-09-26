@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
+import NotificationCenter from "./NotificationCenter";
 import { usePublicRoutes } from "@/hooks/use-public-routes";
 import { cn } from "@/lib/utils"; // Import cn for conditional class merging
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
@@ -70,6 +71,7 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center space-x-2">
+          <NotificationCenter />
           <ThemeToggle />
         </div>
       </div>
