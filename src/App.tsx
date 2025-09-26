@@ -1,20 +1,19 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { appRoutes } from "@/constants/routes"; // Import from new constants file
+import { appRoutes } from "@/constants/routes";
 import Layout from "./components/Layout";
-import Providers from "./components/Providers";
+// Removed Providers import as it's now in main.tsx
 
 const App = () => (
-  <Providers>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {appRoutes.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </Providers>
+  // Removed Providers wrapper as it's now in main.tsx
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {appRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );
 
 export default App;

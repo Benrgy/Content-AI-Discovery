@@ -1,6 +1,6 @@
 "use client";
 
-import React, { StrictMode } from "react"; // Import StrictMode here
+import React from "react"; // StrictMode is now imported in main.tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,16 +14,15 @@ interface ProvidersProps {
 
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
-    <StrictMode> {/* Wrap children with StrictMode */}
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-          <TooltipProvider>
-            {children}
-            <Sonner />
-          </TooltipProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </StrictMode>
+    // StrictMode removed from here, now in main.tsx
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <TooltipProvider>
+          {children}
+          <Sonner />
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 
