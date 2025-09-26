@@ -52,8 +52,8 @@ const ContentRecommendations = ({
               </div>
             )}
             <div className="flex-grow min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <PlatformIcon platform={item.platform} className="h-4 w-4" />
+              <div className="flex items-center gap-2">
+                <PlatformIcon platform={item.platform} />
                 <Badge variant="outline" className="text-xs">
                   {formatNumber(item.engagement.likes)} likes
                 </Badge>
