@@ -3,11 +3,12 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react"; // Added Link2 icon
+import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import { ContentItem } from "@/data/mockContent";
-import { showInfo } from "@/utils/toast"; // Import showInfo for copy feedback
+import { showInfo } from "@/utils/toast";
+import { Badge } from "@/components/ui/badge"; // Import Badge component
 
 interface ContentCardProps extends ContentItem {}
 
@@ -36,9 +37,9 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
             alt={title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute top-2 left-2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full capitalize">
+          <Badge className="absolute top-2 left-2 capitalize"> {/* Using Badge here */}
             {platform}
-          </div>
+          </Badge>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -83,7 +84,7 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
           )}
         </div>
       </CardContent>
-      <CardFooter className="flex gap-2"> {/* Adjusted for multiple buttons */}
+      <CardFooter className="flex gap-2">
         <Button asChild className="flex-grow">
           <a href={link} target="_blank" rel="noopener noreferrer">
             View Content
