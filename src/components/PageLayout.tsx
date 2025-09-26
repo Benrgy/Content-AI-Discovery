@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { cn } from "@/lib/utils"; // Import cn for conditional class merging
 
 interface PageLayoutProps {

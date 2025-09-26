@@ -1,10 +1,8 @@
 "use client";
 
-import React from "react";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import ContentCard from "@/components/ContentCard";
 import EmptyState from "@/components/EmptyState";
-import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
