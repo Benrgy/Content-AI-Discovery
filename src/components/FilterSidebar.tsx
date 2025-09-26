@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { contentPlatforms } from "@/constants/platforms"; // Import the centralized platforms
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
 
 interface FilterSidebarProps {
   isOpen: boolean;
@@ -54,12 +55,26 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
           {/* Future filter options can go here */}
         </div>
         <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-          <Button variant="outline" onClick={onClearFilters} className="flex-grow">
-            Clear Filters
-          </Button>
-          <Button onClick={onApplyFilters} className="flex-grow">
-            Apply Filters
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" onClick={onClearFilters} className="flex-grow">
+                Clear Filters
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Reset all selected filters</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={onApplyFilters} className="flex-grow">
+                Apply Filters
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Apply selected filters to content</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </SheetContent>
     </Sheet>
