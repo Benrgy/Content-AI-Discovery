@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { appRoutes } from "@/constants/routes";
+import { appRoutes } from "@/router/routes"; // Updated import path
 import Layout from "./components/Layout";
 // Removed Providers import as it's now in main.tsx
 

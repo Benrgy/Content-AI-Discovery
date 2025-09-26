@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { appRoutes } from "@/constants/routes"; // Import from new constants file
+import { appRoutes } from "@/router/routes"; // Updated import path
 
 export function usePublicRoutes() {
   const publicRoutes = useMemo(() => {
