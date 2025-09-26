@@ -6,6 +6,7 @@ import SavedContent from "@/pages/SavedContent";
 import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 import ContentDetail from "@/pages/ContentDetail";
 import Diagnostics from "@/pages/Diagnostics";
+import Settings from "@/pages/Settings";
 import NotFound from "@/pages/NotFound";
 
 export interface AppRoute {
@@ -51,6 +52,12 @@ export const appRoutes: AppRoute[] = [
     name: "Saved",
     element: <SavedContent />,
     inNav: true,
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    element: <Settings />,
+    inNav: false,
   },
   {
     path: "/diagnostics",
