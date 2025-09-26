@@ -3,7 +3,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const ContentCardSkeleton: React.FC = () => {
+const ContentCardSkeleton = () => { // Removed React.FC
   return (
     <Card className="flex flex-col h-full">
       <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
