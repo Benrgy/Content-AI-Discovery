@@ -1,5 +1,5 @@
 import { mockContent } from "@/data/mockContent";
-import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
+import { ContentItem } from "@/types/content";
 
 /**
  * Simulates an API call to fetch content discovery data.

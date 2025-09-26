@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { fetchContentDiscoveryData } from "@/api/content";
-import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
+import { ContentItem } from "@/types/content";
 
 export function useContentDiscoveryData() {
   return useQuery<ContentItem[], Error>({

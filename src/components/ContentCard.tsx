@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSavedContent } from "@/hooks/use-saved-content";
-import { ContentItem } from "@/data/mockContent";
+import { ContentItem } from "@/types/content"; // Corrected import path
 import { showInfo } from "@/utils/toast";
 import PlatformIcon from "./PlatformIcon"; // Import the new PlatformIcon component
 

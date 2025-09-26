@@ -1,31 +1,17 @@
 "use client";
 
 import {
-  Linkedin,
-  TikTok,
-  Twitter,
-  Instagram,
-  Youtube,
-  Rss, // Using Rss for blog posts
-  LucideIcon,
+  LucideIcon, // Keep LucideIcon for type definition if needed, or remove if not
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { platformIconMap } from "@/constants/content-constants"; // Import from centralized constants
 
 interface PlatformIconProps {
   platform: string;
   className?: string;
   iconClassName?: string;
 }
-
-const platformIconMap: { [key: string]: LucideIcon } = {
-  linkedin: Linkedin,
-  tiktok: TikTok,
-  twitter: Twitter,
-  instagram: Instagram,
-  youtube: Youtube,
-  blog: Rss,
-};
 
 const PlatformIcon: React.FC<PlatformIconProps> = ({ platform, className, iconClassName }) => {
   const IconComponent = platformIconMap[platform.toLowerCase()];

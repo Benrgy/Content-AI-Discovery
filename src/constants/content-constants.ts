@@ -1,3 +1,13 @@
+import {
+  Linkedin,
+  TikTok,
+  Twitter,
+  Instagram,
+  Youtube,
+  Rss, // Using Rss for blog posts
+  LucideIcon,
+} from "lucide-react";
+
 export const contentPlatforms = [
   { value: "linkedin", label: "LinkedIn" },
   { value: "tiktok", label: "TikTok" },
@@ -20,3 +30,12 @@ export const contentLengths = [
   { value: "medium", label: "Medium" },
   { value: "long", label: "Long" },
 ];
+
+export const platformIconMap: { [key: string]: LucideIcon } = {
+  linkedin: Linkedin,
+  tiktok: TikTok,
+  twitter: Twitter,
+  instagram: Instagram,
+  youtube: Youtube,
+  blog: Rss,
+};
