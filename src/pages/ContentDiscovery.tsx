@@ -98,15 +98,22 @@ const ContentDiscovery = () => {
               </TooltipContent>
             </Tooltip>
           )}
-          <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
-            <Filter className="h-4 w-4" />
-            Filters
-            {appliedPlatforms.length > 0 && (
-              <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
-                {appliedPlatforms.length}
-              </span>
-            )}
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
+                <Filter className="h-4 w-4" />
+                Filters
+                {appliedPlatforms.length > 0 && (
+                  <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                    {appliedPlatforms.length}
+                  </span>
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open filter sidebar</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
 
