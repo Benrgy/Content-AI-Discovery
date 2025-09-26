@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils"; // Import cn for conditional class names
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,17 +34,24 @@ const ScrollToTopButton: React.FC = () => {
   }, []);
 
   return (
-    <Button
-      onClick={scrollToTop}
-      className={cn(
-        "fixed bottom-4 right-4 p-2 rounded-full shadow-lg transition-opacity duration-300 z-50",
-        isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
-      )}
-      size="icon"
-      aria-label="Scroll to top"
-    >
-      <ArrowUp className="h-5 w-5" />
-    </Button>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          onClick={scrollToTop}
+          className={cn(
+            "fixed bottom-4 right-4 p-2 rounded-full shadow-lg transition-opacity duration-300 z-50",
+            isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+          )}
+          size="icon"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="h-5 w-5" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Scroll to top</p>
+      </TooltipContent>
+    </Tooltip>
   );
 };
 
