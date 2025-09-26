@@ -140,19 +140,25 @@ const ContentGeneration = () => {
           {generatedContent && (
             <div className="mt-6 p-4 border rounded-md bg-muted/50 relative">
               <h3 className="text-lg font-semibold mb-2">Generated Content:</h3>
-              <p className="whitespace-pre-wrap text-muted-foreground">{generatedContent}</p>
-              <div className="absolute top-2 right-2 flex gap-1">
+              <Textarea
+                value={generatedContent}
+                readOnly
+                rows={8} // Adjust rows as needed
+                className="resize-none pr-20" // Add padding for buttons
+                aria-label="Generated content"
+              />
+              <div className="absolute top-10 right-2 flex flex-col gap-1"> {/* Adjusted positioning */}
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="icon"
                   onClick={handleCopyContent}
                   aria-label="Copy generated content"
                 >
-                  <Copy className="h-4 w-4 mr-1" /> Copy
+                  <Copy className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="icon"
                   onClick={handleClearGeneratedContent}
                   aria-label="Clear generated content"
                 >
