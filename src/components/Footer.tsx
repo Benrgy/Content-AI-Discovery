@@ -2,7 +2,7 @@
 
 import { MadeWithDyad } from "./made-with-dyad";
 
-const Footer: React.FC = () => {
+const Footer = () => { // Removed React.FC
   return (
     <footer className="py-4">
       <MadeWithDyad />
