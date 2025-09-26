@@ -3,10 +3,11 @@
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react"; // Added Link2 icon
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import { ContentItem } from "@/data/mockContent";
+import { showInfo } from "@/utils/toast"; // Import showInfo for copy feedback
 
 interface ContentCardProps extends ContentItem {}
 
@@ -18,6 +19,12 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
   const handleToggleSave = (event: React.MouseEvent) => {
     event.preventDefault();
     toggleSaved(props);
+  };
+
+  const handleCopyLink = (event: React.MouseEvent) => {
+    event.preventDefault();
+    navigator.clipboard.writeText(link);
+    showInfo("Content link copied to clipboard!");
   };
 
   return (
@@ -76,12 +83,22 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
           )}
         </div>
       </CardContent>
-      <CardFooter>
-        <Button asChild className="w-full">
+      <CardFooter className="flex gap-2"> {/* Adjusted for multiple buttons */}
+        <Button asChild className="flex-grow">
           <a href={link} target="_blank" rel="noopener noreferrer">
             View Content
           </a>
         </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="icon" onClick={handleCopyLink} aria-label="Copy content link">
+              <Link2 className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Copy link</p>
+          </TooltipContent>
+        </Tooltip>
       </CardFooter>
     </Card>
   );
