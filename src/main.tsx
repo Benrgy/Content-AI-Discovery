@@ -7,7 +7,7 @@ import "./globals.css";
 const rootElement = document.getElementById("root");
 
 if (!rootElement) {
-  throw new Error("Root element not found");
+  throw new Error("Root element not found. Make sure there's a div with id='root' in your HTML.");
 }
 
 createRoot(rootElement).render(

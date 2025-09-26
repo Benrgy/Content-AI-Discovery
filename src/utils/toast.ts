@@ -3,21 +3,37 @@
 import { toast } from "sonner";
 
 export const showSuccess = (message: string) => {
-  toast.success(message);
+  toast.success(message, {
+    duration: 4000,
+  });
 };
 
 export const showError = (message: string) => {
-  toast.error(message);
+  toast.error(message, {
+    duration: 5000,
+  });
 };
 
 export const showInfo = (message: string) => {
-  toast.info(message);
+  toast.info(message, {
+    duration: 3000,
+  });
+};
+
+export const showWarning = (message: string) => {
+  toast.warning(message, {
+    duration: 4000,
+  });
 };
 
 export const showLoading = (message: string) => {
   return toast.loading(message);
 };
 
-export const dismissToast = (toastId: string) => {
+export const dismissToast = (toastId: string | number) => {
   toast.dismiss(toastId);
+};
+
+export const dismissAllToasts = () => {
+  toast.dismiss();
 };

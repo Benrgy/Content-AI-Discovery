@@ -1,21 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react"; // Explicitly import useState and useEffect
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
 import NotificationCenter from "./NotificationCenter";
 import { usePublicRoutes } from "@/hooks/use-public-routes";
-import { cn } from "@/lib/utils"; // Import cn for conditional class merging
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Header = () => {
   const location = useLocation();
   const publicRoutes = usePublicRoutes();
-  const [scrolled, setScrolled] = useState(false); // Use useState directly
+  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => { // Use useEffect directly
+  useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
     };
@@ -55,8 +55,8 @@ const Header = () => {
                     variant="ghost"
                     asChild
                     className={cn(
-                      "text-base", // Ensure consistent text size
-                      location.pathname === route.path && "border-b-2 border-primary text-primary" // Active state styling
+                      "text-base",
+                      location.pathname === route.path && "border-b-2 border-primary text-primary"
                     )}
                     aria-current={location.pathname === route.path ? "page" : undefined}
                   >
