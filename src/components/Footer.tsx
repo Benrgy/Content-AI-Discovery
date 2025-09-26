@@ -1,8 +1,8 @@
 "use client";
 
-import MadeWithDyad from "./made-with-dyad"; // Changed to default import
+import MadeWithDyad from "./made-with-dyad";
 
-const Footer = () => {
+const Footer = (): JSX.Element => { // Added explicit return type
   return (
     <footer className="py-4">
       <MadeWithDyad />
