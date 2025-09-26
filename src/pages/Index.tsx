@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import NavigationTest from "@/components/NavigationTest";
+import ThemeTest from "@/components/ThemeTest";
 
 const Index = () => {
   return (
@@ -69,6 +70,11 @@ const Index = () => {
             </TooltipContent>
           </Tooltip>
         </div>
+      </div>
+      
+      {/* Theme Test Component - Remove this in production */}
+      <div className="mb-12">
+        <ThemeTest />
       </div>
       
       {/* Navigation Test Component - Remove this in production */}

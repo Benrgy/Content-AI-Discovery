@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -12,8 +13,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-export const ThemeToggle = () => { // Changed to const arrow function
-  const { setTheme } = useTheme();
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="icon" disabled>
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    );
+  }
 
   return (
     <Tooltip>
@@ -27,21 +42,33 @@ export const ThemeToggle = () => { // Changed to const arrow function
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuItem 
+              onClick={() => setTheme("light")}
+              className={theme === "light" ? "bg-accent" : ""}
+            >
+              <Sun className="mr-2 h-4 w-4" />
               Light
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>
+            <DropdownMenuItem 
+              onClick={() => setTheme("dark")}
+              className={theme === "dark" ? "bg-accent" : ""}
+            >
+              <Moon className="mr-2 h-4 w-4" />
               Dark
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>
+            <DropdownMenuItem 
+              onClick={() => setTheme("system")}
+              className={theme === "system" ? "bg-accent" : ""}
+            >
+              <Sun className="mr-2 h-4 w-4" />
               System
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Toggle theme</p>
+        <p>Toggle theme (Current: {theme})</p>
       </TooltipContent>
     </Tooltip>
   );
-};
+}

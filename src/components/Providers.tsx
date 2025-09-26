@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode } from "react"; // Import ReactNode type directly
+import { type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,13 +9,18 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 const queryClient = new QueryClient();
 
 interface ProvidersProps {
-  children: ReactNode; // Use ReactNode directly
+  children: ReactNode;
 }
 
-const Providers = ({ children }: ProvidersProps) => { // Remove React.FC
+const Providers = ({ children }: ProvidersProps) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <ThemeProvider 
+        attribute="class" 
+        defaultTheme="system" 
+        enableSystem
+        disableTransitionOnChange
+      >
         <TooltipProvider>
           {children}
           <Sonner />
