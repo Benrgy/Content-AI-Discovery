@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSavedContent } from "@/hooks/use-saved-content";
-import { ContentItem } from "@/types/content"; // Corrected import path
+import { ContentItem } from "@/types/content";
 import { showInfo } from "@/utils/toast";
-import PlatformIcon from "./PlatformIcon"; // Import the new PlatformIcon component
+import PlatformIcon from "./PlatformIcon";
 
 interface ContentCardProps extends ContentItem {}
 
-const ContentCard: React.FC<ContentCardProps> = (props) => {
+const ContentCard = (props: ContentCardProps) => { // Removed React.FC
   const { id, title, description, platform, engagement, imageUrl, link } = props;
   const { isSaved, toggleSaved } = useSavedContent();
   const saved = isSaved(id);
