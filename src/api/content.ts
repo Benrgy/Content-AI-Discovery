@@ -1,5 +1,3 @@
-"use client";
-
 import { mockContent } from "@/data/mockContent";
 import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
 
