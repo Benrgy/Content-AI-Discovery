@@ -236,7 +236,7 @@ const FinalTest = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Loading States</span>
-                    {getStatusIcon(testResults.userExperience.loadingStates ? 'success' : : 'error')}
+                    {getStatusIcon(testResults.userExperience.loadingStates ? 'success' : 'error')}
                   </div>
                   <div className="flex items-center justify-between">
                     <span>Error Handling</span>
