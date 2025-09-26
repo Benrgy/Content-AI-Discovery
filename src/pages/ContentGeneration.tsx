@@ -73,15 +73,22 @@ const ContentGeneration = () => {
               disabled={isLoading}
             />
             {prompt && !isLoading && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-8 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
-                onClick={handleClearPrompt}
-                aria-label="Clear prompt"
-              >
-                <XCircle className="h-5 w-5" />
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute top-8 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
+                    onClick={handleClearPrompt}
+                    aria-label="Clear prompt"
+                  >
+                    <XCircle className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Clear prompt</p>
+                </TooltipContent>
+              </Tooltip>
             )}
           </div>
 
