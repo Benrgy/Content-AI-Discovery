@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 interface LoadingScreenProps {
   message?: string;
   className?: string;
-  size?: "sm" | "md" | "lg"; // Added size prop
+  size?: "sm" | "md" | "lg";
 }
 
 const LoadingScreen = ({ message = "Loading...", className, size = "md" }: LoadingScreenProps) => {
