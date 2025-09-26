@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AppInitializer from "./components/AppInitializer";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Import all pages
 import Index from "./pages/Index";
@@ -21,6 +22,7 @@ const App = () => {
     <ErrorBoundary>
       <BrowserRouter>
         <AppInitializer>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Index />} />

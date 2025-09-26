@@ -20,14 +20,34 @@ import {
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import ContentRecommendations from "@/components/ContentRecommendations";
+import ContentStats from "@/components/ContentStats";
+import QuickActions from "@/components/QuickActions";
+import TrendingTopics from "@/components/TrendingTopics";
+import RecentActivity from "@/components/RecentActivity";
+import FeatureTour from "@/components/FeatureTour";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingScreen from "@/components/LoadingScreen";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   console.log("Index: Component rendering");
   
   const { data: contentData, isLoading } = useContentDiscoveryData();
+  const [showTour, setShowTour] = useState(false);
   
+  // Check if user is new
+  useEffect(() => {
+    const hasCompletedTour = localStorage.getItem('hasCompletedTour');
+    if (!hasCompletedTour) {
+      setTimeout(() => setShowTour(true), 1000);
+    }
+  }, []);
+
+  const handleTourComplete = () => {
+    setShowTour(false);
+    localStorage.setItem('hasCompletedTour', 'true');
+  };
+
   const getTopRecommendations = () => {
     if (!contentData) return [];
     return contentData
@@ -35,12 +55,28 @@ const Index = () => {
       .slice(0, 3);
   };
 
+  if (isLoading) {
+    return (
+      <PageLayout>
+        <div className="flex justify-center py-8">
+          <LoadingScreen size="lg" text="Loading trending content..." />
+        </div>
+      </PageLayout>
+    );
+  }
+
   return (
     <PageLayout
       className="items-center justify-center text-center max-w-5xl"
       title="ContentAI"
       description="Your AI-Powered Content Discovery & Generation Platform. Discover viral trends and create optimized content effortlessly."
     >
+      {/* Feature Tour Modal */}
+      <FeatureTour 
+        isOpen={showTour} 
+        onClose={handleTourComplete} 
+      />
+
       <div className="flex flex-col items-center mb-12">
         <div className="flex flex-wrap justify-center gap-4 mt-6">
           <Tooltip>
@@ -86,8 +122,35 @@ const Index = () => {
           </Tooltip>
         </div>
       </div>
+
+      {/* Content Statistics */}
+      <ContentStats />
+
+      {/* Quick Actions & Trending Topics */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12 w-full">
+        <div className="lg:col-span-1">
+          <QuickActions />
+        </div>
+        <div className="lg:col-span-2">
+          <TrendingTopics />
+        </div>
+      </div>
+
+      {/* Recent Activity & Top Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12 w-full">
+        <RecentActivity />
+        <div>
+          <h2 className="text-2xl font-bold mb-6">Top Performing Content</h2>
+          <ContentRecommendations
+            title=""
+            description=""
+            recommendations={getTopRecommendations()}
+          />
+        </div>
+      </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {/* Feature Highlights */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-full">
         <Card>
           <CardHeader>
             <div className="flex justify-center mb-4">
@@ -167,68 +230,7 @@ const Index = () => {
         </Card>
       </div>
       
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Why Choose ContentAI?</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex items-start gap-3 text-left">
-            <div className="p-2 rounded-full bg-primary/10 mt-1">
-              <Search className="h-4 w-4 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-medium">Performance-Driven Discovery</h3>
-              <p className="text-sm text-muted-foreground">Surface only high-performing, trending content with real engagement metrics</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start gap-3 text-left">
-            <div className="p-2 rounded-full bg-primary/10 mt-1">
-              <Sparkles className="h-4 w-4 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-medium">Multi-Platform AI Generation</h3>
-              <p className="text-sm text-muted-foreground">Create platform-optimized content variants (TikTok, Instagram, YouTube, Blog)</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start gap-3 text-left">
-            <div className="p-2 rounded-full bg-primary/10 mt-1">
-              <Clock className="h-4 w-4 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-medium">Time-to-Market Acceleration</h3>
-              <p className="text-sm text-muted-foreground">Reduce content creation time from hours to minutes</p>
-            </div>
-          </div>
-          
-          <div className="flex items-start gap-3 text-left">
-            <div className="p-2 rounded-full bg-primary/10 mt-1">
-              <BarChart className="h-4 w-4 text-primary" />
-            </div>
-            <div>
-              <h3 className="font-medium">Data-Backed Strategy</h3>
-              <p className="text-sm text-muted-foreground">Make content decisions based on proven viral patterns</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Top Performing Content Section */}
-      <div className="mb-12 w-full max-w-5xl">
-        <h2 className="text-2xl font-bold mb-6">Trending Content</h2>
-        {isLoading ? (
-          <div className="flex justify-center py-8">
-            <LoadingSpinner size="lg" text="Loading trending content..." />
-          </div>
-        ) : (
-          <ContentRecommendations
-            title="Top Performing Content"
-            description="Discover what's trending right now"
-            recommendations={getTopRecommendations()}
-          />
-        )}
-      </div>
-      
-      <div className="bg-muted p-6 rounded-lg">
+      <div className="bg-muted p-6 rounded-lg w-full">
         <h2 className="text-xl font-bold mb-4">Ready to transform your content strategy?</h2>
         <p className="text-muted-foreground mb-6">
           Join thousands of content creators, social media managers, and marketers who are leveraging AI to create viral content.
@@ -239,6 +241,13 @@ const Index = () => {
           </Button>
           <Button asChild variant="outline" size="lg">
             <Link to="/analytics">View Demo Analytics</Link>
+          </Button>
+          <Button 
+            variant="ghost" 
+            size="lg"
+            onClick={() => setShowTour(true)}
+          >
+            Take a Tour
           </Button>
         </div>
       </div>
