@@ -5,11 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { ElementType } from "react"; // Import ElementType directly
 
 interface EmptyStateProps {
   title: string;
   description: string;
-  icon?: React.ElementType;
+  icon?: ElementType;
   actionButton?: {
     text: string;
     to?: string; // For internal links
