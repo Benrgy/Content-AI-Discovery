@@ -1,11 +1,16 @@
 "use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArrowRight, Sparkles, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
+import { 
+  TrendingUp, 
+  Hash, 
+  Sparkles,
+  ArrowRight
+} from "lucide-react";
 import { ContentItem } from "@/types/content";
 import PlatformIcon from "./PlatformIcon";
 import { formatNumber } from "@/constants/content-constants";
@@ -29,69 +34,55 @@ const ContentRecommendations = ({
   
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="flex items-center gap-2">
+          <TrendingUp className="h-5 w-5 text-primary" />
+          {title}
+        </CardTitle>
+        {title && (
+          <Button variant="ghost" size="sm" asChild>
+            <Link to="/discover" className="flex items-center gap-1">
+              View All
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+        )}
       </CardHeader>
-      <CardContent className="space-y-4">
-        {recommendations.slice(0, 3).map((item) => (
-          <div 
-            key={item.id} 
-            className="flex items-start gap-3 p-3 rounded-md border hover:bg-muted/50 transition-colors cursor-pointer"
-            onClick={() => onViewDetails && onViewDetails(item)}
-          >
-            {item.imageUrl ? (
-              <img 
-                src={item.imageUrl} 
-                alt={item.title} 
-                className="w-16 h-16 object-cover rounded-md"
-              />
-            ) : (
-              <div className="w-16 h-16 bg-muted rounded-md flex items-center justify-center">
-                <PlatformIcon platform={item.platform} />
-              </div>
-            )}
-            <div className="flex-grow min-w-0">
-              <div className="flex items-center gap-2">
-                <PlatformIcon platform={item.platform} />
-                <Badge variant="outline" className="text-xs">
-                  {formatNumber(item.engagement.likes)} likes
+      <CardContent>
+        <div className="flex flex-wrap gap-2">
+          {recommendations.slice(0, 3).map((item, index) => (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <Badge 
+                  variant="outline" 
+                  className="cursor-pointer hover:bg-primary/10 transition-colors"
+                  onClick={() => onViewDetails && onViewDetails(item)}
+                >
+                  <Hash className="h-3 w-3 mr-1" />
+                  {item.title.substring(0, 30)}...
+                  <span className="ml-1 text-xs opacity-60">
+                    ({formatNumber(item.engagement.likes)})
+                  </span>
                 </Badge>
-              </div>
-              <h4 className="font-medium text-sm line-clamp-2">{item.title}</h4>
-            </div>
-          </div>
-        ))}
-        
-        <div className="flex justify-between pt-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/discover" className="flex items-center gap-1">
-                  <TrendingUp className="h-3.5 w-3.5 mr-1" />
-                  Discover More
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Find more trending content</p>
-            </TooltipContent>
-          </Tooltip>
-          
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline" size="sm" asChild>
-                <Link to="/generate" className="flex items-center gap-1">
-                  <Sparkles className="h-3.5 w-3.5 mr-1" />
-                  Generate Content
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Create AI-powered content</p>
-            </TooltipContent>
-          </Tooltip>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{item.title}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
         </div>
+        {recommendations.length === 0 && (
+          <p className="text-sm text-muted-foreground text-center py-4">
+            No recommendations available
+          </p>
+        )}
+        {!title && recommendations.length > 3 && (
+          <div className="text-center mt-4">
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/discover">View More</Link>
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
