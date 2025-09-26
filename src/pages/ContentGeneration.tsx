@@ -6,10 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Copy } from "lucide-react";
+import { Copy, XCircle } from "lucide-react"; // Import XCircle icon
 import { showSuccess, showInfo } from "@/utils/toast";
 import { contentPlatforms } from "@/constants/platforms";
-import { contentTones, contentLengths } from "@/constants/generationOptions"; // Import new constants
+import { contentTones, contentLengths } from "@/constants/generationOptions";
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -40,6 +40,14 @@ const ContentGeneration = () => {
     showInfo("Generated content copied to clipboard!");
   };
 
+  const handleClearPrompt = () => {
+    setPrompt("");
+  };
+
+  const handleClearGeneratedContent = () => {
+    setGeneratedContent("");
+  };
+
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Generation</h1>
@@ -52,7 +60,7 @@ const ContentGeneration = () => {
           <CardTitle className="text-2xl">Generate New Content</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <div className="grid gap-2">
+          <div className="grid gap-2 relative"> {/* Added relative for positioning clear button */}
             <Label htmlFor="prompt">Content Prompt</Label>
             <Textarea
               id="prompt"
@@ -60,7 +68,19 @@ const ContentGeneration = () => {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               rows={5}
+              className="pr-10" // Add padding for the clear button
             />
+            {prompt && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-8 right-2 h-8 w-8 text-muted-foreground hover:text-foreground"
+                onClick={handleClearPrompt}
+                aria-label="Clear prompt"
+              >
+                <XCircle className="h-5 w-5" />
+              </Button>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -121,14 +141,24 @@ const ContentGeneration = () => {
             <div className="mt-6 p-4 border rounded-md bg-muted/50 relative">
               <h3 className="text-lg font-semibold mb-2">Generated Content:</h3>
               <p className="whitespace-pre-wrap text-muted-foreground">{generatedContent}</p>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="absolute top-2 right-2"
-                onClick={handleCopyContent}
-              >
-                <Copy className="h-4 w-4 mr-1" /> Copy
-              </Button>
+              <div className="absolute top-2 right-2 flex gap-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCopyContent}
+                  aria-label="Copy generated content"
+                >
+                  <Copy className="h-4 w-4 mr-1" /> Copy
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClearGeneratedContent}
+                  aria-label="Clear generated content"
+                >
+                  <XCircle className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           )}
         </CardContent>
