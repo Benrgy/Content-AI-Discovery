@@ -10,10 +10,8 @@ const Layout: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow flex flex-col">
-        <div className="flex-grow flex flex-col"> {/* Removed container mx-auto py-8 px-4 */}
-          <Outlet />
-        </div>
+      <main className="flex-grow flex flex-col"> {/* Applied flex-grow, flex, and flex-col directly here */}
+        <Outlet />
       </main>
       <Footer />
       <ScrollToTopButton /> {/* Add the scroll to top button */}
