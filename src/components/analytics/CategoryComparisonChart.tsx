@@ -19,7 +19,7 @@ interface CategoryPerformanceData {
 }
 
 interface CategoryComparisonChartProps {
-  data: CategoryPerformanceData[];
+  data: CategoryPerformanceData[] | undefined;
   title?: string;
   description?: string;
 }
@@ -29,6 +29,22 @@ const CategoryComparisonChart = ({
   title = "Category Performance Trends",
   description = "Performance scores by content category"
 }: CategoryComparisonChartProps) => {
+  if (!data || data.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center h-64 text-muted-foreground">
+            No data available
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -45,7 +61,13 @@ const CategoryComparisonChart = ({
               margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category" />
+              <XAxis 
+                dataKey="category" 
+                tick={{ fontSize: 10 }}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+              />
               <YAxis domain={[0, 100]} />
               <Tooltip 
                 formatter={(value, name) => [

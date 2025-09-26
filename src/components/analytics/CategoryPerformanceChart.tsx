@@ -19,7 +19,7 @@ interface CategoryPerformanceData {
 }
 
 interface CategoryPerformanceChartProps {
-  data: CategoryPerformanceData[];
+  data: CategoryPerformanceData[] | undefined;
   colors: string[];
   title?: string;
   description?: string;
@@ -33,6 +33,22 @@ const CategoryPerformanceChart = ({
   description = "Average performance score by content category",
   layout = "vertical"
 }: CategoryPerformanceChartProps) => {
+  if (!data || data.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center h-64 text-muted-foreground">
+            No data available
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>

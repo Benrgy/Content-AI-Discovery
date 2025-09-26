@@ -14,7 +14,7 @@ import {
 import { formatNumber } from "@/constants/content-constants";
 
 interface EngagementTrendChartProps {
-  data: Array<{ date: string; value: number }>;
+  data: Array<{ date: string; value: number }> | undefined;
   title?: string;
   description?: string;
   height?: number;
@@ -24,8 +24,24 @@ const EngagementTrendChart = ({
   data,
   title = "Engagement Over Time",
   description = "Total engagement trends over time",
-  height = 80
+  height = 300
 }: EngagementTrendChartProps) => {
+  if (!data || data.length === 0) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center h-64 text-muted-foreground">
+            No data available
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -35,7 +51,7 @@ const EngagementTrendChart = ({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className={`h-${height}`}>
+        <div style={{ height: `${height}px` }}>
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={data}
@@ -47,7 +63,7 @@ const EngagementTrendChart = ({
                 tick={{ fontSize: 12 }}
                 interval="preserveStartEnd"
               />
-              <YAxis />
+              <YAxis tickFormatter={(value) => formatNumber(value)} />
               <Tooltip 
                 formatter={(value) => [`${formatNumber(value as number)}`, 'Engagement']}
               />

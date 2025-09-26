@@ -10,6 +10,7 @@ import {
   TrendingUp
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import ContentCard from "@/components/ContentCard";
 import { getPerformanceColor, formatNumber } from "@/constants/content-constants";
 
 // Import modular components
@@ -93,7 +94,7 @@ const AnalyticsDashboard = () => {
           <LoadingState />
         ) : isError ? (
           <ErrorState onRetry={refetch} isRetrying={isFetching} />
-        ) : (
+        ) : analyticsData ? (
           <>
             {/* Overview Tab */}
             <TabsContent value="overview" className="space-y-8">
@@ -153,7 +154,7 @@ const AnalyticsDashboard = () => {
                 colorMap={PLATFORM_COLORS} 
                 title="Platform Performance Distribution"
                 description="Breakdown of content performance by platform"
-                height={96}
+                height={400}
               />
               
               <PlatformCards 
@@ -170,7 +171,7 @@ const AnalyticsDashboard = () => {
                 data={engagementData} 
                 title="Engagement Trends"
                 description="Daily engagement metrics over the past 20 days"
-                height={96}
+                height={400}
               />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -194,7 +195,7 @@ const AnalyticsDashboard = () => {
               />
             </TabsContent>
           </>
-        )}
+        ) : null}
       </Tabs>
     </PageLayout>
   );
