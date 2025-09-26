@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AppInitializer from "./components/AppInitializer";
 import ScrollToTop from "./components/ScrollToTop";
+import { SEOWrapper } from "./components/SEOWrapper";
 
 // Import all pages
 import Index from "./pages/Index";
@@ -22,17 +23,19 @@ const App = () => {
     <ErrorBoundary>
       <AppInitializer>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Index />} />
-            <Route path="discover" element={<ContentDiscovery />} />
-            <Route path="content/:id" element={<ContentDetail />} />
-            <Route path="generate" element={<ContentGeneration />} />
-            <Route path="analytics" element={<AnalyticsDashboard />} />
-            <Route path="saved" element={<SavedContent />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <SEOWrapper>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Index />} />
+              <Route path="discover" element={<ContentDiscovery />} />
+              <Route path="content/:id" element={<ContentDetail />} />
+              <Route path="generate" element={<ContentGeneration />} />
+              <Route path="analytics" element={<AnalyticsDashboard />} />
+              <Route path="saved" element={<SavedContent />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </SEOWrapper>
       </AppInitializer>
     </ErrorBoundary>
   );

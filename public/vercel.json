@@ -1,0 +1,28 @@
+{
+  "rewrites": [
+    {
+      "source": "/discover",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/generate",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/analytics",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/saved",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/content/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

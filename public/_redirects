@@ -1,0 +1,9 @@
+# SPA fallback for Netlify
+/*    /index.html   200
+
+# Specific routes with proper status codes
+/discover /index.html 200
+/generate /index.html 200
+/analytics /index.html 200
+/saved /index.html 200
+/content/* /index.html 200

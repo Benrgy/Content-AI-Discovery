@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,17 +28,19 @@ const Providers = ({ children }: ProvidersProps) => {
   return (
     <BrowserRouter basename="/">
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="system" 
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TooltipProvider>
-            {children}
-            <Sonner />
-          </TooltipProvider>
-        </ThemeProvider>
+        <HelmetProvider>
+          <ThemeProvider 
+            attribute="class" 
+            defaultTheme="system" 
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TooltipProvider>
+              {children}
+              <Sonner />
+            </TooltipProvider>
+          </ThemeProvider>
+        </HelmetProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );
