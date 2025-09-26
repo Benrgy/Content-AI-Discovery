@@ -19,12 +19,12 @@ interface EmptyStateProps {
   };
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({
+const EmptyState = ({
   title,
   description,
   icon: Icon = Info,
   actionButton,
-}) => {
+}: EmptyStateProps) => {
   return (
     <div className="max-w-xl mx-auto flex items-center justify-center flex-grow">
       <Alert className="flex flex-col items-center text-center p-6">

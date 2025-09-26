@@ -10,7 +10,7 @@ interface PageLayoutProps {
   description?: string;
 }
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, className, title, description }) => {
+const PageLayout = ({ children, className, title, description }: PageLayoutProps) => {
   return (
     <div className={cn("container mx-auto py-8 px-4 flex flex-col flex-grow", className)}>
       {title && (
