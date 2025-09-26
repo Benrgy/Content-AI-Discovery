@@ -13,6 +13,7 @@ import SavedContentSidebar from "@/components/SavedContentSidebar";
 import GeneratedContentDisplay from "@/components/GeneratedContentDisplay";
 import ContentRecommendations from "@/components/ContentRecommendations";
 import ContentGenerationHistory from "@/components/ContentGenerationHistory";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { ContentItem, GeneratedContent, GeneratedImage } from "@/types/content";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, History, Bookmark } from "lucide-react";
@@ -20,7 +21,12 @@ import { Sparkles, History, Bookmark } from "lucide-react";
 const ContentGeneration = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { data: contentData, isLoading: isContentLoading } = useContentDiscoveryData();
+  
+  // Add loading states and error handling
+  const [isInitializing, setIsInitializing] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  
+  const { data: contentData, isLoading: isContentLoading, error: contentError } = useContentDiscoveryData();
   const { savedItems } = useSavedContent();
   const { history, addToHistory, removeFromHistory } = useGenerationHistory();
   
@@ -36,19 +42,42 @@ const ContentGeneration = () => {
   const contentMutation = useContentGeneration();
   const imageMutation = useImageGeneration();
   
+  // Initialize the component
+  useEffect(() => {
+    try {
+      console.log("ContentGeneration component initializing...");
+      console.log("Location:", location.pathname);
+      console.log("Search params:", location.search);
+      console.log("Content ID from URL:", contentIdFromUrl);
+      
+      setIsInitializing(false);
+    } catch (err) {
+      console.error("Error initializing ContentGeneration:", err);
+      setError("Failed to initialize content generation page");
+      setIsInitializing(false);
+    }
+  }, [location, contentIdFromUrl]);
+  
   // Handle URL parameter for content reference
   useEffect(() => {
     if (contentIdFromUrl && contentData && !isContentLoading) {
-      const content = contentData.find(item => item.id === contentIdFromUrl);
-      if (content) {
-        console.log("Setting reference content:", content);
-        setReferenceContent(content);
-        // Clean up URL without the contentId parameter
-        const newUrl = new URL(window.location.href);
-        newUrl.searchParams.delete("contentId");
-        navigate(newUrl.pathname + newUrl.search, { replace: true });
-      } else {
-        console.warn("Content not found for ID:", contentIdFromUrl);
+      try {
+        console.log("Looking for content with ID:", contentIdFromUrl);
+        console.log("Available content:", contentData.map(c => c.id));
+        
+        const content = contentData.find(item => item.id === contentIdFromUrl);
+        if (content) {
+          console.log("Setting reference content:", content.title);
+          setReferenceContent(content);
+          // Clean up URL without the contentId parameter
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.delete("contentId");
+          navigate(newUrl.pathname + newUrl.search, { replace: true });
+        } else {
+          console.warn("Content not found for ID:", contentIdFromUrl);
+        }
+      } catch (err) {
+        console.error("Error setting reference content:", err);
       }
     }
   }, [contentIdFromUrl, contentData, isContentLoading, navigate]);
@@ -91,7 +120,6 @@ const ContentGeneration = () => {
   
   const handleClearReference = () => {
     setReferenceContent(null);
-    // Clean up URL if there are any remaining parameters
     navigate("/generate", { replace: true });
   };
   
@@ -137,6 +165,37 @@ const ContentGeneration = () => {
       .sort((a, b) => (b.performanceScore || 0) - (a.performanceScore || 0))
       .slice(0, 3);
   };
+  
+  // Show loading state
+  if (isInitializing || isContentLoading) {
+    return (
+      <PageLayout>
+        <div className="flex justify-center items-center min-h-[400px]">
+          <LoadingSpinner size="lg" text="Loading content generation..." />
+        </div>
+      </PageLayout>
+    );
+  }
+  
+  // Show error state
+  if (error || contentError) {
+    return (
+      <PageLayout
+        title="Error Loading Page"
+        description="There was an issue loading the content generation page."
+      >
+        <div className="text-center">
+          <p className="text-red-500 mb-4">{error || contentError?.message}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-primary text-primary-foreground rounded"
+          >
+            Reload Page
+          </button>
+        </div>
+      </PageLayout>
+    );
+  }
   
   return (
     <PageLayout

@@ -58,38 +58,63 @@ const ContentGenerationForm = ({
   const [includeHashtags, setIncludeHashtags] = useState(true);
   const [includeCTA, setIncludeCTA] = useState(true);
   const [imagePrompt, setImagePrompt] = useState("");
+  const [formError, setFormError] = useState<string | null>(null);
   
   useEffect(() => {
-    if (referenceContent) {
-      setPrompt(`Create content inspired by: "${referenceContent.title}"`);
-      setPlatform(referenceContent.platform);
-      setImagePrompt(`Create an image for: ${referenceContent.title}`);
+    try {
+      if (referenceContent) {
+        console.log("Setting reference content in form:", referenceContent.title);
+        setPrompt(`Create content inspired by: "${referenceContent.title}"`);
+        setPlatform(referenceContent.platform);
+        setImagePrompt(`Create an image for: ${referenceContent.title}`);
+        setFormError(null);
+      }
+    } catch (error) {
+      console.error("Error setting reference content:", error);
+      setFormError("Error loading reference content");
     }
   }, [referenceContent]);
   
   const handleGenerateContent = () => {
-    if (!prompt.trim()) {
-      showError("Please enter a content prompt");
-      return;
+    try {
+      setFormError(null);
+      
+      if (!prompt.trim()) {
+        showError("Please enter a content prompt");
+        return;
+      }
+      
+      console.log("Form submitting with:", { prompt, platform, tone, length, includeHashtags, includeCTA });
+      
+      onGenerateContent({
+        prompt,
+        platform,
+        tone,
+        length,
+        includeHashtags,
+        includeCTA
+      });
+    } catch (error) {
+      console.error("Error in handleGenerateContent:", error);
+      setFormError("Error submitting form");
     }
-    
-    onGenerateContent({
-      prompt,
-      platform,
-      tone,
-      length,
-      includeHashtags,
-      includeCTA
-    });
   };
   
   const handleGenerateImages = () => {
-    if (!imagePrompt.trim()) {
-      showError("Please enter an image prompt");
-      return;
+    try {
+      setFormError(null);
+      
+      if (!imagePrompt.trim()) {
+        showError("Please enter an image prompt");
+        return;
+      }
+      
+      console.log("Generating images with prompt:", imagePrompt);
+      onGenerateImages(imagePrompt);
+    } catch (error) {
+      console.error("Error in handleGenerateImages:", error);
+      setFormError("Error generating images");
     }
-    
-    onGenerateImages(imagePrompt);
   };
   
   const handleClearPrompt = () => {
@@ -99,6 +124,25 @@ const ContentGenerationForm = ({
   const handleClearImagePrompt = () => {
     setImagePrompt("");
   };
+  
+  if (formError) {
+    return (
+      <Card className="w-full">
+        <CardContent className="p-6">
+          <Alert variant="destructive">
+            <AlertTitle>Form Error</AlertTitle>
+            <AlertDescription>{formError}</AlertDescription>
+          </Alert>
+          <Button 
+            onClick={() => setFormError(null)} 
+            className="mt-4"
+          >
+            Try Again
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
   
   return (
     <Card className="w-full">
