@@ -76,15 +76,23 @@ const ContentDiscovery = () => {
             </Button>
           )}
         </div>
-        <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
-          <Filter className="h-4 w-4" />
-          Filters
+        <div className="flex gap-4"> {/* Added a div to group filter buttons */}
           {appliedPlatforms.length > 0 && (
-            <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
-              {appliedPlatforms.length}
-            </span>
+            <Button variant="outline" onClick={handleClearFilters} className="flex items-center gap-2">
+              <XCircle className="h-4 w-4" />
+              Clear Filters
+            </Button>
           )}
-        </Button>
+          <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
+            <Filter className="h-4 w-4" />
+            Filters
+            {appliedPlatforms.length > 0 && (
+              <span className="ml-1 px-2 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                {appliedPlatforms.length}
+              </span>
+            )}
+          </Button>
+        </div>
       </div>
 
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
