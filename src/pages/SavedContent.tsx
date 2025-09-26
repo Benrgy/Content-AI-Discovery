@@ -4,7 +4,9 @@ import React from "react";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import ContentCard from "@/components/ContentCard";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button"; // Import Button
 import { Info } from "lucide-react";
+import { Link } from "react-router-dom"; // Import Link
 
 const SavedContent = () => {
   const { savedItems } = useSavedContent();
@@ -21,8 +23,11 @@ const SavedContent = () => {
           <Alert>
             <Info className="h-4 w-4" />
             <AlertTitle>No Saved Content</AlertTitle>
-            <AlertDescription>
+            <AlertDescription className="flex flex-col items-center gap-4 pt-2"> {/* Added flex-col and gap for button */}
               You haven't saved any content yet. Discover content and click the save icon to add items here!
+              <Button asChild>
+                <Link to="/discover">Discover Content</Link>
+              </Button>
             </AlertDescription>
           </Alert>
         </div>
