@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react"; // Explicitly import useState and useEffect
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
@@ -12,9 +12,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 const Header = () => {
   const location = useLocation();
   const publicRoutes = usePublicRoutes();
-  const [scrolled, setScrolled] = React.useState(false);
+  const [scrolled, setScrolled] = useState(false); // Use useState directly
 
-  React.useEffect(() => {
+  useEffect(() => { // Use useEffect directly
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
     };
