@@ -16,7 +16,6 @@ const navigationRoutes = [
 
 const MobileNav = () => {
   console.log("MobileNav: Component rendering");
-  
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 

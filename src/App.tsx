@@ -20,7 +20,7 @@ const App = () => {
   
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <AppInitializer>
           <ScrollToTop />
           <Routes>
