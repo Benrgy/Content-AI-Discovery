@@ -5,7 +5,7 @@ import {
   Instagram,
   Youtube,
   Rss, // Using Rss for blog posts
-  LucideIcon,
+  type LucideIcon, // Add 'type' keyword here
 } from "lucide-react";
 
 export const contentPlatforms = [
