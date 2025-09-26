@@ -117,168 +117,6 @@ export const mockContent: ContentItem[] = [
       avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 420000
     }
-  },
-  {
-    id: "6",
-    title: "How to Build a Personal Brand on LinkedIn in 2024",
-    description: "Transform your LinkedIn presence into a powerful personal brand that attracts opportunities. Learn the strategies top professionals use to build authority, grow their network, and land dream jobs. Includes content templates, posting schedules, and engagement tactics that actually work.",
-    platform: "linkedin",
-    category: "personal branding",
-    tags: ["linkedin", "personal branding", "networking", "career growth", "professional development"],
-    performanceScore: 85,
-    engagement: { 
-      likes: 1850, 
-      comments: 120, 
-      shares: 340,
-      engagementRate: 4.8
-    },
-    imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://www.linkedin.com/pulse/build-personal-brand-linkedin-2024-sarah-johnson/",
-    publishedAt: "2024-05-20T08:15:00Z",
-    author: {
-      name: "Sarah Johnson",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 67000
-    }
-  },
-  {
-    id: "7",
-    title: "Instagram Reels That Go Viral: 7 Proven Formulas",
-    description: "Crack the code to viral Instagram Reels with these 7 proven formulas used by top creators. From hook techniques to trending audio selection, learn exactly what makes content shareable and how to apply these strategies to your niche. Includes real examples and performance metrics.",
-    platform: "instagram",
-    category: "content creation",
-    tags: ["instagram reels", "viral content", "social media", "content creation", "engagement"],
-    performanceScore: 94,
-    engagement: { 
-      likes: 12500, 
-      comments: 890, 
-      shares: 2100,
-      engagementRate: 6.2
-    },
-    imageUrl: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://blog.later.com/instagram-reels-viral-formulas/",
-    publishedAt: "2024-05-22T16:45:00Z",
-    author: {
-      name: "Maria Rodriguez",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 156000
-    }
-  },
-  {
-    id: "8",
-    title: "The Psychology Behind Viral Content: What Makes People Share",
-    description: "Dive deep into the psychological triggers that make content go viral. Based on research from top universities and analysis of millions of social media posts, discover the emotional and cognitive factors that drive sharing behavior. Essential reading for content creators and marketers.",
-    platform: "blog",
-    category: "psychology",
-    tags: ["viral content", "psychology", "social media psychology", "content marketing", "behavioral science"],
-    performanceScore: 91,
-    engagement: { 
-      likes: 3400, 
-      comments: 280, 
-      shares: 1200,
-      engagementRate: 5.1
-    },
-    imageUrl: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://contentmarketinginstitute.com/psychology-viral-content/",
-    publishedAt: "2024-05-19T11:30:00Z",
-    author: {
-      name: "Dr. Michael Chen",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 89000
-    }
-  },
-  {
-    id: "9",
-    title: "YouTube Shorts Strategy: From 0 to 1M Views in 30 Days",
-    description: "The complete blueprint for YouTube Shorts success. Learn the exact strategy one creator used to go from zero to 1 million views in just 30 days. Includes content planning, optimization techniques, and the posting schedule that maximizes reach and subscriber growth.",
-    platform: "youtube",
-    category: "content creation",
-    tags: ["youtube shorts", "youtube growth", "video marketing", "content strategy", "viral videos"],
-    performanceScore: 96,
-    engagement: { 
-      likes: 45000, 
-      comments: 3200, 
-      shares: 8900, 
-      views: 2800000,
-      engagementRate: 2.1
-    },
-    imageUrl: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    publishedAt: "2024-05-25T14:20:00Z",
-    author: {
-      name: "Creator Academy",
-      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 890000
-    }
-  },
-  {
-    id: "10",
-    title: "Twitter Growth Hacks: 10K Followers in 90 Days",
-    description: "The proven system for rapid Twitter growth without buying followers or using bots. Learn the content strategies, engagement tactics, and networking approaches that helped dozens of creators reach 10K+ followers in under 90 days. Includes tweet templates and growth tracking tools.",
-    platform: "twitter",
-    category: "social media",
-    tags: ["twitter growth", "social media growth", "twitter marketing", "follower growth", "engagement"],
-    performanceScore: 88,
-    engagement: { 
-      likes: 5600, 
-      comments: 420, 
-      shares: 1800,
-      engagementRate: 4.9
-    },
-    imageUrl: "https://images.unsplash.com/photo-1611605698335-8b156eddfcd7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://buffer.com/library/twitter-growth-strategy/",
-    publishedAt: "2024-05-17T09:45:00Z",
-    author: {
-      name: "Growth Hacker Pro",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 234000
-    }
-  },
-  {
-    id: "11",
-    title: "Email Marketing Automation That Converts: Complete Guide",
-    description: "Build email sequences that turn subscribers into customers on autopilot. This comprehensive guide covers everything from welcome series to abandoned cart recovery, with real examples from 7-figure businesses. Includes templates, timing strategies, and A/B testing frameworks.",
-    platform: "blog",
-    category: "marketing",
-    tags: ["email marketing", "marketing automation", "conversion optimization", "email sequences", "digital marketing"],
-    performanceScore: 82,
-    engagement: { 
-      likes: 2100, 
-      comments: 180, 
-      shares: 650,
-      engagementRate: 3.9
-    },
-    imageUrl: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://mailchimp.com/resources/email-marketing-automation-guide/",
-    publishedAt: "2024-05-14T13:15:00Z",
-    author: {
-      name: "Marketing Maven",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 45000
-    }
-  },
-  {
-    id: "12",
-    title: "Mindfulness for Entrepreneurs: Reduce Stress, Increase Focus",
-    description: "Discover how successful entrepreneurs use mindfulness to manage stress, make better decisions, and maintain peak performance. Includes practical meditation techniques, breathing exercises, and daily routines that fit into busy schedules. Transform your mental game in just 10 minutes a day.",
-    platform: "linkedin",
-    category: "health",
-    tags: ["mindfulness", "entrepreneur wellness", "stress management", "meditation", "mental health"],
-    performanceScore: 79,
-    engagement: { 
-      likes: 980, 
-      comments: 65, 
-      shares: 190,
-      engagementRate: 3.2
-    },
-    imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
-    link: "https://www.linkedin.com/pulse/mindfulness-entrepreneurs-wellness-guide-zen-master/",
-    publishedAt: "2024-05-11T07:30:00Z",
-    author: {
-      name: "Zen Master",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
-      followers: 28000
-    }
   }
 ];
 
@@ -358,6 +196,12 @@ export const mockGeneratedContent = {
     hashtags: ["#RemoteWork", "#Productivity", "#WorkFromHome", "#ProfessionalDevelopment", "#WorkLifeBalance"],
     cta: "Follow for more remote work insights and career growth tips!",
     productionNotes: "Use numbered list format for easy scanning. Include relevant emojis. Post during peak LinkedIn hours (8-10 AM or 12-2 PM). Engage with comments within first hour."
+  },
+  twitter: {
+    content: "🧵 THREAD: 10 productivity hacks that doubled my remote work output (without working more hours)\n\n1/ The 90-minute focus block method\n\nYour brain operates in natural 90-minute cycles. Work WITH your biology, not against it.\n\n• 90 min focused work\n• 15-20 min break\n• Repeat\n\nThis alone increased my output by 40%.\n\n2/ Digital workspace organization\n\nYour digital environment affects your mental clarity.\n\n• One browser window at a time\n• Desktop with zero files\n• Organized folder structure\n• Bookmarks sorted by priority\n\nClean space = clear mind.\n\n3/ The 2-minute rule\n\nIf it takes less than 2 minutes, do it NOW.\n\n• Reply to that email\n• File that document\n• Make that quick call\n\nThis prevents small tasks from becoming overwhelming piles.\n\n4/ Time-blocking for deep work\n\nSchedule your most important work like you would a meeting.\n\n• Block 2-3 hours for deep work\n• Turn off ALL notifications\n• Work on ONE project only\n\nProtect this time fiercely.\n\n5/ Environment optimization\n\n• Natural light when possible\n• Plants for better air quality\n• Comfortable temperature (68-72°F)\n• Noise-canceling headphones\n• Dedicated work space\n\nYour environment shapes your performance.\n\n6/ Workday shutdown ritual\n\nThis was the game-changer for me.\n\n• Review tomorrow's priorities\n• Close all work apps\n• Write 3 wins from today\n• Physically leave workspace\n\nThis creates a clear boundary between work and life.\n\n7/ Communication boundaries\n\n• Check email 3x per day max\n• Set 'focus time' in calendar\n• Use status indicators\n• Batch similar communications\n\nConstant interruptions kill productivity.\n\n8/ Energy management > time management\n\nWork during your peak energy hours.\n\n• Track your energy patterns\n• Schedule hard tasks during peaks\n• Use low-energy times for admin\n• Take breaks before you need them\n\n9/ Regular productivity audits\n\nEvery Friday, ask:\n\n• What worked well this week?\n• What drained my energy?\n• What can I eliminate?\n• What should I do more of?\n\nContinuous improvement is key.\n\n10/ The compound effect\n\nSmall improvements compound over time.\n\n• 1% better each day = 37x better in a year\n• Focus on systems, not goals\n• Consistency beats perfection\n• Progress over perfection\n\nRemote work isn't about working from anywhere.\n\nIt's about working intentionally.\n\nWhich hack will you try first? 👇",
+    hashtags: ["#RemoteWork", "#Productivity", "#WorkFromHome", "#TimeManagement", "#WorkLifeBalance"],
+    cta: "Follow @username for more productivity tips and remote work strategies!",
+    productionNotes: "Break into multiple tweets for a thread. Use emojis and bullet points for readability. Engage with replies within first hour. Pin the thread to profile."
   }
 };
 
