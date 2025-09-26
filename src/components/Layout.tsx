@@ -11,7 +11,7 @@ const Layout: React.FC = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow flex flex-col">
-        <div className="container mx-auto py-8 px-4 flex-grow flex flex-col"> {/* Centralized container and flex-grow */}
+        <div className="flex-grow flex flex-col"> {/* Removed container mx-auto py-8 px-4 */}
           <Outlet />
         </div>
       </main>
