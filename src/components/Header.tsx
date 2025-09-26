@@ -12,9 +12,26 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 const Header = () => {
   const location = useLocation();
   const publicRoutes = usePublicRoutes();
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
+    <header
+      className={cn(
+        "sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm transition-shadow duration-300",
+        scrolled && "shadow-sm"
+      )}
+    >
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-4">
           <MobileNav />
