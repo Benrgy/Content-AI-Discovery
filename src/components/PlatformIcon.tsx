@@ -1,9 +1,8 @@
 "use client";
 
 import {
-  LucideIcon, // Keep LucideIcon for type definition if needed, or remove if not
-} from "lucide-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+  Tooltip, TooltipContent, TooltipTrigger
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { platformIconMap } from "@/constants/content-constants"; // Import from centralized constants
 
