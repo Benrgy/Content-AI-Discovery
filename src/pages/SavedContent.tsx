@@ -7,6 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button"; // Import Button
 import { Info } from "lucide-react";
 import { Link } from "react-router-dom"; // Import Link
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
 
 const SavedContent = () => {
   const { savedItems } = useSavedContent();
@@ -25,9 +26,16 @@ const SavedContent = () => {
             <AlertTitle>No Saved Content</AlertTitle>
             <AlertDescription className="flex flex-col items-center gap-4 pt-2"> {/* Added flex-col and gap for button */}
               You haven't saved any content yet. Discover content and click the save icon to add items here!
-              <Button asChild>
-                <Link to="/discover">Discover Content</Link>
-              </Button>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button asChild>
+                    <Link to="/discover">Discover Content</Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Explore new content to save</p>
+                </TooltipContent>
+              </Tooltip>
             </AlertDescription>
           </Alert>
         </div>
