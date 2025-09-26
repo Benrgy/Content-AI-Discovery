@@ -120,7 +120,14 @@ const ContentDiscovery = () => {
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>
                 Failed to load content. Please try refreshing the page.
-                <Button onClick={() => refetch()} className="ml-4">Retry</Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button onClick={() => refetch()} className="ml-4">Retry</Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Attempt to refetch content</p>
+                  </TooltipContent>
+                </Tooltip>
               </AlertDescription>
             </Alert>
           </div>
