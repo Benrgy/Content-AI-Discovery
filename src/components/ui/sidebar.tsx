@@ -43,7 +43,7 @@ const sidebarMenuButtonVariants = cva(
   }
 );
 
-type SidebarMenuButtonProps = React.ComponentProps<"button"> & VariantProps<typeof sidebarMenuButtonVariants>;
+interface SidebarMenuButtonProps extends React.ComponentProps<"button">, VariantProps<typeof sidebarMenuButtonVariants> {}
 
 const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
