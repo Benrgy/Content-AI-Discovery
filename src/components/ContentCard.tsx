@@ -2,17 +2,20 @@
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2 } from "lucide-react";
+import { MessageSquare, Heart, Share2, Eye, Bookmark, BookmarkCheck, Link2, ExternalLink } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import { ContentItem } from "@/types/content";
 import { showInfo } from "@/utils/toast";
 import PlatformIcon from "./PlatformIcon";
+import { Badge } from "@/components/ui/badge";
+import { formatNumber, getPerformanceColor } from "@/constants/content-constants";
+import { Link } from "react-router-dom";
 
 interface ContentCardProps extends ContentItem {}
 
-const ContentCard = (props: ContentCardProps) => { // Removed React.FC
-  const { id, title, description, platform, engagement, imageUrl, link } = props;
+const ContentCard = (props: ContentCardProps) => {
+  const { id, title, description, platform, category, engagement, imageUrl, link, performanceScore } = props;
   const { isSaved, toggleSaved } = useSavedContent();
   const saved = isSaved(id);
 
@@ -28,23 +31,28 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
   };
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card className="flex flex-col h-full overflow-hidden transition-all duration-200 hover:shadow-md">
       {imageUrl && (
-        <div className="relative w-full h-48 overflow-hidden rounded-t-lg">
+        <div className="relative w-full h-48 overflow-hidden">
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
           />
-          <div className="absolute top-2 left-2">
-            <PlatformIcon platform={platform} className="bg-background/50 text-foreground" />
+          <div className="absolute top-2 left-2 flex gap-2">
+            <PlatformIcon platform={platform} className="bg-background/80 text-foreground" />
+            {performanceScore && (
+              <Badge variant="outline" className={`bg-background/80 ${getPerformanceColor(performanceScore)}`}>
+                {performanceScore}
+              </Badge>
+            )}
           </div>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-2 right-2 bg-background/50 hover:bg-background/70"
+                className="absolute top-2 right-2 bg-background/80 hover:bg-background/90"
                 onClick={handleToggleSave}
                 aria-label={saved ? "Unsave content" : "Save content"}
               >
@@ -61,16 +69,23 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
           </Tooltip>
         </div>
       )}
-      <CardHeader>
-        <CardTitle className="text-lg line-clamp-2">{title}</CardTitle>
+      <CardHeader className="pb-2">
+        <div className="flex justify-between items-start gap-2">
+          <CardTitle className="text-lg line-clamp-2">{title}</CardTitle>
+        </div>
+        {category && (
+          <Badge variant="secondary" className="mt-1 mb-2">
+            {category}
+          </Badge>
+        )}
         <CardDescription className="text-sm line-clamp-3">{description}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent className="flex-grow pb-2">
         <div className="flex items-center justify-around text-muted-foreground text-sm mt-2">
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center gap-1">
-                <Heart className="h-4 w-4" /> {engagement.likes}
+                <Heart className="h-4 w-4" /> {formatNumber(engagement.likes)}
               </div>
             </TooltipTrigger>
             <TooltipContent>
@@ -80,7 +95,7 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center gap-1">
-                <MessageSquare className="h-4 w-4" /> {engagement.comments}
+                <MessageSquare className="h-4 w-4" /> {formatNumber(engagement.comments)}
               </div>
             </TooltipTrigger>
             <TooltipContent>
@@ -90,7 +105,7 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center gap-1">
-                <Share2 className="h-4 w-4" /> {engagement.shares}
+                <Share2 className="h-4 w-4" /> {formatNumber(engagement.shares)}
               </div>
             </TooltipTrigger>
             <TooltipContent>
@@ -101,7 +116,7 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="flex items-center gap-1">
-                  <Eye className="h-4 w-4" /> {engagement.views}
+                  <Eye className="h-4 w-4" /> {formatNumber(engagement.views)}
                 </div>
               </TooltipTrigger>
               <TooltipContent>
@@ -110,18 +125,37 @@ const ContentCard = (props: ContentCardProps) => { // Removed React.FC
             </Tooltip>
           )}
         </div>
+        {engagement.engagementRate && (
+          <div className="mt-3 text-center">
+            <Badge variant="outline" className="text-xs">
+              Engagement Rate: {engagement.engagementRate.toFixed(1)}%
+            </Badge>
+          </div>
+        )}
       </CardContent>
-      <CardFooter className="flex gap-2">
+      <CardFooter className="flex gap-2 pt-2">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button asChild className="flex-grow">
+            <Button asChild variant="default" className="flex-grow gap-1">
               <a href={link} target="_blank" rel="noopener noreferrer">
-                View Content
+                View <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>View full content in a new tab</p>
+            <p>View original content</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button asChild variant="outline" className="flex-grow gap-1">
+              <Link to={`/generate?contentId=${id}`}>
+                Generate
+              </Link>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Create content based on this</p>
           </TooltipContent>
         </Tooltip>
         <Tooltip>

@@ -1,14 +1,15 @@
-import { type ReactNode } from "react"; // Import ReactNode directly
+import { type ReactNode } from "react";
 import Index from "@/pages/Index";
 import ContentDiscovery from "@/pages/ContentDiscovery";
 import ContentGeneration from "@/pages/ContentGeneration";
 import SavedContent from "@/pages/SavedContent";
+import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 import NotFound from "@/pages/NotFound";
 
 export interface AppRoute {
   path: string;
   name: string;
-  element: ReactNode; // Use ReactNode directly
+  element: ReactNode;
   inNav?: boolean;
 }
 
@@ -29,6 +30,12 @@ export const appRoutes: AppRoute[] = [
     path: "/generate",
     name: "Generate Content",
     element: <ContentGeneration />,
+    inNav: true,
+  },
+  {
+    path: "/analytics",
+    name: "Analytics",
+    element: <AnalyticsDashboard />,
     inNav: true,
   },
   {
