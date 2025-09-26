@@ -37,7 +37,7 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
             alt={title}
             className="w-full h-full object-cover"
           />
-          <Badge className="absolute top-2 left-2 capitalize"> {/* Using Badge here */}
+          <Badge className="absolute top-2 left-2 capitalize">
             {platform}
           </Badge>
           <Tooltip>
@@ -113,11 +113,18 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
         </div>
       </CardContent>
       <CardFooter className="flex gap-2">
-        <Button asChild className="flex-grow">
-          <a href={link} target="_blank" rel="noopener noreferrer">
-            View Content
-          </a>
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button asChild className="flex-grow">
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                View Content
+              </a>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>View full content in a new tab</p>
+          </TooltipContent>
+        </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="outline" size="icon" onClick={handleCopyLink} aria-label="Copy content link">
