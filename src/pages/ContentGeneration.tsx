@@ -20,7 +20,7 @@ import { Sparkles, History, Bookmark } from "lucide-react";
 const ContentGeneration = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { data: contentData } = useContentDiscoveryData();
+  const { data: contentData, isLoading: isContentLoading } = useContentDiscoveryData();
   const { savedItems } = useSavedContent();
   const { history, addToHistory, removeFromHistory } = useGenerationHistory();
   
@@ -36,15 +36,22 @@ const ContentGeneration = () => {
   const contentMutation = useContentGeneration();
   const imageMutation = useImageGeneration();
   
+  // Handle URL parameter for content reference
   useEffect(() => {
-    if (contentIdFromUrl && contentData) {
+    if (contentIdFromUrl && contentData && !isContentLoading) {
       const content = contentData.find(item => item.id === contentIdFromUrl);
       if (content) {
+        console.log("Setting reference content:", content);
         setReferenceContent(content);
-        navigate("/generate", { replace: true });
+        // Clean up URL without the contentId parameter
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete("contentId");
+        navigate(newUrl.pathname + newUrl.search, { replace: true });
+      } else {
+        console.warn("Content not found for ID:", contentIdFromUrl);
       }
     }
-  }, [contentIdFromUrl, contentData, navigate]);
+  }, [contentIdFromUrl, contentData, isContentLoading, navigate]);
   
   const handleGenerateContent = async (formData: {
     prompt: string;
@@ -55,7 +62,9 @@ const ContentGeneration = () => {
     includeCTA: boolean;
   }) => {
     try {
+      console.log("Generating content with data:", formData);
       const result = await contentMutation.mutateAsync(formData);
+      console.log("Content generated successfully:", result);
       setGeneratedContent(result);
       addToHistory(result);
       setActiveTab("content");
@@ -68,7 +77,9 @@ const ContentGeneration = () => {
   
   const handleGenerateImages = async (imagePrompt: string) => {
     try {
+      console.log("Generating images with prompt:", imagePrompt);
       const result = await imageMutation.mutateAsync(imagePrompt);
+      console.log("Images generated successfully:", result);
       setGeneratedImages(result);
       setActiveTab("images");
       showSuccess("Images generated successfully!");
@@ -80,6 +91,7 @@ const ContentGeneration = () => {
   
   const handleClearReference = () => {
     setReferenceContent(null);
+    // Clean up URL if there are any remaining parameters
     navigate("/generate", { replace: true });
   };
   
@@ -98,7 +110,7 @@ const ContentGeneration = () => {
   
   const handleRegenerateFromHistory = (content: GeneratedContent) => {
     const formData = {
-      prompt: `Regenerate similar content to: "${content.content.substring(0, 100)}..."`,
+      prompt: `Create similar content to: "${content.content.substring(0, 100)}..."`,
       platform: content.platform,
       tone: "professional",
       length: "medium",
