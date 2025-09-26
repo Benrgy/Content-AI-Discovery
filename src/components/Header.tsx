@@ -8,7 +8,7 @@ import MobileNav from "./MobileNav";
 import NotificationCenter from "./NotificationCenter";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Settings } from "lucide-react";
+import { Settings, Rocket } from "lucide-react";
 
 const navigationRoutes = [
   { path: "/discover", name: "Discover", inNav: true },
@@ -98,6 +98,18 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center space-x-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/deployment">
+                  <Rocket className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Deployment Status</p>
+            </TooltipContent>
+          </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" asChild>

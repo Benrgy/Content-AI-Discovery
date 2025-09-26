@@ -19,6 +19,7 @@ import ContentDetail from "./pages/ContentDetail";
 import Diagnostics from "./pages/Diagnostics";
 import Settings from "./pages/Settings";
 import GitHubIntegration from "./pages/GitHubIntegration";
+import DeploymentStatus from "./pages/DeploymentStatus";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
                 <Route path="settings" element={<Settings />} />
                 <Route path="diagnostics" element={<Diagnostics />} />
                 <Route path="github" element={<GitHubIntegration />} />
+                <Route path="deployment" element={<DeploymentStatus />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
