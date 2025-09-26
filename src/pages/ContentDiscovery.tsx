@@ -49,13 +49,13 @@ const ContentDiscovery = () => {
   });
 
   return (
-    <div>
+    <div className="container mx-auto py-8 px-4 flex flex-col flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Discovery Engine</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center">
         Find high-performing social media content and identify viral patterns.
       </p>
 
-      <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4">
+      <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full"> {/* Added w-full */}
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
@@ -118,7 +118,7 @@ const ContentDiscovery = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"> {/* Added w-full */}
         {isLoading ? (
           Array.from({ length: 6 }).map((_, index) => <ContentCardSkeleton key={index} />)
         ) : isError ? (

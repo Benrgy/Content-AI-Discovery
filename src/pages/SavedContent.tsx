@@ -11,7 +11,7 @@ const SavedContent = () => {
   const { savedItems } = useSavedContent();
 
   return (
-    <div className="flex flex-col flex-grow">
+    <div className="container mx-auto py-8 px-4 flex flex-col flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Your Saved Content</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
         Revisit the content you've bookmarked for later inspiration.
@@ -29,7 +29,7 @@ const SavedContent = () => {
           }}
         />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto w-full"> {/* Added w-full */}
           {savedItems.map((content) => (
             <ContentCard key={content.id} {...content} />
           ))}
