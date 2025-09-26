@@ -1,5 +1,3 @@
-"use client";
-
 export const contentPlatforms = [
   { value: "linkedin", label: "LinkedIn" },
   { value: "tiktok", label: "TikTok" },
