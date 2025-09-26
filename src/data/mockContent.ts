@@ -4,7 +4,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "1",
     title: "10 Productivity Hacks for Remote Workers in 2024",
-    description: "Discover the top strategies to boost your efficiency and maintain work-life balance while working from home. Essential tips for every remote professional.",
+    description: "Discover the top strategies to boost your efficiency and maintain work-life balance while working from home. Essential tips for every remote professional including time-blocking, digital workspace organization, and energy management techniques.",
     platform: "linkedin",
     category: "productivity",
     tags: ["remote work", "productivity", "work-life balance"],
@@ -27,7 +27,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "2",
     title: "The Ultimate Guide to Mastering TikTok Algorithms",
-    description: "Unlock the secrets to going viral on TikTok! This guide breaks down how the algorithm works and provides actionable steps to increase your reach.",
+    description: "Unlock the secrets to going viral on TikTok! This comprehensive guide breaks down how the algorithm works, provides actionable steps to increase your reach, and reveals the best posting times and content strategies used by top creators.",
     platform: "tiktok",
     category: "social media",
     tags: ["tiktok", "algorithm", "viral content"],
@@ -40,7 +40,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 5.3
     },
     imageUrl: "https://images.unsplash.com/photo-1611605698335-8b156eddfcd7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.tiktok.com/@creator/video/7234567890123456789",
+    link: "https://blog.hootsuite.com/how-tiktok-algorithm-works/",
     publishedAt: "2024-05-18T14:20:00Z",
     author: {
       name: "Ryan Chen",
@@ -51,7 +51,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "3",
     title: "5 AI Tools Revolutionizing Digital Marketing",
-    description: "Stay ahead of the curve with these powerful AI tools that are transforming how marketers create, analyze, and optimize campaigns.",
+    description: "Stay ahead of the curve with these powerful AI tools that are transforming how marketers create, analyze, and optimize campaigns. From content generation to predictive analytics, discover the tools that top marketers are using to gain competitive advantages.",
     platform: "twitter",
     category: "marketing",
     tags: ["ai", "digital marketing", "tools"],
@@ -63,7 +63,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.8
     },
     imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dce98d07?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://twitter.com/sophiawilliams/status/1234567890123456789",
+    link: "https://blog.hubspot.com/marketing/ai-tools-for-marketers",
     publishedAt: "2024-05-10T09:15:00Z",
     author: {
       name: "Sophia Williams",
@@ -74,7 +74,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "4",
     title: "Healthy Meal Prep Ideas for Busy Professionals",
-    description: "Quick and easy meal prep recipes that will save you time and keep you energized throughout your busy week. Perfect for health-conscious individuals.",
+    description: "Quick and easy meal prep recipes that will save you time and keep you energized throughout your busy week. Perfect for health-conscious individuals who want to maintain nutrition without spending hours in the kitchen. Includes 15 recipes with prep times under 30 minutes.",
     platform: "instagram",
     category: "health",
     tags: ["meal prep", "healthy eating", "recipes"],
@@ -86,7 +86,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.5
     },
     imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.instagram.com/p/ABC123DEF456/",
+    link: "https://www.eatingwell.com/gallery/7896454/healthy-meal-prep-ideas/",
     publishedAt: "2024-05-12T11:45:00Z",
     author: {
       name: "Jamie Oliver",
@@ -97,7 +97,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "5",
     title: "Understanding Web3: The Future of the Internet",
-    description: "A beginner-friendly explanation of Web3, blockchain, NFTs, and decentralized applications. Dive into the next generation of the internet.",
+    description: "A beginner-friendly explanation of Web3, blockchain, NFTs, and decentralized applications. Dive into the next generation of the internet with clear explanations of complex concepts, real-world use cases, and predictions for how Web3 will reshape digital interactions.",
     platform: "youtube",
     category: "technology",
     tags: ["web3", "blockchain", "crypto"],
@@ -110,7 +110,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 2.6
     },
     imageUrl: "https://images.unsplash.com/photo-1639322537228-fefc227777c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    link: "https://www.youtube.com/watch?v=nHhAEkG1y2U",
     publishedAt: "2024-05-08T16:30:00Z",
     author: {
       name: "Tech Explained",
@@ -121,7 +121,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "6",
     title: "Top 7 SEO Trends You Can't Ignore in 2024",
-    description: "Stay competitive in search rankings with these crucial SEO trends. Learn how to adapt your strategy for maximum visibility.",
+    description: "Stay competitive in search rankings with these crucial SEO trends. Learn how to adapt your strategy for maximum visibility including AI-powered content optimization, Core Web Vitals, E-A-T signals, and voice search optimization strategies that actually work.",
     platform: "blog",
     category: "marketing",
     tags: ["seo", "digital marketing", "trends"],
@@ -133,7 +133,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.2
     },
     imageUrl: "https://images.unsplash.com/photo-1557426272-0a6479ab1188?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://blog.example.com/seo-trends-2024",
+    link: "https://blog.semrush.com/seo-trends/",
     publishedAt: "2024-05-05T13:20:00Z",
     author: {
       name: "SEO Mastery",
@@ -144,7 +144,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "7",
     title: "How to Create Viral Short-Form Video Content",
-    description: "Master the art of creating engaging short-form videos that capture attention and drive engagement across platforms.",
+    description: "Master the art of creating engaging short-form videos that capture attention and drive engagement across platforms. Learn the psychology behind viral content, optimal video lengths, trending audio strategies, and editing techniques used by top creators to get millions of views.",
     platform: "tiktok",
     category: "content creation",
     tags: ["short-form video", "viral content", "content strategy"],
@@ -157,7 +157,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 5.1
     },
     imageUrl: "https://images.unsplash.com/photo-1616469829941-c7200edec809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.tiktok.com/@creativevisuals/video/7345678901234567890",
+    link: "https://blog.later.com/viral-video-content/",
     publishedAt: "2024-05-20T10:00:00Z",
     author: {
       name: "Creative Visuals",
@@ -168,7 +168,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "8",
     title: "The Psychology of Viral Content: Why We Share",
-    description: "Explore the psychological triggers that make content shareable and how to incorporate these elements into your content strategy.",
+    description: "Explore the psychological triggers that make content shareable and how to incorporate these elements into your content strategy. Discover the six key emotions that drive sharing behavior, the role of social currency, and practical frameworks for creating content that people can't help but share.",
     platform: "blog",
     category: "psychology",
     tags: ["psychology", "viral content", "social sharing"],
@@ -180,7 +180,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.8
     },
     imageUrl: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://mindmatters.blog/psychology-viral-content",
+    link: "https://blog.bufferapp.com/psychology-of-sharing",
     publishedAt: "2024-05-14T08:45:00Z",
     author: {
       name: "Mind Matters",
@@ -191,7 +191,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "9",
     title: "Building a Personal Brand on LinkedIn: A Step-by-Step Guide",
-    description: "Learn how to establish yourself as a thought leader and build a powerful personal brand on LinkedIn with these proven strategies.",
+    description: "Learn how to establish yourself as a thought leader and build a powerful personal brand on LinkedIn with these proven strategies. From optimizing your profile to creating engaging content, networking effectively, and measuring your brand's impact - everything you need to stand out professionally.",
     platform: "linkedin",
     category: "personal branding",
     tags: ["linkedin", "personal brand", "professional development"],
@@ -203,7 +203,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.9
     },
     imageUrl: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.linkedin.com/pulse/building-personal-brand-linkedin-step-by-step-guide-career-growth/",
+    link: "https://blog.linkedin.com/2023/january/19/how-to-build-your-personal-brand-on-linkedin",
     publishedAt: "2024-05-16T15:10:00Z",
     author: {
       name: "Career Growth",
@@ -214,7 +214,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "10",
     title: "Instagram Reels vs. TikTok: Which Platform Drives More Engagement?",
-    description: "A data-driven comparison of Instagram Reels and TikTok, analyzing which platform offers better engagement opportunities for creators.",
+    description: "A comprehensive data-driven comparison of Instagram Reels and TikTok, analyzing which platform offers better engagement opportunities for creators. Includes metrics analysis, audience demographics, algorithm differences, and strategic recommendations for content creators and brands.",
     platform: "instagram",
     category: "social media",
     tags: ["instagram reels", "tiktok", "platform comparison"],
@@ -226,7 +226,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.7
     },
     imageUrl: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.instagram.com/p/DEF456GHI789/",
+    link: "https://blog.sproutsocial.com/instagram-reels-vs-tiktok/",
     publishedAt: "2024-05-19T12:30:00Z",
     author: {
       name: "Social Media Insights",
@@ -237,7 +237,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "11",
     title: "How to Create Engaging YouTube Thumbnails That Drive Clicks",
-    description: "Master the art of creating eye-catching thumbnails that increase your click-through rate and help your videos stand out.",
+    description: "Master the art of creating eye-catching thumbnails that increase your click-through rate and help your videos stand out. Learn design principles, color psychology, text placement strategies, A/B testing methods, and tools used by top YouTubers to create thumbnails that get clicked.",
     platform: "youtube",
     category: "content creation",
     tags: ["youtube", "thumbnails", "ctr optimization"],
@@ -250,7 +250,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 2.4
     },
     imageUrl: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://www.youtube.com/watch?v=abc123def456",
+    link: "https://creatoreconomy.so/p/youtube-thumbnail-guide",
     publishedAt: "2024-05-11T14:15:00Z",
     author: {
       name: "Video Creators Hub",
@@ -261,7 +261,7 @@ export const mockContent: ContentItem[] = [
   {
     id: "12",
     title: "The Future of Content Creation: AI Tools Every Creator Should Know",
-    description: "Discover the cutting-edge AI tools that are transforming content creation and how to leverage them to stay ahead of the competition.",
+    description: "Discover the cutting-edge AI tools that are transforming content creation and how to leverage them to stay ahead of the competition. From writing assistants to video editing, image generation, and analytics - explore the complete toolkit for modern content creators in 2024.",
     platform: "twitter",
     category: "technology",
     tags: ["ai tools", "content creation", "future tech"],
@@ -273,7 +273,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.9
     },
     imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://twitter.com/futuretechtoday/status/9876543210987654321",
+    link: "https://www.contentcreator.com/ai-tools-2024/",
     publishedAt: "2024-05-17T09:40:00Z",
     author: {
       name: "Future Tech Today",

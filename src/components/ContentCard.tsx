@@ -156,13 +156,13 @@ const ContentCard = (props: ContentCardProps) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button asChild variant="default" className="flex-grow gap-1">
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                View <ExternalLink className="h-3.5 w-3.5" />
-              </a>
+              <Link to={`/content/${id}`}>
+                Read More
+              </Link>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>View original content</p>
+            <p>Read full article</p>
           </TooltipContent>
         </Tooltip>
         <Tooltip>

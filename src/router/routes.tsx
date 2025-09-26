@@ -4,6 +4,7 @@ import ContentDiscovery from "@/pages/ContentDiscovery";
 import ContentGeneration from "@/pages/ContentGeneration";
 import SavedContent from "@/pages/SavedContent";
 import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
+import ContentDetail from "@/pages/ContentDetail";
 import NotFound from "@/pages/NotFound";
 
 export interface AppRoute {
@@ -25,6 +26,12 @@ export const appRoutes: AppRoute[] = [
     name: "Discover Content",
     element: <ContentDiscovery />,
     inNav: true,
+  },
+  {
+    path: "/content/:id",
+    name: "Content Detail",
+    element: <ContentDetail />,
+    inNav: false,
   },
   {
     path: "/generate",
