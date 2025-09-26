@@ -3,13 +3,13 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Info, AlertCircle, XCircle } from "lucide-react";
+import { Search, Filter, Info, AlertCircle, XCircle, Loader2 } from "lucide-react"; // Import Loader2 icon
 import ContentCard from "@/components/ContentCard";
 import ContentCardSkeleton from "@/components/ContentCardSkeleton";
 import FilterSidebar from "@/components/FilterSidebar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -17,7 +17,7 @@ const ContentDiscovery = () => {
   const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
   const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
 
-  const { data: contentData, isLoading, isError, refetch } = useContentDiscoveryData();
+  const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData(); // Destructure isFetching
 
   const handlePlatformChange = (platform: string, checked: boolean) => {
     setSelectedPlatforms((prev) =>
@@ -125,11 +125,20 @@ const ContentDiscovery = () => {
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
+              <AlertDescription className="flex items-center gap-4"> {/* Added flex and gap for button */}
                 Failed to load content. Please try refreshing the page.
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <Button onClick={() => refetch()} className="ml-4">Retry</Button>
+                    <Button onClick={() => refetch()} disabled={isFetching}> {/* Use isFetching for disabled state */}
+                      {isFetching ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Retrying...
+                        </>
+                      ) : (
+                        "Retry"
+                      )}
+                    </Button>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>Attempt to refetch content</p>
