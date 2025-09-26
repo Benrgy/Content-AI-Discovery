@@ -3,14 +3,15 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Info, AlertCircle, XCircle, Loader2 } from "lucide-react"; // Import Loader2 icon
+import { Search, Filter, Info, AlertCircle, XCircle, Loader2 } from "lucide-react";
 import ContentCard from "@/components/ContentCard";
 import ContentCardSkeleton from "@/components/ContentCardSkeleton";
 import FilterSidebar from "@/components/FilterSidebar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import EmptyState from "@/components/EmptyState"; // Import the new EmptyState component
+import EmptyState from "@/components/EmptyState";
+import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -18,7 +19,7 @@ const ContentDiscovery = () => {
   const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
   const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
 
-  const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData(); // Destructure isFetching
+  const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData();
 
   const handlePlatformChange = (platform: string, checked: boolean) => {
     setSelectedPlatforms((prev) =>
@@ -49,13 +50,13 @@ const ContentDiscovery = () => {
   });
 
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
+    <PageLayout>
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Discovery Engine</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center">
         Find high-performing social media content and identify viral patterns.
       </p>
 
-      <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full"> {/* Added w-full */}
+      <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full">
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
@@ -118,7 +119,7 @@ const ContentDiscovery = () => {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"> {/* Added w-full */}
+      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
         {isLoading ? (
           Array.from({ length: 6 }).map((_, index) => <ContentCardSkeleton key={index} />)
         ) : isError ? (
@@ -171,7 +172,7 @@ const ContentDiscovery = () => {
         onApplyFilters={handleApplyFilters}
         onClearFilters={handleClearFilters}
       />
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,7 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button"; // Import Button
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,7 +15,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col items-center justify-center rounded-lg p-6 flex-grow">
+    <PageLayout className="items-center justify-center rounded-lg p-6">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">Oops! Page not found</p>
@@ -31,7 +32,7 @@ const NotFound = () => {
           </TooltipContent>
         </Tooltip>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

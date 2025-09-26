@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
 const Index = () => {
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col items-center justify-center text-center max-w-2xl flex-grow">
+    <PageLayout className="items-center justify-center text-center max-w-2xl">
       <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white leading-tight">
         Welcome to ContentAI
       </h1>
@@ -22,7 +23,7 @@ const Index = () => {
           <p>Explore trending content</p>
         </TooltipContent>
       </Tooltip>
-    </div>
+    </PageLayout>
   );
 };
 

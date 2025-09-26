@@ -6,11 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Copy, XCircle, Loader2 } from "lucide-react"; // Import Loader2 icon
+import { Copy, XCircle, Loader2 } from "lucide-react";
 import { showSuccess, showInfo } from "@/utils/toast";
 import { contentPlatforms } from "@/constants/platforms";
 import { contentTones, contentLengths } from "@/constants/generationOptions";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -50,7 +51,7 @@ const ContentGeneration = () => {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col items-center flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
+    <PageLayout className="items-center">
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Generation</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl">
         Unleash AI to create engaging content tailored to your needs.
@@ -199,7 +200,7 @@ const ContentGeneration = () => {
           )}
         </CardContent>
       </Card>
-    </div>
+    </PageLayout>
   );
 };
 

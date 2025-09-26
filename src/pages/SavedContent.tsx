@@ -3,15 +3,16 @@
 import React from "react";
 import { useSavedContent } from "@/hooks/use-saved-content";
 import ContentCard from "@/components/ContentCard";
-import EmptyState from "@/components/EmptyState"; // Import the new EmptyState component
-import { Link } from "react-router-dom"; // Link is still needed for the action button's 'to' prop
-import { Info } from "lucide-react"; // Info icon is still needed if passed explicitly
+import EmptyState from "@/components/EmptyState";
+import { Link } from "react-router-dom";
+import { Info } from "lucide-react";
+import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
 const SavedContent = () => {
   const { savedItems } = useSavedContent();
 
   return (
-    <div className="container mx-auto py-8 px-4 flex flex-col flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
+    <PageLayout>
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Your Saved Content</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
         Revisit the content you've bookmarked for later inspiration.
@@ -29,13 +30,13 @@ const SavedContent = () => {
           }}
         />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto w-full"> {/* Added w-full */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto w-full">
           {savedItems.map((content) => (
             <ContentCard key={content.id} {...content} />
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 };
 
