@@ -1,8 +1,8 @@
 "use client";
 
-import { MadeWithDyad } from "./made-with-dyad";
+import MadeWithDyad from "./made-with-dyad"; // Changed to default import
 
-const Footer = () => { // Removed React.FC
+const Footer = () => {
   return (
     <footer className="py-4">
       <MadeWithDyad />

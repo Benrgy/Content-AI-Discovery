@@ -1,6 +1,6 @@
 "use client";
 
-export const MadeWithDyad = () => {
+const MadeWithDyad = () => {
   return (
     <div className="p-4 text-center">
       <a
@@ -14,3 +14,5 @@ export const MadeWithDyad = () => {
     </div>
   );
 };
+
+export default MadeWithDyad;
