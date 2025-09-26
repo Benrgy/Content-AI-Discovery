@@ -47,9 +47,11 @@ const ContentGeneration = () => {
       const content = contentData.find(item => item.id === contentIdFromUrl);
       if (content) {
         setReferenceContent(content);
+        // Clear URL param after setting reference
+        navigate("/generate", { replace: true });
       }
     }
-  }, [contentIdFromUrl, contentData]);
+  }, [contentIdFromUrl, contentData, navigate]);
   
   // Handle content generation
   const handleGenerateContent = async (formData: {
@@ -64,8 +66,10 @@ const ContentGeneration = () => {
       const result = await contentMutation.mutateAsync(formData);
       setGeneratedContent(result);
       addToHistory(result);
+      setActiveTab("content");
       showSuccess("Content generated successfully!");
     } catch (error) {
+      console.error("Content generation error:", error);
       showError("Failed to generate content. Please try again.");
     }
   };
@@ -75,8 +79,10 @@ const ContentGeneration = () => {
     try {
       const result = await imageMutation.mutateAsync(imagePrompt);
       setGeneratedImages(result);
+      setActiveTab("images");
       showSuccess("Images generated successfully!");
     } catch (error) {
+      console.error("Image generation error:", error);
       showError("Failed to generate images. Please try again.");
     }
   };
@@ -105,14 +111,16 @@ const ContentGeneration = () => {
   
   // Handle regenerate from history
   const handleRegenerateFromHistory = (content: GeneratedContent) => {
-    handleGenerateContent({
+    const formData = {
       prompt: `Regenerate similar content to: "${content.content.substring(0, 100)}..."`,
       platform: content.platform,
       tone: "professional", // Default
       length: "medium", // Default
       includeHashtags: !!content.hashtags,
       includeCTA: !!content.cta
-    });
+    };
+    
+    handleGenerateContent(formData);
   };
   
   // Get content recommendations
@@ -160,11 +168,11 @@ const ContentGeneration = () => {
             <TabsList className="grid grid-cols-2 mb-4">
               <TabsTrigger value="saved" className="flex items-center gap-1">
                 <Bookmark className="h-4 w-4" />
-                <span>Saved</span>
+                <span>Saved ({savedItems.length})</span>
               </TabsTrigger>
               <TabsTrigger value="history" className="flex items-center gap-1">
                 <History className="h-4 w-4" />
-                <span>History</span>
+                <span>History ({history.length})</span>
               </TabsTrigger>
             </TabsList>
             
@@ -197,33 +205,35 @@ const ContentGeneration = () => {
       </div>
       
       {/* Generated Content Display */}
-      <GeneratedContentDisplay
-        generatedContent={generatedContent}
-        generatedImages={generatedImages}
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        onClearAll={handleClearAll}
-        onClearContent={handleClearGeneratedContent}
-        onRegenerateContent={() => {
-          if (generatedContent) {
-            handleGenerateContent({
-              prompt: "Regenerate with different wording but same topic",
-              platform: generatedContent.platform,
-              tone: "professional", // Default
-              length: "medium", // Default
-              includeHashtags: !!generatedContent.hashtags,
-              includeCTA: !!generatedContent.cta
-            });
-          }
-        }}
-        onRegenerateImages={() => {
-          if (generatedImages.length > 0) {
-            handleGenerateImages(generatedImages[0].prompt);
-          }
-        }}
-        isRegeneratingContent={contentMutation.isPending}
-        isRegeneratingImages={imageMutation.isPending}
-      />
+      {(generatedContent || generatedImages.length > 0) && (
+        <GeneratedContentDisplay
+          generatedContent={generatedContent}
+          generatedImages={generatedImages}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          onClearAll={handleClearAll}
+          onClearContent={handleClearGeneratedContent}
+          onRegenerateContent={() => {
+            if (generatedContent) {
+              handleGenerateContent({
+                prompt: "Regenerate with different wording but same topic",
+                platform: generatedContent.platform,
+                tone: "professional",
+                length: "medium",
+                includeHashtags: !!generatedContent.hashtags,
+                includeCTA: !!generatedContent.cta
+              });
+            }
+          }}
+          onRegenerateImages={() => {
+            if (generatedImages.length > 0) {
+              handleGenerateImages(generatedImages[0].prompt);
+            }
+          }}
+          isRegeneratingContent={contentMutation.isPending}
+          isRegeneratingImages={imageMutation.isPending}
+        />
+      )}
     </PageLayout>
   );
 };

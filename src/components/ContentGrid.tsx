@@ -38,6 +38,7 @@ const ContentGrid = ({
   
   const handleCloseDetailModal = () => {
     setIsDetailModalOpen(false);
+    setSelectedContent(null);
   };
   
   return (

@@ -1,23 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react"; // Explicitly import useState and useEffect
+import { useState, useEffect } from "react";
 import { ContentItem } from "@/types/content";
 import { showSuccess, showInfo } from "@/utils/toast";
 
 const LOCAL_STORAGE_KEY = "savedContentItems";
 
 export function useSavedContent() {
-  const [savedItems, setSavedItems] = useState<ContentItem[]>(() => { // Use useState directly
+  const [savedItems, setSavedItems] = useState<ContentItem[]>(() => {
     if (typeof window !== "undefined") {
-      const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return storedItems ? JSON.parse(storedItems) : [];
+      try {
+        const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
+        return storedItems ? JSON.parse(storedItems) : [];
+      } catch (error) {
+        console.error("Error loading saved content:", error);
+        return [];
+      }
     }
     return [];
   });
 
-  useEffect(() => { // Use useEffect directly
+  useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedItems));
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedItems));
+      } catch (error) {
+        console.error("Error saving content:", error);
+      }
     }
   }, [savedItems]);
 
@@ -27,7 +36,9 @@ export function useSavedContent() {
 
   const toggleSaved = (item: ContentItem) => {
     setSavedItems((prevItems) => {
-      if (isSaved(item.id)) {
+      const isCurrentlySaved = prevItems.some((savedItem) => savedItem.id === item.id);
+      
+      if (isCurrentlySaved) {
         showInfo(`Removed "${item.title}" from saved content.`);
         return prevItems.filter((savedItem) => savedItem.id !== item.id);
       } else {
@@ -37,5 +48,16 @@ export function useSavedContent() {
     });
   };
 
-  return { savedItems, isSaved, toggleSaved };
+  const clearAllSaved = () => {
+    setSavedItems([]);
+    showInfo("All saved content cleared.");
+  };
+
+  return { 
+    savedItems, 
+    isSaved, 
+    toggleSaved, 
+    clearAllSaved,
+    savedCount: savedItems.length 
+  };
 }

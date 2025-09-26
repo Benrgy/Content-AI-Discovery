@@ -85,11 +85,6 @@ const ContentGenerationForm = ({
       includeHashtags,
       includeCTA
     });
-    
-    // Auto-generate images if we have an image prompt
-    if (imagePrompt.trim() && !isGeneratingImages) {
-      handleGenerateImages();
-    }
   };
   
   // Handle image generation

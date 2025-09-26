@@ -5,26 +5,38 @@ import { GeneratedContent } from "@/types/content";
 import { showSuccess, showInfo } from "@/utils/toast";
 
 const LOCAL_STORAGE_KEY = "contentGenerationHistory";
+const MAX_HISTORY_ITEMS = 20;
 
 export function useGenerationHistory() {
   const [history, setHistory] = useState<GeneratedContent[]>(() => {
     if (typeof window !== "undefined") {
-      const storedHistory = localStorage.getItem(LOCAL_STORAGE_KEY);
-      return storedHistory ? JSON.parse(storedHistory) : [];
+      try {
+        const storedHistory = localStorage.getItem(LOCAL_STORAGE_KEY);
+        return storedHistory ? JSON.parse(storedHistory) : [];
+      } catch (error) {
+        console.error("Error loading generation history:", error);
+        return [];
+      }
     }
     return [];
   });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(history));
+      } catch (error) {
+        console.error("Error saving generation history:", error);
+      }
     }
   }, [history]);
 
   const addToHistory = (content: GeneratedContent) => {
     setHistory(prevHistory => {
-      // Limit history to 20 items
-      const newHistory = [content, ...prevHistory.slice(0, 19)];
+      // Remove any existing item with the same ID to avoid duplicates
+      const filteredHistory = prevHistory.filter(item => item.id !== content.id);
+      // Add new item to the beginning and limit to MAX_HISTORY_ITEMS
+      const newHistory = [content, ...filteredHistory].slice(0, MAX_HISTORY_ITEMS);
       return newHistory;
     });
   };
@@ -42,10 +54,16 @@ export function useGenerationHistory() {
     showSuccess("Generation history cleared");
   };
 
+  const getHistoryItem = (contentId: string) => {
+    return history.find(item => item.id === contentId);
+  };
+
   return { 
     history, 
     addToHistory, 
     removeFromHistory, 
-    clearHistory 
+    clearHistory,
+    getHistoryItem,
+    historyCount: history.length
   };
 }
