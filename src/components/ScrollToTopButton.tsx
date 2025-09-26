@@ -6,19 +6,17 @@ import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-const ScrollToTopButton = () => { // Removed React.FC
+const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Show button when page is scrolled down
   const toggleVisibility = () => {
-    if (window.scrollY > 300) { // Adjust scroll threshold as needed
+    if (window.scrollY > 300) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
   };
 
-  // Scroll to top logic
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

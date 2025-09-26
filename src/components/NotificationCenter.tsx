@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -146,7 +146,7 @@ const NotificationCenter = () => {
                   <div
                     key={notification.id}
                     className={cn(
-                      "p-3 border-b hover:bg-muted/50 cursor-pointer transition-colors",
+                      "p-3 border-b hover:bg-muted/50 cursor-pointer transition-colors group",
                       !notification.read && "bg-muted/30"
                     )}
                     onClick={() => markAsRead(notification.id)}

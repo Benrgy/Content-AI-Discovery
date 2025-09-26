@@ -2,7 +2,7 @@
 
 import MadeWithDyad from "./made-with-dyad";
 
-const Footer = (): JSX.Element => { // Added explicit return type
+const Footer = () => {
   return (
     <footer className="py-4">
       <MadeWithDyad />
