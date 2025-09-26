@@ -68,19 +68,47 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="flex items-center justify-around text-muted-foreground text-sm mt-2">
-          <div className="flex items-center gap-1">
-            <Heart className="h-4 w-4" /> {engagement.likes}
-          </div>
-          <div className="flex items-center gap-1">
-            <MessageSquare className="h-4 w-4" /> {engagement.comments}
-          </div>
-          <div className="flex items-center gap-1">
-            <Share2 className="h-4 w-4" /> {engagement.shares}
-          </div>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-1">
+                <Heart className="h-4 w-4" /> {engagement.likes}
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Likes</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-1">
+                <MessageSquare className="h-4 w-4" /> {engagement.comments}
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Comments</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-1">
+                <Share2 className="h-4 w-4" /> {engagement.shares}
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Shares</p>
+            </TooltipContent>
+          </Tooltip>
           {engagement.views && (
-            <div className="flex items-center gap-1">
-              <Eye className="h-4 w-4" /> {engagement.views}
-            </div>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" /> {engagement.views}
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Views</p>
+              </TooltipContent>
+            </Tooltip>
           )}
         </div>
       </CardContent>
