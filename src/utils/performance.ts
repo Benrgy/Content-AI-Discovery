@@ -44,3 +44,30 @@ export const preloadImage = (src: string): Promise<void> => {
 export const preloadImages = (srcs: string[]): Promise<void[]> => {
   return Promise.all(srcs.map(preloadImage));
 };
+
+export const optimizeImages = () => {
+  const images = document.querySelectorAll('img');
+  images.forEach(img => {
+    // Lazy load images that are not in viewport
+    if (!img.hasAttribute('loading')) {
+      img.setAttribute('loading', 'lazy');
+    }
+    
+    // Add decoding async for better performance
+    if (!img.hasAttribute('decoding')) {
+      img.setAttribute('decoding', 'async');
+    }
+  });
+};
+
+export const observePerformance = () => {
+  if ('PerformanceObserver' in window) {
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        console.log(`${entry.name}: ${entry.duration}ms`);
+      });
+    });
+    
+    observer.observe({ entryTypes: ['measure', 'navigation', 'resource'] });
+  }
+};

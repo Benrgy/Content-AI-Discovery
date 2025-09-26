@@ -6,6 +6,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import AppInitializer from "./components/AppInitializer";
 import ScrollToTop from "./components/ScrollToTop";
 import { SEOWrapper } from "./components/SEOWrapper";
+import PerformanceOptimizer from "./components/PerformanceOptimizer";
+import KeyboardShortcuts from "./components/KeyboardShortcuts";
 
 // Import all pages
 import Index from "./pages/Index";
@@ -14,6 +16,7 @@ import ContentGeneration from "./pages/ContentGeneration";
 import SavedContent from "./pages/SavedContent";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import ContentDetail from "./pages/ContentDetail";
+import Diagnostics from "./pages/Diagnostics";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -22,20 +25,24 @@ const App = () => {
   return (
     <ErrorBoundary>
       <AppInitializer>
-        <ScrollToTop />
-        <SEOWrapper>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Index />} />
-              <Route path="discover" element={<ContentDiscovery />} />
-              <Route path="content/:id" element={<ContentDetail />} />
-              <Route path="generate" element={<ContentGeneration />} />
-              <Route path="analytics" element={<AnalyticsDashboard />} />
-              <Route path="saved" element={<SavedContent />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </SEOWrapper>
+        <KeyboardShortcuts>
+          <ScrollToTop />
+          <PerformanceOptimizer />
+          <SEOWrapper>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Index />} />
+                <Route path="discover" element={<ContentDiscovery />} />
+                <Route path="content/:id" element={<ContentDetail />} />
+                <Route path="generate" element={<ContentGeneration />} />
+                <Route path="analytics" element={<AnalyticsDashboard />} />
+                <Route path="saved" element={<SavedContent />} />
+                <Route path="diagnostics" element={<Diagnostics />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </SEOWrapper>
+        </KeyboardShortcuts>
       </AppInitializer>
     </ErrorBoundary>
   );
