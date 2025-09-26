@@ -12,26 +12,39 @@ import { Badge } from "@/components/ui/badge";
 import { formatNumber, getPerformanceColor } from "@/constants/content-constants";
 import { Link } from "react-router-dom";
 
-interface ContentCardProps extends ContentItem {}
+interface ContentCardProps extends ContentItem {
+  onViewDetails?: (content: ContentItem) => void;
+}
 
 const ContentCard = (props: ContentCardProps) => {
-  const { id, title, description, platform, category, engagement, imageUrl, link, performanceScore } = props;
+  const { id, title, description, platform, category, engagement, imageUrl, link, performanceScore, onViewDetails } = props;
   const { isSaved, toggleSaved } = useSavedContent();
   const saved = isSaved(id);
 
   const handleToggleSave = (event: React.MouseEvent) => {
     event.preventDefault();
+    event.stopPropagation();
     toggleSaved(props);
   };
 
   const handleCopyLink = (event: React.MouseEvent) => {
     event.preventDefault();
+    event.stopPropagation();
     navigator.clipboard.writeText(link);
     showInfo("Content link copied to clipboard!");
   };
+  
+  const handleCardClick = () => {
+    if (onViewDetails) {
+      onViewDetails(props);
+    }
+  };
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden transition-all duration-200 hover:shadow-md">
+    <Card 
+      className={`flex flex-col h-full overflow-hidden transition-all duration-200 hover:shadow-md ${onViewDetails ? 'cursor-pointer' : ''}`}
+      onClick={onViewDetails ? handleCardClick : undefined}
+    >
       {imageUrl && (
         <div className="relative w-full h-48 overflow-hidden">
           <img
@@ -133,7 +146,7 @@ const ContentCard = (props: ContentCardProps) => {
           </div>
         )}
       </CardContent>
-      <CardFooter className="flex gap-2 pt-2">
+      <CardFooter className="flex gap-2 pt-2" onClick={(e) => e.stopPropagation()}>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button asChild variant="default" className="flex-grow gap-1">
