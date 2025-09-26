@@ -50,7 +50,7 @@ const ContentGeneration = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="container mx-auto py-8 px-4 flex flex-col items-center flex-grow"> {/* Added container, mx-auto, py-8, px-4 */}
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Generation</h1>
       <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl">
         Unleash AI to create engaging content tailored to your needs.
