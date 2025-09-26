@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { useSavedContent } from "@/hooks/use-saved-content";
 import { ContentItem } from "@/data/mockContent";
 import { showInfo } from "@/utils/toast";
-import { Badge } from "@/components/ui/badge"; // Import Badge component
+import PlatformIcon from "./PlatformIcon"; // Import the new PlatformIcon component
 
 interface ContentCardProps extends ContentItem {}
 
@@ -37,9 +37,9 @@ const ContentCard: React.FC<ContentCardProps> = (props) => {
             alt={title}
             className="w-full h-full object-cover"
           />
-          <Badge className="absolute top-2 left-2 capitalize">
-            {platform}
-          </Badge>
+          <div className="absolute top-2 left-2">
+            <PlatformIcon platform={platform} className="bg-background/50 text-foreground" />
+          </div>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
