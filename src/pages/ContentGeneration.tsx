@@ -51,12 +51,11 @@ const ContentGeneration = () => {
   };
 
   return (
-    <PageLayout className="items-center">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Content Generation</h1>
-      <p className="text-lg text-muted-foreground mb-8 text-center max-w-2xl">
-        Unleash AI to create engaging content tailored to your needs.
-      </p>
-
+    <PageLayout
+      className="items-center"
+      title="Content Generation"
+      description="Unleash AI to create engaging content tailored to your needs."
+    >
       <Card className="w-full max-w-3xl p-6">
         <CardHeader>
           <CardTitle className="text-2xl">Generate New Content</CardTitle>

@@ -15,10 +15,12 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <PageLayout className="items-center justify-center rounded-lg p-6">
+    <PageLayout
+      className="items-center justify-center rounded-lg p-6"
+      title="404"
+      description="Oops! Page not found"
+    >
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">Oops! Page not found</p>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button asChild>
