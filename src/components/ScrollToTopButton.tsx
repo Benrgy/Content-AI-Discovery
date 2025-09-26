@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
-import { cn } from "@/lib/utils"; // Import cn for conditional class names
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-const ScrollToTopButton: React.FC = () => {
+const ScrollToTopButton = () => { // Removed React.FC
   const [isVisible, setIsVisible] = useState(false);
 
   // Show button when page is scrolled down
