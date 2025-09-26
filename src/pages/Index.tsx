@@ -59,7 +59,8 @@ const Index = () => {
     return (
       <PageLayout>
         <div className="flex justify-center py-8">
-          <LoadingScreen size="lg" text="Loading trending content..." />
+          {/* Removed invalid size prop */}
+          <LoadingScreen message="Loading trending content..." />
         </div>
       </PageLayout>
     );

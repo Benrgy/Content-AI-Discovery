@@ -24,7 +24,7 @@ interface TourStep {
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   target?: string;
-  position?: 'top' | 'bottom' | 'left' | 'right';
+  position?: 'top' | 'bottom' | 'left' | 'right'; // Removed 'center' as it's not valid
 }
 
 const tourSteps: TourStep[] = [
@@ -64,8 +64,8 @@ const tourSteps: TourStep[] = [
     id: 'complete',
     title: 'You\'re All Set!',
     description: 'Start exploring trending content and create viral posts with AI. Remember to use keyboard shortcuts for faster navigation!',
-    icon: CheckCircle,
-    position: 'center'
+    icon: CheckCircle
+    // Removed position property since 'center' is not valid
   }
 ];
 

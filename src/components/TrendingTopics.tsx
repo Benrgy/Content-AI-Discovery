@@ -1,6 +1,7 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button"; // Added missing import
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
@@ -51,17 +52,17 @@ const TrendingTopics = () => {
           {trendingTopics.map((item, index) => (
             <Tooltip key={index}>
               <TooltipTrigger asChild>
-                <Badge 
-                  variant="outline" 
-                  className="cursor-pointer hover:bg-primary/10 transition-colors"
-                  asChild
-                >
-                  <Link to={`/discover?search=${encodeURIComponent(item.topic)}`}>
+                {/* Removed asChild prop which doesn't exist on Badge */}
+                <Link to={`/discover?search=${encodeURIComponent(item.topic)}`}>
+                  <Badge 
+                    variant="outline" 
+                    className="cursor-pointer hover:bg-primary/10 transition-colors"
+                  >
                     <Hash className="h-3 w-3 mr-1" />
                     {item.topic}
                     <span className="ml-1 text-xs opacity-60">({item.count})</span>
-                  </Link>
-                </Badge>
+                  </Badge>
+                </Link>
               </TooltipTrigger>
               <TooltipContent>
                 <p>{item.count} posts tagged with {item.topic}</p>

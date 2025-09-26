@@ -1,3 +1,6 @@
-import { useToast, toast } from "@/hooks/use-toast";
+"use client";
 
-export { useToast, toast };
+// Fixed import path to match actual file location
+import { toast, useToast } from "../../hooks/use-toast";
+
+export { toast, useToast };
