@@ -69,8 +69,9 @@ const ContentGeneration = () => {
               onChange={(e) => setPrompt(e.target.value)}
               rows={5}
               className="pr-10" // Add padding for the clear button
+              disabled={isLoading} // Disable while loading
             />
-            {prompt && (
+            {prompt && !isLoading && ( {/* Only show clear button if not loading */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -86,7 +87,7 @@ const ContentGeneration = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="grid gap-2">
               <Label htmlFor="platform">Platform</Label>
-              <Select value={platform} onValueChange={setPlatform}>
+              <Select value={platform} onValueChange={setPlatform} disabled={isLoading}> {/* Disable while loading */}
                 <SelectTrigger id="platform">
                   <SelectValue placeholder="Select platform" />
                 </SelectTrigger>
@@ -102,7 +103,7 @@ const ContentGeneration = () => {
 
             <div className="grid gap-2">
               <Label htmlFor="tone">Tone</Label>
-              <Select value={tone} onValueChange={setTone}>
+              <Select value={tone} onValueChange={setTone} disabled={isLoading}> {/* Disable while loading */}
                 <SelectTrigger id="tone">
                   <SelectValue placeholder="Select tone" />
                 </SelectTrigger>
@@ -118,7 +119,7 @@ const ContentGeneration = () => {
 
             <div className="grid gap-2">
               <Label htmlFor="length">Length</Label>
-              <Select value={length} onValueChange={setLength}>
+              <Select value={length} onValueChange={setLength} disabled={isLoading}> {/* Disable while loading */}
                 <SelectTrigger id="length">
                   <SelectValue placeholder="Select length" />
                 </SelectTrigger>
