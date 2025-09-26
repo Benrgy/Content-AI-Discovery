@@ -45,6 +45,19 @@ const ContentDiscovery = () => {
 
   const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData();
 
+  // Debug: Log when data changes
+  useEffect(() => {
+    console.log("Content data loaded:", contentData?.length, "items");
+    if (contentData) {
+      console.log("Sample content:", contentData[0]);
+    }
+  }, [contentData]);
+
+  // Debug: Log when search changes
+  useEffect(() => {
+    console.log("Search query updated:", searchQuery);
+  }, [searchQuery]);
+
   // Handle platform filter change
   const handlePlatformChange = (platform: string, checked: boolean) => {
     setSelectedPlatforms((prev) =>
@@ -99,12 +112,13 @@ const ContentDiscovery = () => {
 
   // Clear search
   const handleClearSearch = () => {
+    console.log("Clearing search");
     setSearchQuery("");
   };
 
   // Handle search change
   const handleSearchChange = (query: string) => {
-    console.log("Search query changed:", query); // Debug log
+    console.log("Search query changed to:", query);
     setSearchQuery(query);
   };
 
@@ -116,23 +130,43 @@ const ContentDiscovery = () => {
 
   // Filter and sort content using useMemo for performance
   const filteredAndSortedContent = useMemo(() => {
-    console.log("Filtering content with query:", searchQuery); // Debug log
-    console.log("Content data:", contentData?.length, "items"); // Debug log
+    console.log("=== FILTERING CONTENT ===");
+    console.log("Search query:", `"${searchQuery}"`);
+    console.log("Content data available:", !!contentData);
+    console.log("Total content items:", contentData?.length || 0);
     
-    if (!contentData) return [];
+    if (!contentData || contentData.length === 0) {
+      console.log("No content data available");
+      return [];
+    }
 
     // Filter content based on all criteria
-    const filtered = contentData.filter((content) => {
+    const filtered = contentData.filter((content, index) => {
+      console.log(`\n--- Checking item ${index + 1}: "${content.title}" ---`);
+      
       // Search query filter - make it more comprehensive
       const searchLower = searchQuery.toLowerCase().trim();
-      const matchesSearch = 
-        searchQuery === "" ||
-        content.title.toLowerCase().includes(searchLower) ||
-        content.description.toLowerCase().includes(searchLower) ||
-        (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchLower))) ||
-        content.platform.toLowerCase().includes(searchLower) ||
-        (content.category && content.category.toLowerCase().includes(searchLower)) ||
-        (content.author && content.author.name.toLowerCase().includes(searchLower));
+      console.log("Search term:", `"${searchLower}"`);
+      
+      let matchesSearch = true;
+      if (searchQuery !== "") {
+        const titleMatch = content.title.toLowerCase().includes(searchLower);
+        const descMatch = content.description.toLowerCase().includes(searchLower);
+        const tagsMatch = content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchLower));
+        const platformMatch = content.platform.toLowerCase().includes(searchLower);
+        const categoryMatch = content.category && content.category.toLowerCase().includes(searchLower);
+        const authorMatch = content.author && content.author.name.toLowerCase().includes(searchLower);
+        
+        matchesSearch = titleMatch || descMatch || tagsMatch || platformMatch || categoryMatch || authorMatch;
+        
+        console.log("Title match:", titleMatch, `"${content.title.toLowerCase()}" includes "${searchLower}"`);
+        console.log("Description match:", descMatch);
+        console.log("Tags match:", tagsMatch, content.tags);
+        console.log("Platform match:", platformMatch, content.platform);
+        console.log("Category match:", categoryMatch, content.category);
+        console.log("Author match:", authorMatch, content.author?.name);
+        console.log("Overall search match:", matchesSearch);
+      }
       
       // Platform filter
       const matchesPlatform = 
@@ -150,17 +184,15 @@ const ContentDiscovery = () => {
         (content.performanceScore >= appliedPerformanceRange[0] && 
          content.performanceScore <= appliedPerformanceRange[1]);
       
-      const result = matchesSearch && matchesPlatform && matchesCategory && matchesPerformance;
+      const finalResult = matchesSearch && matchesPlatform && matchesCategory && matchesPerformance;
+      console.log("Final result for this item:", finalResult);
       
-      // Debug log for search
-      if (searchQuery && !matchesSearch) {
-        console.log("Content filtered out by search:", content.title, "Query:", searchQuery);
-      }
-      
-      return result;
+      return finalResult;
     });
 
-    console.log("Filtered results:", filtered.length, "items"); // Debug log
+    console.log("=== FILTERING COMPLETE ===");
+    console.log("Filtered results:", filtered.length, "items");
+    console.log("Filtered items:", filtered.map(item => item.title));
 
     // Sort the filtered content
     const sorted = [...filtered].sort((a, b) => {
@@ -259,12 +291,11 @@ const ContentDiscovery = () => {
         </div>
       )}
 
-      {/* Debug info - remove in production */}
-      {process.env.NODE_ENV === 'development' && (
-        <div className="max-w-5xl mx-auto mb-4 p-2 bg-muted rounded text-xs">
-          <p>Debug: Search="{searchQuery}", Total={contentData?.length}, Filtered={filteredAndSortedContent.length}</p>
-        </div>
-      )}
+      {/* Debug info - always show in development */}
+      <div className="max-w-5xl mx-auto mb-4 p-2 bg-muted rounded text-xs">
+        <p>Debug: Search="{searchQuery}", Total={contentData?.length}, Filtered={filteredAndSortedContent.length}</p>
+        <p>Loading: {isLoading.toString()}, Error: {isError.toString()}</p>
+      </div>
 
       {/* Content Grid */}
       <ContentGrid
