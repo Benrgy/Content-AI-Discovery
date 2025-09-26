@@ -3,12 +3,12 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Filter, Info, AlertCircle } from "lucide-react";
+import { Search, Filter, Info, AlertCircle, XCircle } from "lucide-react"; // Import XCircle icon
 import ContentCard from "@/components/ContentCard";
 import ContentCardSkeleton from "@/components/ContentCardSkeleton";
 import FilterSidebar from "@/components/FilterSidebar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data"; // Import the new hook
+import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 
 const ContentDiscovery = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -33,6 +33,10 @@ const ContentDiscovery = () => {
     setSelectedPlatforms([]);
     setAppliedPlatforms([]);
     setIsFilterSidebarOpen(false);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
   };
 
   const filteredContent = (contentData || []).filter((content) => {
@@ -60,6 +64,17 @@ const ContentDiscovery = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             aria-label="Search for content"
           />
+          {searchQuery && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-foreground"
+              onClick={handleClearSearch}
+              aria-label="Clear search query"
+            >
+              <XCircle className="h-5 w-5" />
+            </Button>
+          )}
         </div>
         <Button variant="outline" className="flex items-center gap-2" onClick={() => setIsFilterSidebarOpen(true)}>
           <Filter className="h-4 w-4" />
