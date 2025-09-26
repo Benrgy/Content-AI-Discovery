@@ -1,3 +1,5 @@
+"use client";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appRoutes } from "@/router/routes"; // Updated import path
 import Layout from "./components/Layout";
