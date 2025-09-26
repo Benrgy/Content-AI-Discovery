@@ -1,5 +1,3 @@
-"use client";
-
 import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
 
 export const mockContent: ContentItem[] = [
