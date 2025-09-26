@@ -20,6 +20,7 @@ import { showInfo } from "@/utils/toast";
 import { Link } from "react-router-dom";
 import PlatformIcon from "./PlatformIcon";
 import ContentPerformanceMetrics from "./ContentPerformanceMetrics";
+import { formatNumber } from "@/constants/content-constants";
 
 interface ContentDetailViewProps {
   content: ContentItem;

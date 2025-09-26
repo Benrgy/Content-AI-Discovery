@@ -16,6 +16,7 @@ import {
   LineChart 
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import NavigationTest from "@/components/NavigationTest";
 
 const Index = () => {
   return (
@@ -68,6 +69,11 @@ const Index = () => {
             </TooltipContent>
           </Tooltip>
         </div>
+      </div>
+      
+      {/* Navigation Test Component - Remove this in production */}
+      <div className="mb-12">
+        <NavigationTest />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

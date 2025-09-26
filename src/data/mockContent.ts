@@ -20,7 +20,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-15T10:30:00Z",
     author: {
       name: "Alex Morgan",
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 15400
     }
   },
@@ -44,7 +44,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-18T14:20:00Z",
     author: {
       name: "Ryan Chen",
-      avatar: "https://randomuser.me/api/portraits/men/22.jpg",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 245000
     }
   },
@@ -67,7 +67,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-10T09:15:00Z",
     author: {
       name: "Sophia Williams",
-      avatar: "https://randomuser.me/api/portraits/women/33.jpg",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 32100
     }
   },
@@ -90,7 +90,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-12T11:45:00Z",
     author: {
       name: "Jamie Oliver",
-      avatar: "https://randomuser.me/api/portraits/men/55.jpg",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 89000
     }
   },
@@ -114,7 +114,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-08T16:30:00Z",
     author: {
       name: "Tech Explained",
-      avatar: "https://randomuser.me/api/portraits/men/11.jpg",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 420000
     }
   },
@@ -137,7 +137,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-05T13:20:00Z",
     author: {
       name: "SEO Mastery",
-      avatar: "https://randomuser.me/api/portraits/women/67.jpg",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 28500
     }
   },
@@ -161,7 +161,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-20T10:00:00Z",
     author: {
       name: "Creative Visuals",
-      avatar: "https://randomuser.me/api/portraits/women/22.jpg",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 560000
     }
   },
@@ -184,7 +184,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-14T08:45:00Z",
     author: {
       name: "Mind Matters",
-      avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 41200
     }
   },
@@ -207,7 +207,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-16T15:10:00Z",
     author: {
       name: "Career Growth",
-      avatar: "https://randomuser.me/api/portraits/women/28.jpg",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 67800
     }
   },
@@ -230,7 +230,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-19T12:30:00Z",
     author: {
       name: "Social Media Insights",
-      avatar: "https://randomuser.me/api/portraits/men/42.jpg",
+      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 124000
     }
   },
@@ -254,7 +254,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-11T14:15:00Z",
     author: {
       name: "Video Creators Hub",
-      avatar: "https://randomuser.me/api/portraits/women/52.jpg",
+      avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 215000
     }
   },
@@ -277,7 +277,7 @@ export const mockContent: ContentItem[] = [
     publishedAt: "2024-05-17T09:40:00Z",
     author: {
       name: "Future Tech Today",
-      avatar: "https://randomuser.me/api/portraits/men/62.jpg",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=150&auto=format&fit=crop&ixlib=rb-4.0.3",
       followers: 78500
     }
   }
