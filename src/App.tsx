@@ -3,6 +3,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
+import AppInitializer from "./components/AppInitializer";
 
 // Import all pages
 import Index from "./pages/Index";
@@ -19,17 +20,19 @@ const App = () => {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Index />} />
-            <Route path="discover" element={<ContentDiscovery />} />
-            <Route path="content/:id" element={<ContentDetail />} />
-            <Route path="generate" element={<ContentGeneration />} />
-            <Route path="analytics" element={<AnalyticsDashboard />} />
-            <Route path="saved" element={<SavedContent />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
+        <AppInitializer>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Index />} />
+              <Route path="discover" element={<ContentDiscovery />} />
+              <Route path="content/:id" element={<ContentDetail />} />
+              <Route path="generate" element={<ContentGeneration />} />
+              <Route path="analytics" element={<AnalyticsDashboard />} />
+              <Route path="saved" element={<SavedContent />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </AppInitializer>
       </BrowserRouter>
     </ErrorBoundary>
   );
