@@ -12,7 +12,7 @@ interface PlatformIconProps {
   iconClassName?: string;
 }
 
-const PlatformIcon: React.FC<PlatformIconProps> = ({ platform, className, iconClassName }) => {
+const PlatformIcon = ({ platform, className, iconClassName }: PlatformIconProps) => { // Removed React.FC
   const IconComponent = platformIconMap[platform.toLowerCase()];
 
   if (!IconComponent) {
