@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-export function ThemeToggle() {
+export const ThemeToggle = () => { // Changed to const arrow function
   const { setTheme } = useTheme();
 
   return (
@@ -44,4 +44,4 @@ export function ThemeToggle() {
       </TooltipContent>
     </Tooltip>
   );
-}
+};
