@@ -14,4 +14,10 @@ export default defineConfig(() => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Add base path for GitHub Pages deployment
+  base: "/Content-AI-Discovery/",
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+  },
 }));

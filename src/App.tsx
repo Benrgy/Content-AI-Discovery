@@ -17,6 +17,8 @@ import SavedContent from "./pages/SavedContent";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import ContentDetail from "./pages/ContentDetail";
 import Diagnostics from "./pages/Diagnostics";
+import Settings from "./pages/Settings";
+import GitHubIntegration from "./pages/GitHubIntegration";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
@@ -37,7 +39,9 @@ const App = () => {
                 <Route path="generate" element={<ContentGeneration />} />
                 <Route path="analytics" element={<AnalyticsDashboard />} />
                 <Route path="saved" element={<SavedContent />} />
+                <Route path="settings" element={<Settings />} />
                 <Route path="diagnostics" element={<Diagnostics />} />
+                <Route path="github" element={<GitHubIntegration />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
