@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { appRoutes } from "./routes";
+import { appRoutes } from "@/constants/routes"; // Import from new constants file
 import Layout from "./components/Layout";
-import Providers from "./components/Providers"; // Import the new Providers component
+import Providers from "./components/Providers";
 
 const App = () => (
   <Providers>
