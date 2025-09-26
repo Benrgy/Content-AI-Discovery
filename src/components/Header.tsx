@@ -5,11 +5,12 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import MobileNav from "./MobileNav";
-import { usePublicRoutes } from "@/hooks/use-public-routes"; // Import the new hook
+import { usePublicRoutes } from "@/hooks/use-public-routes";
+import { cn } from "@/lib/utils"; // Import cn for conditional class merging
 
 const Header = () => {
   const location = useLocation();
-  const publicRoutes = usePublicRoutes(); // Use the new hook
+  const publicRoutes = usePublicRoutes();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
@@ -26,6 +27,10 @@ const Header = () => {
                 key={route.path}
                 variant="ghost"
                 asChild
+                className={cn(
+                  "text-base", // Ensure consistent text size
+                  location.pathname === route.path && "border-b-2 border-primary text-primary" // Active state styling
+                )}
                 aria-current={location.pathname === route.path ? "page" : undefined}
               >
                 <Link to={route.path}>{route.name}</Link>
