@@ -1,10 +1,12 @@
+"use client";
+
 import {
   Linkedin,
-  TikTok,
   Twitter,
   Instagram,
   Youtube,
   Rss, // Using Rss for blog posts
+  Play, // Using Play as a placeholder for TikTok
   type LucideIcon, // Add 'type' keyword here
 } from "lucide-react";
 
@@ -33,7 +35,7 @@ export const contentLengths = [
 
 export const platformIconMap: { [key: string]: LucideIcon } = {
   linkedin: Linkedin,
-  tiktok: TikTok,
+  tiktok: Play, // Changed to Play icon
   twitter: Twitter,
   instagram: Instagram,
   youtube: Youtube,
