@@ -17,6 +17,8 @@ import {
 import PageLayout from "@/components/PageLayout";
 
 const Index = () => {
+  console.log("Index: Component rendering");
+  
   return (
     <PageLayout
       className="items-center justify-center text-center max-w-5xl"

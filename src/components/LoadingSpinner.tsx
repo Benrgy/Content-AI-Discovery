@@ -10,6 +10,8 @@ interface LoadingSpinnerProps {
 }
 
 const LoadingSpinner = ({ size = "md", className, text }: LoadingSpinnerProps) => {
+  console.log("LoadingSpinner: Rendering with props:", { size, className, text });
+  
   const sizeClasses = {
     sm: "h-4 w-4",
     md: "h-6 w-6",

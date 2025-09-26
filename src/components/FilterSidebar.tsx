@@ -35,6 +35,13 @@ const FilterSidebar = ({
   onApplyFilters,
   onClearFilters,
 }: FilterSidebarProps) => {
+  console.log("FilterSidebar: Rendering with props:", { 
+    isOpen, 
+    selectedPlatforms, 
+    selectedCategories, 
+    performanceScoreRange 
+  });
+  
   const totalFiltersApplied = 
     selectedPlatforms.length + 
     selectedCategories.length + 

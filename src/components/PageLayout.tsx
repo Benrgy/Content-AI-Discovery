@@ -11,6 +11,8 @@ interface PageLayoutProps {
 }
 
 const PageLayout = ({ children, className, title, description }: PageLayoutProps) => {
+  console.log("PageLayout: Rendering with props:", { className, title, description });
+  
   return (
     <div className={cn("container mx-auto py-8 px-4 flex flex-col flex-grow", className)}>
       {title && (

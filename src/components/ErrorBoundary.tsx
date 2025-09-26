@@ -20,26 +20,34 @@ interface ErrorBoundaryState {
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
+    console.log("ErrorBoundary: Constructor called");
     this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    console.log("ErrorBoundary: getDerivedStateFromError called with error:", error);
     return { hasError: true, error };
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    console.error('Error caught by boundary:', error, errorInfo);
+    console.error('ErrorBoundary: componentDidCatch called with error:', error, errorInfo);
     this.setState({ errorInfo });
   }
 
   handleRetry = () => {
+    console.log("ErrorBoundary: handleRetry called");
     this.setState({ hasError: false, error: undefined, errorInfo: undefined });
     window.location.reload();
   };
 
   render() {
+    console.log("ErrorBoundary: render called with state:", this.state);
+    
     if (this.state.hasError) {
+      console.log("ErrorBoundary: Rendering error state");
+      
       if (this.props.fallback) {
+        console.log("ErrorBoundary: Using fallback component");
         return this.props.fallback;
       }
 
@@ -78,6 +86,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       );
     }
 
+    console.log("ErrorBoundary: Rendering children");
     return this.props.children;
   }
 }

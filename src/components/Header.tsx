@@ -17,16 +17,19 @@ const navigationRoutes = [
 ];
 
 const Header = () => {
+  console.log("Header component rendering");
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    console.log("Header: Setting up scroll listener");
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
+      console.log("Header: Cleaning up scroll listener");
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);

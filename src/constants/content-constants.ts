@@ -16,6 +16,8 @@ import {
   type LucideIcon
 } from "lucide-react";
 
+console.log("content-constants.ts: Initializing constants");
+
 export const contentPlatforms = [
   { value: "linkedin", label: "LinkedIn" },
   { value: "tiktok", label: "TikTok" },
@@ -61,6 +63,8 @@ export const platformIconMap: { [key: string]: LucideIcon } = {
   youtube: Youtube,
   blog: Rss,
 };
+
+console.log("content-constants.ts: platformIconMap initialized:", platformIconMap);
 
 export const categoryIconMap: { [key: string]: LucideIcon } = {
   productivity: Clock,

@@ -30,15 +30,23 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import PageLayout from "@/components/PageLayout";
 
 const ContentDetail = () => {
+  console.log("ContentDetail: Component rendering");
+  
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data: contentData, isLoading } = useContentDiscoveryData();
   const { isSaved, toggleSaved } = useSavedContent();
   
+  console.log("ContentDetail: Params:", { id });
+  console.log("ContentDetail: Content data:", contentData);
+  
   const content = contentData?.find(item => item.id === id);
   const saved = content ? isSaved(content.id) : false;
   
+  console.log("ContentDetail: Found content:", content);
+  
   if (isLoading) {
+    console.log("ContentDetail: Loading state");
     return (
       <PageLayout>
         <div className="flex justify-center items-center min-h-[400px]">
@@ -49,6 +57,7 @@ const ContentDetail = () => {
   }
   
   if (!content) {
+    console.log("ContentDetail: Content not found");
     return (
       <PageLayout
         title="Content Not Found"
@@ -65,10 +74,12 @@ const ContentDetail = () => {
   }
   
   const handleToggleSave = () => {
+    console.log("ContentDetail: Toggle save called");
     toggleSaved(content);
   };
   
   const handleCopyLink = () => {
+    console.log("ContentDetail: Copy link called");
     navigator.clipboard.writeText(window.location.href);
     showInfo("Content link copied to clipboard!");
   };
@@ -85,6 +96,7 @@ const ContentDetail = () => {
   
   // Generate full article content based on the description
   const generateFullContent = (content: any) => {
+    console.log("ContentDetail: Generating full content");
     const sections = [
       {
         title: "Introduction",

@@ -12,10 +12,13 @@ interface PlatformIconProps {
   iconClassName?: string;
 }
 
-const PlatformIcon = ({ platform, className, iconClassName }: PlatformIconProps) => { // Removed React.FC
+const PlatformIcon = ({ platform, className, iconClassName }: PlatformIconProps) => {
+  console.log("PlatformIcon: Rendering for platform:", platform);
+  
   const IconComponent = platformIconMap[platform.toLowerCase()];
 
   if (!IconComponent) {
+    console.warn("PlatformIcon: No icon found for platform:", platform);
     return null; // Or a default icon if preferred
   }
 

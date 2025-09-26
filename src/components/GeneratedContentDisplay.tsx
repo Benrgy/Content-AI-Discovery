@@ -48,9 +48,6 @@ const GeneratedContentDisplay = ({
   isRegeneratingContent,
   isRegeneratingImages
 }: GeneratedContentDisplayProps) => {
-  // Get platform icon
-  const PlatformIcon = generatedContent?.platform ? platformIconMap[generatedContent.platform] : undefined;
-  
   // Handle copy content
   const handleCopyContent = () => {
     if (!generatedContent) return;
@@ -132,7 +129,18 @@ const GeneratedContentDisplay = ({
           {generatedContent && (
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                {PlatformIcon && <PlatformIcon className="h-5 w-5" />}
+                {generatedContent.platform && (
+                  <div className="flex items-center justify-center rounded-full p-1 bg-muted">
+                    {platformIconMap[generatedContent.platform] ? (
+                      (() => {
+                        const IconComponent = platformIconMap[generatedContent.platform];
+                        return <IconComponent className="h-5 w-5" />;
+                      })()
+                    ) : (
+                      <span className="text-xs capitalize">{generatedContent.platform}</span>
+                    )}
+                  </div>
+                )}
                 <h3 className="font-medium capitalize">{generatedContent.platform} Content</h3>
                 {generatedContent.performanceEstimate && (
                   <Badge className="ml-auto">

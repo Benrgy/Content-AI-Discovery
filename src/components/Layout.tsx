@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import ScrollToTopButton from "./ScrollToTopButton";
 
 const Layout = () => {
+  console.log("Layout component rendering");
+  
   return (
     <div className="flex flex-col min-h-screen">
       <Header />

@@ -17,17 +17,21 @@ interface ContentCardProps extends ContentItem {
 }
 
 const ContentCard = (props: ContentCardProps) => {
+  console.log("ContentCard: Rendering with props:", props);
+  
   const { id, title, description, platform, category, engagement, imageUrl, link, performanceScore, onViewDetails } = props;
   const { isSaved, toggleSaved } = useSavedContent();
   const saved = isSaved(id);
 
   const handleToggleSave = (event: React.MouseEvent) => {
+    console.log("ContentCard: handleToggleSave called");
     event.preventDefault();
     event.stopPropagation();
     toggleSaved(props);
   };
 
   const handleCopyLink = (event: React.MouseEvent) => {
+    console.log("ContentCard: handleCopyLink called");
     event.preventDefault();
     event.stopPropagation();
     // Copy the internal app link instead of external link
@@ -37,12 +41,14 @@ const ContentCard = (props: ContentCardProps) => {
   };
   
   const handleCardClick = () => {
+    console.log("ContentCard: handleCardClick called");
     if (onViewDetails) {
       onViewDetails(props);
     }
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log("ContentCard: handleImageError called");
     const target = e.target as HTMLImageElement;
     target.style.display = 'none';
   };

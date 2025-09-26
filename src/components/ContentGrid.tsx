@@ -26,6 +26,8 @@ const ContentGrid = ({
   onRetry,
   onClearFilters
 }: ContentGridProps) => {
+  console.log("ContentGrid: Rendering with props:", { isLoading, isError, isFetching, contentLength: content.length });
+  
   return (
     <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
       {isLoading ? (

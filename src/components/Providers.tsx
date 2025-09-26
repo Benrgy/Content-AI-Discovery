@@ -21,6 +21,8 @@ interface ProvidersProps {
 }
 
 const Providers = ({ children }: ProvidersProps) => {
+  console.log("Providers component rendering");
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider 

@@ -48,6 +48,11 @@ const ContentSearchControls = ({
   currentSort,
   onSortChange
 }: ContentSearchControlsProps) => {
+  console.log("ContentSearchControls: Rendering with props:", { 
+    searchQuery, 
+    totalAppliedFilters, 
+    currentSort 
+  });
   
   return (
     <div className="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full">

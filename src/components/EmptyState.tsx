@@ -25,6 +25,8 @@ const EmptyState = ({
   icon: Icon = Info,
   actionButton,
 }: EmptyStateProps) => {
+  console.log("EmptyState: Rendering with props:", { title, description, actionButton });
+  
   return (
     <div className="max-w-xl mx-auto flex items-center justify-center flex-grow">
       <Alert className="flex flex-col items-center text-center p-6">

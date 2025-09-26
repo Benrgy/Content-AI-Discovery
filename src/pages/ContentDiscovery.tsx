@@ -26,6 +26,8 @@ const sortOptions: SortOption[] = [
 ];
 
 const ContentDiscovery = () => {
+  console.log("ContentDiscovery: Component rendering");
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
@@ -54,6 +56,8 @@ const ContentDiscovery = () => {
   };
 
   const processedContent = useMemo(() => {
+    console.log("ContentDiscovery: Processing content with filters");
+    
     if (!contentData) return [];
 
     let filtered = contentData;
@@ -118,26 +122,31 @@ const ContentDiscovery = () => {
   }, [contentData, searchQuery, appliedPlatforms, appliedCategories, appliedPerformanceRange, currentSort]);
 
   const handleSearchChange = (query: string) => {
+    console.log("ContentDiscovery: Search query changed to:", query);
     setSearchQuery(query);
   };
 
   const handleClearSearch = () => {
+    console.log("ContentDiscovery: Clearing search");
     setSearchQuery("");
   };
 
   const handlePlatformChange = (platform: string, checked: boolean) => {
+    console.log("ContentDiscovery: Platform change:", platform, checked);
     setSelectedPlatforms(prev =>
       checked ? [...prev, platform] : prev.filter(p => p !== platform)
     );
   };
 
   const handleCategoryChange = (category: string, checked: boolean) => {
+    console.log("ContentDiscovery: Category change:", category, checked);
     setSelectedCategories(prev =>
       checked ? [...prev, category] : prev.filter(c => c !== category)
     );
   };
 
   const handleApplyFilters = () => {
+    console.log("ContentDiscovery: Applying filters");
     setAppliedPlatforms(selectedPlatforms);
     setAppliedCategories(selectedCategories);
     setAppliedPerformanceRange(performanceScoreRange);
@@ -145,6 +154,7 @@ const ContentDiscovery = () => {
   };
 
   const handleClearFilters = () => {
+    console.log("ContentDiscovery: Clearing all filters");
     setSelectedPlatforms([]);
     setSelectedCategories([]);
     setPerformanceScoreRange([0, 100]);
@@ -156,16 +166,19 @@ const ContentDiscovery = () => {
   };
 
   const handleRemovePlatform = (platform: string) => {
+    console.log("ContentDiscovery: Removing platform filter:", platform);
     setAppliedPlatforms(prev => prev.filter(p => p !== platform));
     setSelectedPlatforms(prev => prev.filter(p => p !== platform));
   };
 
   const handleRemoveCategory = (category: string) => {
+    console.log("ContentDiscovery: Removing category filter:", category);
     setAppliedCategories(prev => prev.filter(c => c !== category));
     setSelectedCategories(prev => prev.filter(c => c !== category));
   };
 
   const handleResetPerformanceRange = () => {
+    console.log("ContentDiscovery: Resetting performance range filter");
     setAppliedPerformanceRange([0, 100]);
     setPerformanceScoreRange([0, 100]);
   };
@@ -176,6 +189,7 @@ const ContentDiscovery = () => {
     (appliedPerformanceRange[0] > 0 || appliedPerformanceRange[1] < 100 ? 1 : 0);
 
   useEffect(() => {
+    console.log("ContentDiscovery: Filter sidebar state changed:", isFilterSidebarOpen);
     if (isFilterSidebarOpen) {
       setSelectedPlatforms(appliedPlatforms);
       setSelectedCategories(appliedCategories);

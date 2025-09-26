@@ -25,7 +25,15 @@ const AppliedFilters = ({
   onClearAllFilters,
   totalAppliedFilters
 }: AppliedFiltersProps) => {
+  console.log("AppliedFilters: Rendering with props:", { 
+    appliedPlatforms, 
+    appliedCategories, 
+    appliedPerformanceRange, 
+    totalAppliedFilters 
+  });
+  
   if (totalAppliedFilters === 0) {
+    console.log("AppliedFilters: No filters applied, returning null");
     return null;
   }
   

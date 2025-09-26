@@ -14,6 +14,8 @@ import ContentDetail from "./pages/ContentDetail";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
+  console.log("App component rendering");
+  
   return (
     <ErrorBoundary>
       <BrowserRouter>

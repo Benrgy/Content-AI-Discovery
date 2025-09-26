@@ -4,6 +4,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ContentCardSkeleton = () => {
+  console.log("ContentCardSkeleton: Rendering");
+  
   return (
     <Card className="flex flex-col h-full">
       <div className="relative w-full h-48 overflow-hidden">
