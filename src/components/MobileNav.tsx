@@ -1,17 +1,17 @@
 "use client";
 
-import React from "react";
+import { useState } from "react"; // Explicitly import useState
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { usePublicRoutes } from "@/hooks/use-public-routes"; // Import the new hook
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { usePublicRoutes } from "@/hooks/use-public-routes";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const MobileNav = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Use useState directly
   const location = useLocation();
-  const publicRoutes = usePublicRoutes(); // Use the new hook
+  const publicRoutes = usePublicRoutes();
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>

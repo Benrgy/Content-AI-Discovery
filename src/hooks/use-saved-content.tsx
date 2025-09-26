@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
-import { ContentItem } from "@/types/content"; // Import ContentItem from the new types file
-import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
+import { useState, useEffect } from "react"; // Explicitly import useState and useEffect
+import { ContentItem } from "@/types/content";
+import { showSuccess, showInfo } from "@/utils/toast";
 
 const LOCAL_STORAGE_KEY = "savedContentItems";
 
 export function useSavedContent() {
-  const [savedItems, setSavedItems] = React.useState<ContentItem[]>(() => {
+  const [savedItems, setSavedItems] = useState<ContentItem[]>(() => { // Use useState directly
     if (typeof window !== "undefined") {
       const storedItems = localStorage.getItem(LOCAL_STORAGE_KEY);
       return storedItems ? JSON.parse(storedItems) : [];
@@ -15,7 +15,7 @@ export function useSavedContent() {
     return [];
   });
 
-  React.useEffect(() => {
+  useEffect(() => { // Use useEffect directly
     if (typeof window !== "undefined") {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedItems));
     }
@@ -28,10 +28,10 @@ export function useSavedContent() {
   const toggleSaved = (item: ContentItem) => {
     setSavedItems((prevItems) => {
       if (isSaved(item.id)) {
-        showInfo(`Removed "${item.title}" from saved content.`); // Using utility function
+        showInfo(`Removed "${item.title}" from saved content.`);
         return prevItems.filter((savedItem) => savedItem.id !== item.id);
       } else {
-        showSuccess(`Saved "${item.title}"!`); // Using utility function
+        showSuccess(`Saved "${item.title}"!`);
         return [...prevItems, item];
       }
     });

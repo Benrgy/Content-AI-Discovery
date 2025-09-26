@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState } from "react"; // Explicitly import useState
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -8,22 +8,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Copy, XCircle, Loader2 } from "lucide-react";
 import { showSuccess, showInfo } from "@/utils/toast";
-import { contentPlatforms, contentTones, contentLengths } from "@/constants/content-constants"; // Import from the centralized constants
+import { contentPlatforms, contentTones, contentLengths } from "@/constants/content-constants";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import PageLayout from "@/components/PageLayout"; // Import PageLayout
+import PageLayout from "@/components/PageLayout";
 
 const ContentGeneration = () => {
-  const [prompt, setPrompt] = React.useState("");
-  const [platform, setPlatform] = React.useState("linkedin");
-  const [tone, setTone] = React.useState("professional");
-  const [length, setLength] = React.useState("medium");
-  const [generatedContent, setGeneratedContent] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [prompt, setPrompt] = useState(""); // Use useState directly
+  const [platform, setPlatform] = useState("linkedin"); // Use useState directly
+  const [tone, setTone] = useState("professional"); // Use useState directly
+  const [length, setLength] = useState("medium"); // Use useState directly
+  const [generatedContent, setGeneratedContent] = useState(""); // Use useState directly
+  const [isLoading, setIsLoading] = useState(false); // Use useState directly
 
   const handleGenerateContent = () => {
     setIsLoading(true);
-    setGeneratedContent(""); // Clear previous content
-    // Simulate API call
+    setGeneratedContent("");
     setTimeout(() => {
       setGeneratedContent(
         `Here's your ${length}, ${tone} content for ${platform}:\n\n` +

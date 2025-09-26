@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState } from "react"; // Explicitly import useState
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Filter, Info, AlertCircle, XCircle, Loader2 } from "lucide-react";
@@ -11,13 +11,13 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import EmptyState from "@/components/EmptyState";
-import PageLayout from "@/components/PageLayout"; // Import PageLayout
+import PageLayout from "@/components/PageLayout";
 
 const ContentDiscovery = () => {
-  const [searchQuery, setSearchQuery] = React.useState("");
-  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = React.useState(false);
-  const [selectedPlatforms, setSelectedPlatforms] = React.useState<string[]>([]);
-  const [appliedPlatforms, setAppliedPlatforms] = React.useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState(""); // Use useState directly
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false); // Use useState directly
+  const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]); // Use useState directly
+  const [appliedPlatforms, setAppliedPlatforms] = useState<string[]>([]); // Use useState directly
 
   const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData();
 
