@@ -43,9 +43,11 @@ const sidebarMenuButtonVariants = cva(
   }
 );
 
+type SidebarMenuButtonProps = React.ComponentProps<"button"> & VariantProps<typeof sidebarMenuButtonVariants>;
+
 const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<"button"> & VariantProps<typeof sidebarMenuButtonVariants>
+  SidebarMenuButtonProps
 >(({ className, variant, size, ...props }, ref) => (
   <button
     ref={ref}
@@ -74,7 +76,7 @@ const Sidebar = React.forwardRef<
     },
     ref
   ) => {
-    const { isMobile, isLoading } = useIsMobile();
+    const isMobile = useIsMobile();
     const [state, setState] = React.useState<"expanded" | "collapsed">(
       "expanded"
     );
@@ -103,10 +105,6 @@ const Sidebar = React.forwardRef<
       document.addEventListener("mousedown", handleClickOutside);
       return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [isMobile, state, closeMobile]);
-
-    if (isLoading) {
-      return null;
-    }
 
     return (
       <TooltipProvider delayDuration={0}>
@@ -172,7 +170,7 @@ const SidebarHeader = React.forwardRef<
       ref={ref}
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
-    />
+  />
   );
 });
 SidebarHeader.displayName = "SidebarHeader";
@@ -353,7 +351,7 @@ const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
-  const { isMobile } = useIsMobile();
+  const isMobile = useIsMobile();
 
   return (
     <Button
