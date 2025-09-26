@@ -48,16 +48,28 @@ const ContentSearchControls = ({
   currentSort,
   onSortChange
 }: ContentSearchControlsProps) => {
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log("Input changed:", value); // Debug log
+    onSearchChange(value);
+  };
+
+  const handleClearClick = () => {
+    console.log("Clear search clicked"); // Debug log
+    onClearSearch();
+  };
+
   return (
     <div className="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full">
       <div className="relative flex-grow">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
         <Input
           type="text"
-          placeholder="Search for trending content by topic or keyword..."
+          placeholder="Search for trending content by topic or keyword... (try 'productivity', 'AI', 'TikTok')"
           className="w-full pl-10 pr-10 py-2 rounded-md border border-input focus:ring-2 focus:ring-primary focus:border-transparent"
           value={searchQuery}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={handleInputChange}
           aria-label="Search for content"
         />
         {searchQuery && (
@@ -67,7 +79,7 @@ const ContentSearchControls = ({
                 variant="ghost"
                 size="icon"
                 className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-foreground"
-                onClick={onClearSearch}
+                onClick={handleClearClick}
                 aria-label="Clear search query"
               >
                 <XCircle className="h-5 w-5" />

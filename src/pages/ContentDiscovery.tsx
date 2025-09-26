@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 import PageLayout from "@/components/PageLayout";
 import ContentSearchControls from "@/components/ContentSearchControls";
@@ -75,6 +75,7 @@ const ContentDiscovery = () => {
     setAppliedPlatforms([]);
     setAppliedCategories([]);
     setAppliedPerformanceRange([0, 100]);
+    setSearchQuery(""); // Also clear search
     setIsFilterSidebarOpen(false);
   };
 
@@ -101,84 +102,111 @@ const ContentDiscovery = () => {
     setSearchQuery("");
   };
 
+  // Handle search change
+  const handleSearchChange = (query: string) => {
+    console.log("Search query changed:", query); // Debug log
+    setSearchQuery(query);
+  };
+
   // Calculate total applied filters
   const totalAppliedFilters = 
     appliedPlatforms.length + 
     appliedCategories.length + 
     (appliedPerformanceRange[0] > 0 || appliedPerformanceRange[1] < 100 ? 1 : 0);
 
-  // Filter content based on all criteria
-  const filteredContent = (contentData || []).filter((content) => {
-    // Search query filter
-    const matchesSearch = 
-      searchQuery === "" ||
-      content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      content.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))) ||
-      content.platform.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (content.category && content.category.toLowerCase().includes(searchQuery.toLowerCase()));
+  // Filter and sort content using useMemo for performance
+  const filteredAndSortedContent = useMemo(() => {
+    console.log("Filtering content with query:", searchQuery); // Debug log
+    console.log("Content data:", contentData?.length, "items"); // Debug log
     
-    // Platform filter
-    const matchesPlatform = 
-      appliedPlatforms.length === 0 || 
-      appliedPlatforms.includes(content.platform);
-    
-    // Category filter
-    const matchesCategory = 
-      appliedCategories.length === 0 || 
-      (content.category && appliedCategories.includes(content.category));
-    
-    // Performance score filter
-    const matchesPerformance = 
-      (content.performanceScore === undefined) || 
-      (content.performanceScore >= appliedPerformanceRange[0] && 
-       content.performanceScore <= appliedPerformanceRange[1]);
-    
-    return matchesSearch && matchesPlatform && matchesCategory && matchesPerformance;
-  });
+    if (!contentData) return [];
 
-  // Sort the filtered content
-  const sortedContent = [...filteredContent].sort((a, b) => {
-    const { value, direction } = currentSort;
-    
-    if (value === "performanceScore") {
-      const scoreA = a.performanceScore || 0;
-      const scoreB = b.performanceScore || 0;
-      return direction === "asc" ? scoreA - scoreB : scoreB - scoreA;
-    }
-    
-    if (value === "engagementRate") {
-      const rateA = a.engagement.engagementRate || 0;
-      const rateB = b.engagement.engagementRate || 0;
-      return direction === "asc" ? rateA - rateB : rateB - rateA;
-    }
-    
-    if (value === "publishedAt") {
-      const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-      const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      return direction === "asc" ? dateA - dateB : dateB - dateA;
-    }
-    
-    if (value === "likes") {
-      return direction === "asc" 
-        ? a.engagement.likes - b.engagement.likes 
-        : b.engagement.likes - a.engagement.likes;
-    }
-    
-    if (value === "comments") {
-      return direction === "asc" 
-        ? a.engagement.comments - b.engagement.comments 
-        : b.engagement.comments - a.engagement.comments;
-    }
-    
-    if (value === "shares") {
-      return direction === "asc" 
-        ? a.engagement.shares - b.engagement.shares 
-        : b.engagement.shares - a.engagement.shares;
-    }
-    
-    return 0;
-  });
+    // Filter content based on all criteria
+    const filtered = contentData.filter((content) => {
+      // Search query filter - make it more comprehensive
+      const searchLower = searchQuery.toLowerCase().trim();
+      const matchesSearch = 
+        searchQuery === "" ||
+        content.title.toLowerCase().includes(searchLower) ||
+        content.description.toLowerCase().includes(searchLower) ||
+        (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchLower))) ||
+        content.platform.toLowerCase().includes(searchLower) ||
+        (content.category && content.category.toLowerCase().includes(searchLower)) ||
+        (content.author && content.author.name.toLowerCase().includes(searchLower));
+      
+      // Platform filter
+      const matchesPlatform = 
+        appliedPlatforms.length === 0 || 
+        appliedPlatforms.includes(content.platform);
+      
+      // Category filter
+      const matchesCategory = 
+        appliedCategories.length === 0 || 
+        (content.category && appliedCategories.includes(content.category));
+      
+      // Performance score filter
+      const matchesPerformance = 
+        (content.performanceScore === undefined) || 
+        (content.performanceScore >= appliedPerformanceRange[0] && 
+         content.performanceScore <= appliedPerformanceRange[1]);
+      
+      const result = matchesSearch && matchesPlatform && matchesCategory && matchesPerformance;
+      
+      // Debug log for search
+      if (searchQuery && !matchesSearch) {
+        console.log("Content filtered out by search:", content.title, "Query:", searchQuery);
+      }
+      
+      return result;
+    });
+
+    console.log("Filtered results:", filtered.length, "items"); // Debug log
+
+    // Sort the filtered content
+    const sorted = [...filtered].sort((a, b) => {
+      const { value, direction } = currentSort;
+      
+      if (value === "performanceScore") {
+        const scoreA = a.performanceScore || 0;
+        const scoreB = b.performanceScore || 0;
+        return direction === "asc" ? scoreA - scoreB : scoreB - scoreA;
+      }
+      
+      if (value === "engagementRate") {
+        const rateA = a.engagement.engagementRate || 0;
+        const rateB = b.engagement.engagementRate || 0;
+        return direction === "asc" ? rateA - rateB : rateB - rateA;
+      }
+      
+      if (value === "publishedAt") {
+        const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+        const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+        return direction === "asc" ? dateA - dateB : dateB - dateA;
+      }
+      
+      if (value === "likes") {
+        return direction === "asc" 
+          ? a.engagement.likes - b.engagement.likes 
+          : b.engagement.likes - a.engagement.likes;
+      }
+      
+      if (value === "comments") {
+        return direction === "asc" 
+          ? a.engagement.comments - b.engagement.comments 
+          : b.engagement.comments - a.engagement.comments;
+      }
+      
+      if (value === "shares") {
+        return direction === "asc" 
+          ? a.engagement.shares - b.engagement.shares 
+          : b.engagement.shares - a.engagement.shares;
+      }
+      
+      return 0;
+    });
+
+    return sorted;
+  }, [contentData, searchQuery, appliedPlatforms, appliedCategories, appliedPerformanceRange, currentSort]);
 
   // Reset filter selections when sidebar is opened
   useEffect(() => {
@@ -197,7 +225,7 @@ const ContentDiscovery = () => {
       {/* Search and Filter Controls */}
       <ContentSearchControls
         searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
+        onSearchChange={handleSearchChange}
         onClearSearch={handleClearSearch}
         onOpenFilters={() => setIsFilterSidebarOpen(true)}
         totalAppliedFilters={totalAppliedFilters}
@@ -220,9 +248,9 @@ const ContentDiscovery = () => {
 
       {/* Results count and sort info */}
       {!isLoading && !isError && (
-        <div className="max-w-5xl mx-auto mb-4 flex justify-between items-center">
+        <div className="max-w-5xl mx-auto mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <p className="text-sm text-muted-foreground">
-            Showing {sortedContent.length} {sortedContent.length === 1 ? 'result' : 'results'}
+            Showing {filteredAndSortedContent.length} {filteredAndSortedContent.length === 1 ? 'result' : 'results'}
             {searchQuery && ` for "${searchQuery}"`}
           </p>
           <p className="text-sm text-muted-foreground">
@@ -231,12 +259,19 @@ const ContentDiscovery = () => {
         </div>
       )}
 
+      {/* Debug info - remove in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="max-w-5xl mx-auto mb-4 p-2 bg-muted rounded text-xs">
+          <p>Debug: Search="{searchQuery}", Total={contentData?.length}, Filtered={filteredAndSortedContent.length}</p>
+        </div>
+      )}
+
       {/* Content Grid */}
       <ContentGrid
         isLoading={isLoading}
         isError={isError}
         isFetching={isFetching}
-        content={sortedContent}
+        content={filteredAndSortedContent}
         onRetry={refetch}
         onClearFilters={handleClearFilters}
       />

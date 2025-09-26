@@ -4,10 +4,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "1",
     title: "10 Productivity Hacks for Remote Workers in 2024",
-    description: "Discover the top strategies to boost your efficiency and maintain work-life balance while working from home. Essential tips for every remote professional including time-blocking, digital workspace organization, and energy management techniques.",
+    description: "Discover the top strategies to boost your efficiency and maintain work-life balance while working from home. Essential tips for every remote professional including time-blocking, digital workspace organization, and energy management techniques. Learn how to maximize productivity while avoiding burnout.",
     platform: "linkedin",
     category: "productivity",
-    tags: ["remote work", "productivity", "work-life balance"],
+    tags: ["remote work", "productivity", "work-life balance", "time management", "efficiency"],
     performanceScore: 87,
     engagement: { 
       likes: 1200, 
@@ -27,10 +27,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "2",
     title: "The Ultimate Guide to Mastering TikTok Algorithms",
-    description: "Unlock the secrets to going viral on TikTok! This comprehensive guide breaks down how the algorithm works, provides actionable steps to increase your reach, and reveals the best posting times and content strategies used by top creators.",
+    description: "Unlock the secrets to going viral on TikTok! This comprehensive guide breaks down how the algorithm works, provides actionable steps to increase your reach, and reveals the best posting times and content strategies used by top creators. Master TikTok's algorithm and grow your following.",
     platform: "tiktok",
     category: "social media",
-    tags: ["tiktok", "algorithm", "viral content"],
+    tags: ["tiktok", "algorithm", "viral content", "social media growth", "content strategy"],
     performanceScore: 92,
     engagement: { 
       likes: 54000, 
@@ -51,10 +51,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "3",
     title: "5 AI Tools Revolutionizing Digital Marketing",
-    description: "Stay ahead of the curve with these powerful AI tools that are transforming how marketers create, analyze, and optimize campaigns. From content generation to predictive analytics, discover the tools that top marketers are using to gain competitive advantages.",
+    description: "Stay ahead of the curve with these powerful AI tools that are transforming how marketers create, analyze, and optimize campaigns. From content generation to predictive analytics, discover the artificial intelligence tools that top marketers are using to gain competitive advantages and automate their workflows.",
     platform: "twitter",
     category: "marketing",
-    tags: ["ai", "digital marketing", "tools"],
+    tags: ["ai", "artificial intelligence", "digital marketing", "marketing tools", "automation"],
     performanceScore: 78,
     engagement: { 
       likes: 890, 
@@ -74,10 +74,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "4",
     title: "Healthy Meal Prep Ideas for Busy Professionals",
-    description: "Quick and easy meal prep recipes that will save you time and keep you energized throughout your busy week. Perfect for health-conscious individuals who want to maintain nutrition without spending hours in the kitchen. Includes 15 recipes with prep times under 30 minutes.",
+    description: "Quick and easy meal prep recipes that will save you time and keep you energized throughout your busy week. Perfect for health-conscious individuals who want to maintain nutrition without spending hours in the kitchen. Includes 15 healthy recipes with prep times under 30 minutes.",
     platform: "instagram",
     category: "health",
-    tags: ["meal prep", "healthy eating", "recipes"],
+    tags: ["meal prep", "healthy eating", "recipes", "nutrition", "wellness", "fitness"],
     performanceScore: 83,
     engagement: { 
       likes: 2300, 
@@ -97,10 +97,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "5",
     title: "Understanding Web3: The Future of the Internet",
-    description: "A beginner-friendly explanation of Web3, blockchain, NFTs, and decentralized applications. Dive into the next generation of the internet with clear explanations of complex concepts, real-world use cases, and predictions for how Web3 will reshape digital interactions.",
+    description: "A beginner-friendly explanation of Web3, blockchain, NFTs, and decentralized applications. Dive into the next generation of the internet with clear explanations of complex concepts, real-world use cases, and predictions for how Web3 technology will reshape digital interactions and create new opportunities.",
     platform: "youtube",
     category: "technology",
-    tags: ["web3", "blockchain", "crypto"],
+    tags: ["web3", "blockchain", "crypto", "cryptocurrency", "NFT", "decentralized", "technology"],
     performanceScore: 89,
     engagement: { 
       likes: 7500, 
@@ -121,10 +121,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "6",
     title: "Top 7 SEO Trends You Can't Ignore in 2024",
-    description: "Stay competitive in search rankings with these crucial SEO trends. Learn how to adapt your strategy for maximum visibility including AI-powered content optimization, Core Web Vitals, E-A-T signals, and voice search optimization strategies that actually work.",
+    description: "Stay competitive in search rankings with these crucial SEO trends. Learn how to adapt your strategy for maximum visibility including AI-powered content optimization, Core Web Vitals, E-A-T signals, and voice search optimization strategies that actually work for modern websites.",
     platform: "blog",
     category: "marketing",
-    tags: ["seo", "digital marketing", "trends"],
+    tags: ["seo", "search engine optimization", "digital marketing", "trends", "google", "ranking"],
     performanceScore: 76,
     engagement: { 
       likes: 600, 
@@ -144,10 +144,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "7",
     title: "How to Create Viral Short-Form Video Content",
-    description: "Master the art of creating engaging short-form videos that capture attention and drive engagement across platforms. Learn the psychology behind viral content, optimal video lengths, trending audio strategies, and editing techniques used by top creators to get millions of views.",
+    description: "Master the art of creating engaging short-form videos that capture attention and drive engagement across platforms. Learn the psychology behind viral content, optimal video lengths, trending audio strategies, and editing techniques used by top creators to get millions of views on TikTok and Instagram Reels.",
     platform: "tiktok",
     category: "content creation",
-    tags: ["short-form video", "viral content", "content strategy"],
+    tags: ["short-form video", "viral content", "content strategy", "video editing", "social media", "engagement"],
     performanceScore: 94,
     engagement: { 
       likes: 78000, 
@@ -168,10 +168,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "8",
     title: "The Psychology of Viral Content: Why We Share",
-    description: "Explore the psychological triggers that make content shareable and how to incorporate these elements into your content strategy. Discover the six key emotions that drive sharing behavior, the role of social currency, and practical frameworks for creating content that people can't help but share.",
+    description: "Explore the psychological triggers that make content shareable and how to incorporate these elements into your content strategy. Discover the six key emotions that drive sharing behavior, the role of social currency, and practical frameworks for creating content that people can't help but share across social platforms.",
     platform: "blog",
     category: "psychology",
-    tags: ["psychology", "viral content", "social sharing"],
+    tags: ["psychology", "viral content", "social sharing", "content psychology", "behavior", "engagement"],
     performanceScore: 85,
     engagement: { 
       likes: 950, 
@@ -191,10 +191,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "9",
     title: "Building a Personal Brand on LinkedIn: A Step-by-Step Guide",
-    description: "Learn how to establish yourself as a thought leader and build a powerful personal brand on LinkedIn with these proven strategies. From optimizing your profile to creating engaging content, networking effectively, and measuring your brand's impact - everything you need to stand out professionally.",
+    description: "Learn how to establish yourself as a thought leader and build a powerful personal brand on LinkedIn with these proven strategies. From optimizing your profile to creating engaging content, networking effectively, and measuring your brand's impact - everything you need to stand out professionally and grow your career.",
     platform: "linkedin",
     category: "personal branding",
-    tags: ["linkedin", "personal brand", "professional development"],
+    tags: ["linkedin", "personal brand", "professional development", "networking", "career growth", "thought leadership"],
     performanceScore: 81,
     engagement: { 
       likes: 1450, 
@@ -214,10 +214,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "10",
     title: "Instagram Reels vs. TikTok: Which Platform Drives More Engagement?",
-    description: "A comprehensive data-driven comparison of Instagram Reels and TikTok, analyzing which platform offers better engagement opportunities for creators. Includes metrics analysis, audience demographics, algorithm differences, and strategic recommendations for content creators and brands.",
+    description: "A comprehensive data-driven comparison of Instagram Reels and TikTok, analyzing which platform offers better engagement opportunities for creators. Includes metrics analysis, audience demographics, algorithm differences, and strategic recommendations for content creators and brands looking to maximize their social media presence.",
     platform: "instagram",
     category: "social media",
-    tags: ["instagram reels", "tiktok", "platform comparison"],
+    tags: ["instagram reels", "tiktok", "platform comparison", "social media strategy", "engagement", "content creators"],
     performanceScore: 88,
     engagement: { 
       likes: 3200, 
@@ -237,10 +237,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "11",
     title: "How to Create Engaging YouTube Thumbnails That Drive Clicks",
-    description: "Master the art of creating eye-catching thumbnails that increase your click-through rate and help your videos stand out. Learn design principles, color psychology, text placement strategies, A/B testing methods, and tools used by top YouTubers to create thumbnails that get clicked.",
+    description: "Master the art of creating eye-catching thumbnails that increase your click-through rate and help your videos stand out. Learn design principles, color psychology, text placement strategies, A/B testing methods, and tools used by top YouTubers to create thumbnails that get clicked and boost video performance.",
     platform: "youtube",
     category: "content creation",
-    tags: ["youtube", "thumbnails", "ctr optimization"],
+    tags: ["youtube", "thumbnails", "ctr optimization", "video marketing", "design", "youtube growth"],
     performanceScore: 84,
     engagement: { 
       likes: 5600, 
@@ -261,10 +261,10 @@ export const mockContent: ContentItem[] = [
   {
     id: "12",
     title: "The Future of Content Creation: AI Tools Every Creator Should Know",
-    description: "Discover the cutting-edge AI tools that are transforming content creation and how to leverage them to stay ahead of the competition. From writing assistants to video editing, image generation, and analytics - explore the complete toolkit for modern content creators in 2024.",
+    description: "Discover the cutting-edge AI tools that are transforming content creation and how to leverage them to stay ahead of the competition. From writing assistants to video editing, image generation, and analytics - explore the complete artificial intelligence toolkit for modern content creators in 2024 and beyond.",
     platform: "twitter",
     category: "technology",
-    tags: ["ai tools", "content creation", "future tech"],
+    tags: ["ai tools", "artificial intelligence", "content creation", "future tech", "automation", "creator tools"],
     performanceScore: 90,
     engagement: { 
       likes: 1280, 
