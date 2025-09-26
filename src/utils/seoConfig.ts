@@ -6,6 +6,8 @@ export interface SEOConfig {
   ogDescription: string;
   twitterTitle: string;
   twitterDescription: string;
+  structuredData?: Record<string, any>;
+  canonicalUrl?: string;
 }
 
 export const seoConfigs: Record<string, SEOConfig> = {
@@ -16,7 +18,20 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogTitle: 'ContentAI - Discover & Create Viral Content',
     ogDescription: 'AI-powered platform to discover trending content and generate optimized posts for all social platforms',
     twitterTitle: 'ContentAI - AI Content Discovery & Generation',
-    twitterDescription: 'Discover viral trends and create optimized content with AI'
+    twitterDescription: 'Discover viral trends and create optimized content with AI',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ContentAI",
+      "description": "AI-powered content discovery and generation platform",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
   },
   '/discover': {
     title: 'Content Discovery - Find Viral Content | ContentAI',
@@ -25,7 +40,13 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogTitle: 'Discover Viral Content - ContentAI',
     ogDescription: 'Find high-performing content across all major social platforms with engagement analytics',
     twitterTitle: 'Content Discovery - Find Trending Posts',
-    twitterDescription: 'Discover viral content across multiple platforms with ContentAI'
+    twitterDescription: 'Discover viral content across multiple platforms with ContentAI',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Content Discovery",
+      "description": "Discover trending content across social media platforms"
+    }
   },
   '/generate': {
     title: 'AI Content Generation - Create Optimized Posts | ContentAI',
@@ -34,7 +55,13 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogTitle: 'AI Content Generation - ContentAI',
     ogDescription: 'Create platform-optimized content with our advanced AI generation tools',
     twitterTitle: 'AI Content Generation Tool',
-    twitterDescription: 'Generate optimized content for all social platforms with AI'
+    twitterDescription: 'Generate optimized content for all social platforms with AI',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "AI Content Generation",
+      "description": "AI-powered content generation tool for social media"
+    }
   },
   '/analytics': {
     title: 'Content Analytics Dashboard - Performance Metrics | ContentAI',
@@ -43,7 +70,13 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogTitle: 'Content Analytics Dashboard - ContentAI',
     ogDescription: 'Analyze content performance and identify viral patterns with detailed metrics',
     twitterTitle: 'Content Performance Analytics',
-    twitterDescription: 'Track and analyze content engagement metrics'
+    twitterDescription: 'Track and analyze content engagement metrics',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Dashboard",
+      "name": "Content Analytics",
+      "description": "Content performance analytics dashboard"
+    }
   },
   '/saved': {
     title: 'Saved Content - Your Bookmarked Posts | ContentAI',
@@ -52,17 +85,19 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogTitle: 'Saved Content Library - ContentAI',
     ogDescription: 'Access your bookmarked content and generated posts in one place',
     twitterTitle: 'Saved Content Library',
-    twitterDescription: 'Manage your bookmarked and generated content'
-  },
-  '/content/:id': {
-    title: 'Content Details - Performance Analysis | ContentAI',
-    description: 'Detailed analysis of content performance including engagement metrics, platform insights, and performance scores.',
-    keywords: 'content details, performance analysis, engagement metrics, content insights',
-    ogTitle: 'Content Performance Analysis - ContentAI',
-    ogDescription: 'Detailed analysis of content performance and engagement metrics',
-    twitterTitle: 'Content Performance Details',
-    twitterDescription: 'Analyze detailed content performance metrics'
+    twitterDescription: 'Manage your bookmarked and generated content',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Collection",
+      "name": "Saved Content",
+      "description": "Personal collection of saved content items"
+    }
   }
 };
 
 export const getDefaultSEO = (): SEOConfig => seoConfigs['/'];
+
+// Helper function to generate structured data JSON-LD
+export const generateStructuredData = (data: Record<string, any>): string => {
+  return JSON.stringify(data, null, 2);
+};

@@ -5,6 +5,7 @@ import LoadingScreen from "./LoadingScreen";
 import NetworkStatus from "./NetworkStatus";
 import KeyboardShortcuts from "./KeyboardShortcuts";
 import { showSuccess } from "@/utils/toast";
+import { preloadCriticalResources } from "@/utils/preloadUtils";
 
 interface AppInitializerProps {
   children: React.ReactNode;
@@ -16,6 +17,9 @@ const AppInitializer = ({ children }: AppInitializerProps) => {
   useEffect(() => {
     const initializeApp = async () => {
       try {
+        // Preload critical resources
+        preloadCriticalResources();
+        
         // Simulate app initialization
         await new Promise(resolve => setTimeout(resolve, 500));
         
