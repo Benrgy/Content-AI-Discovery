@@ -17,14 +17,14 @@ interface FilterSidebarProps {
   onClearFilters: () => void;
 }
 
-const FilterSidebar: React.FC<FilterSidebarProps> = ({
+const FilterSidebar = ({ // Removed React.FC
   isOpen,
   onOpenChange,
   selectedPlatforms,
   onPlatformChange,
   onApplyFilters,
   onClearFilters,
-}) => {
+}: FilterSidebarProps) => {
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="w-[300px] sm:w-[400px]">
