@@ -4,6 +4,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import ScrollToTopButton from "./ScrollToTopButton"; // Import the new component
 
 const Layout: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Layout: React.FC = () => {
         </div>
       </main>
       <Footer />
+      <ScrollToTopButton /> {/* Add the scroll to top button */}
     </div>
   );
 };
