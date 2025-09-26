@@ -18,6 +18,8 @@ const PlatformDistributionChart = ({
   description = "Content performance by platform",
   height = 300
 }: PlatformDistributionChartProps) => {
+  console.log("PlatformDistributionChart: Component rendering");
+  
   return (
     <Card>
       <CardHeader>

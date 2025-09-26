@@ -51,6 +51,8 @@ const ContentGenerationForm = ({
   isGeneratingContent,
   isGeneratingImages
 }: ContentGenerationFormProps) => {
+  console.log("ContentGenerationForm: Component rendering");
+  
   const [prompt, setPrompt] = useState("");
   const [platform, setPlatform] = useState("linkedin");
   const [tone, setTone] = useState("professional");

@@ -14,6 +14,8 @@ import {
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function ThemeToggle() {
+  console.log("ThemeToggle: Component rendering");
+  
   const { setTheme, theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 

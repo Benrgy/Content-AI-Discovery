@@ -10,6 +10,8 @@ interface ErrorStateProps {
 }
 
 const ErrorState = ({ onRetry, isRetrying }: ErrorStateProps) => {
+  console.log("ErrorState: Component rendering");
+  
   return (
     <Alert variant="destructive" className="mb-8">
       <AlertCircle className="h-4 w-4" />

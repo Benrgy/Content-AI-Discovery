@@ -21,6 +21,8 @@ const TopContentSection = ({
   description = "Content with the highest performance scores",
   limit = 3
 }: TopContentSectionProps) => {
+  console.log("TopContentSection: Component rendering");
+  
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">

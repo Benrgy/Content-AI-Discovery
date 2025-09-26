@@ -18,6 +18,8 @@ interface Notification {
 }
 
 const NotificationCenter = () => {
+  console.log("NotificationCenter: Component rendering");
+  
   const [notifications, setNotifications] = useState<Notification[]>([
     {
       id: "1",

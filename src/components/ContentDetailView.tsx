@@ -29,6 +29,8 @@ interface ContentDetailViewProps {
 }
 
 const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
+  console.log("ContentDetailView: Component rendering");
+  
   const { isSaved, toggleSaved } = useSavedContent();
   const saved = isSaved(content.id);
   

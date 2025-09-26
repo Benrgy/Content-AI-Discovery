@@ -26,6 +26,8 @@ const EngagementTrendChart = ({
   description = "Total engagement trends over time",
   height = 300
 }: EngagementTrendChartProps) => {
+  console.log("EngagementTrendChart: Component rendering");
+  
   if (!data || data.length === 0) {
     return (
       <Card>

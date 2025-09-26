@@ -33,6 +33,8 @@ const CategoryPerformanceChart = ({
   description = "Average performance score by content category",
   layout = "vertical"
 }: CategoryPerformanceChartProps) => {
+  console.log("CategoryPerformanceChart: Component rendering");
+  
   if (!data || data.length === 0) {
     return (
       <Card>

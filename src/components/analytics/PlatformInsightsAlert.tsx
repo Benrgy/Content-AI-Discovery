@@ -8,6 +8,8 @@ interface PlatformInsightsAlertProps {
 }
 
 const PlatformInsightsAlert = ({ platformDistribution }: PlatformInsightsAlertProps) => {
+  console.log("PlatformInsightsAlert: Component rendering");
+  
   // Find top and bottom platforms
   const sortedPlatforms = Object.entries(platformDistribution).sort((a, b) => b[1] - a[1]);
   const topPlatform = sortedPlatforms[0][0];

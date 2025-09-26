@@ -14,6 +14,8 @@ interface PlatformCardsProps {
 }
 
 const PlatformCards = ({ platformDistribution, topPerformingContent }: PlatformCardsProps) => {
+  console.log("PlatformCards: Component rendering");
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {Object.entries(platformDistribution)

@@ -16,6 +16,8 @@ const OverviewMetricCard = ({
   description, 
   valueClassName = "" 
 }: OverviewMetricCardProps) => {
+  console.log("OverviewMetricCard: Component rendering");
+  
   return (
     <Card>
       <CardHeader className="pb-2">

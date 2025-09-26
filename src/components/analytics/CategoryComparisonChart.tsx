@@ -29,6 +29,8 @@ const CategoryComparisonChart = ({
   title = "Category Performance Trends",
   description = "Performance scores by content category"
 }: CategoryComparisonChartProps) => {
+  console.log("CategoryComparisonChart: Component rendering");
+  
   if (!data || data.length === 0) {
     return (
       <Card>

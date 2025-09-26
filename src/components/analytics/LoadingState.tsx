@@ -8,6 +8,8 @@ interface LoadingStateProps {
 }
 
 const LoadingState = ({ cardCount = 4 }: LoadingStateProps) => {
+  console.log("LoadingState: Component rendering");
+  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       {Array.from({ length: cardCount }).map((_, i) => (

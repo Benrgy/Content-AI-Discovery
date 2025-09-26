@@ -11,6 +11,8 @@ interface ContentDetailModalProps {
 }
 
 const ContentDetailModal = ({ content, isOpen, onClose }: ContentDetailModalProps) => {
+  console.log("ContentDetailModal: Component rendering");
+  
   if (!content) return null;
   
   return (

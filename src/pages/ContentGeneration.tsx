@@ -19,6 +19,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, History, Bookmark } from "lucide-react";
 
 const ContentGeneration = () => {
+  console.log("ContentGeneration: Component rendering");
+  
   const location = useLocation();
   const navigate = useNavigate();
   

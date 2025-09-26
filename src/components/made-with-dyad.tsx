@@ -1,6 +1,8 @@
 "use client";
 
 const MadeWithDyad = () => {
+  console.log("MadeWithDyad: Component rendering");
+  
   return (
     <div className="p-4 text-center">
       <a

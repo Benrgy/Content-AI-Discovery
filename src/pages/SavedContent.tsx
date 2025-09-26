@@ -10,6 +10,8 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 
 const SavedContent = () => {
+  console.log("SavedContent: Component rendering");
+  
   const { savedItems } = useSavedContent();
   const [activeTab, setActiveTab] = useState("all");
   

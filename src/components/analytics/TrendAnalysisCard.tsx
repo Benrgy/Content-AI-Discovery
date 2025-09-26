@@ -9,6 +9,8 @@ interface TrendAnalysisCardProps {
 }
 
 const TrendAnalysisCard = ({ analyticsData }: TrendAnalysisCardProps) => {
+  console.log("TrendAnalysisCard: Component rendering");
+  
   // Calculate growth percentage
   const firstDay = analyticsData.engagementOverTime[0].value;
   const lastDay = analyticsData.engagementOverTime[analyticsData.engagementOverTime.length - 1].value;

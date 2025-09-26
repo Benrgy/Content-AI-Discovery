@@ -14,6 +14,8 @@ interface ContentPatternAnalysisProps {
 }
 
 const ContentPatternAnalysis = ({ topContent, analyticsData }: ContentPatternAnalysisProps) => {
+  console.log("ContentPatternAnalysis: Component rendering");
+  
   // Calculate platform distribution
   const platformDistribution = topContent.reduce((acc, content) => {
     acc[content.platform] = (acc[content.platform] || 0) + 1;

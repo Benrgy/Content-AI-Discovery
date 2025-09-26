@@ -8,6 +8,8 @@ import { Home, Search, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 
 const NotFound = () => {
+  console.log("NotFound: Component rendering");
+  
   const location = useLocation();
 
   useEffect(() => {

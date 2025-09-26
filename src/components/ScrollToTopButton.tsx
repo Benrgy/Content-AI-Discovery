@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const ScrollToTopButton = () => {
+  console.log("ScrollToTopButton: Component rendering");
+  
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {

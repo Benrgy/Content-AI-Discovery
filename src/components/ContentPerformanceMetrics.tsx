@@ -13,6 +13,8 @@ interface ContentPerformanceMetricsProps {
 }
 
 const ContentPerformanceMetrics = ({ content }: ContentPerformanceMetricsProps) => {
+  console.log("ContentPerformanceMetrics: Component rendering");
+  
   const { engagement, performanceScore } = content;
   
   // Calculate engagement distribution
