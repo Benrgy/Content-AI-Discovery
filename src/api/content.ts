@@ -8,13 +8,10 @@ import { ContentItem, AnalyticsData, ContentGenerationParams, GeneratedContent, 
 export const fetchContentDiscoveryData = async (): Promise<ContentItem[]> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // Simulate a random error for demonstration (1% chance)
-      if (Math.random() < 0.01) {
-        reject(new Error("Failed to fetch content. Please try again."));
-      } else {
-        resolve([...mockContent]); // Return a copy to avoid mutations
-      }
-    }, 500); // Simulate 500ms loading time
+      // Remove error simulation for now to ensure data loads
+      console.log("API: Returning mock content data:", mockContent.length, "items");
+      resolve([...mockContent]); // Return a copy to avoid mutations
+    }, 100); // Reduce delay to 100ms for faster testing
   });
 };
 
