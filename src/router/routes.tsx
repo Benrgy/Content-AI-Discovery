@@ -1,4 +1,4 @@
-import React from "react";
+import { type ReactNode } from "react"; // Import ReactNode directly
 import Index from "@/pages/Index";
 import ContentDiscovery from "@/pages/ContentDiscovery";
 import ContentGeneration from "@/pages/ContentGeneration";
@@ -8,7 +8,7 @@ import NotFound from "@/pages/NotFound";
 export interface AppRoute {
   path: string;
   name: string;
-  element: React.ReactNode;
+  element: ReactNode; // Use ReactNode directly
   inNav?: boolean;
 }
 
