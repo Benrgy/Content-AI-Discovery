@@ -43,11 +43,6 @@ const Index = () => {
     }
   }, []);
 
-  const handleTourComplete = () => {
-    setShowTour(false);
-    localStorage.setItem('hasCompletedTour', 'true');
-  };
-
   const getTopRecommendations = () => {
     if (!contentData) return [];
     return contentData
@@ -59,7 +54,6 @@ const Index = () => {
     return (
       <PageLayout>
         <div className="flex justify-center py-8">
-          {/* Removed invalid size prop */}
           <LoadingScreen message="Loading trending content..." />
         </div>
       </PageLayout>
@@ -75,7 +69,10 @@ const Index = () => {
       {/* Feature Tour Modal */}
       <FeatureTour 
         isOpen={showTour} 
-        onClose={handleTourComplete} 
+        onClose={() => {
+          setShowTour(false);
+          localStorage.setItem('hasCompletedTour', 'true');
+        }} 
       />
 
       <div className="flex flex-col items-center mb-12">
@@ -187,7 +184,7 @@ const Index = () => {
             </div>
             <CardTitle>Generate Content</CardTitle>
             <CardDescription>
-              Create platform-optimized content variants with our advanced AI generation
+              Create platform-specific content variants with our advanced AI generation
             </CardDescription>
           </CardHeader>
           <CardContent>

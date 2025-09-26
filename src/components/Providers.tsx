@@ -26,7 +26,7 @@ const Providers = ({ children }: ProvidersProps) => {
   console.log("Providers component rendering");
   
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/Content-AI-Discovery">
       <QueryClientProvider client={queryClient}>
         <HelmetProvider>
           <ThemeProvider 
