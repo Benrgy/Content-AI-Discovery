@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   Search, 
   Sparkles, 
@@ -16,8 +15,6 @@ import {
   LineChart 
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
-import NavigationTest from "@/components/NavigationTest";
-import ThemeTest from "@/components/ThemeTest";
 
 const Index = () => {
   return (
@@ -70,16 +67,6 @@ const Index = () => {
             </TooltipContent>
           </Tooltip>
         </div>
-      </div>
-      
-      {/* Theme Test Component - Remove this in production */}
-      <div className="mb-12">
-        <ThemeTest />
-      </div>
-      
-      {/* Navigation Test Component - Remove this in production */}
-      <div className="mb-12">
-        <NavigationTest />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

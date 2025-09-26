@@ -1,10 +1,16 @@
 import { createRoot } from "react-dom/client";
+import { StrictMode } from "react";
 import App from "./App.tsx";
-import "./globals.css";
 import Providers from "./components/Providers.tsx";
-import { StrictMode } from "react"; // Import StrictMode directly from 'react'
+import "./globals.css";
 
-createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
+
+createRoot(rootElement).render(
   <StrictMode>
     <Providers>
       <App />
