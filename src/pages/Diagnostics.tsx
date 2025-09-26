@@ -3,6 +3,7 @@
 import PageLayout from "@/components/PageLayout";
 import DiagnosticTest from "@/components/DiagnosticTest";
 import AnalysisReport from "@/components/AnalysisReport";
+import FinalTest from "@/components/FinalTest";
 
 const Diagnostics = () => {
   return (
@@ -11,6 +12,7 @@ const Diagnostics = () => {
       description="Comprehensive testing and monitoring of all application functionality"
     >
       <div className="space-y-8">
+        <FinalTest />
         <AnalysisReport />
         <DiagnosticTest />
       </div>
