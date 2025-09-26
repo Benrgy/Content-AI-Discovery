@@ -10,10 +10,10 @@ import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navigationRoutes = [
-  { path: "/discover", name: "Discover" },
-  { path: "/generate", name: "Generate" },
-  { path: "/analytics", name: "Analytics" },
-  { path: "/saved", name: "Saved" },
+  { path: "/discover", name: "Discover", inNav: true },
+  { path: "/generate", name: "Generate", inNav: true },
+  { path: "/analytics", name: "Analytics", inNav: true },
+  { path: "/saved", name: "Saved", inNav: true },
 ];
 
 const Header = () => {
@@ -74,6 +74,26 @@ const Header = () => {
                 </TooltipContent>
               </Tooltip>
             ))}
+            {/* Diagnostics link for development */}
+            {process.env.NODE_ENV === 'development' && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    asChild
+                    className={cn(
+                      "text-base",
+                      location.pathname === '/diagnostics' && "border-b-2 border-primary text-primary"
+                    )}
+                  >
+                    <Link to="/diagnostics">Diagnostics</Link>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Application diagnostics</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
           </nav>
         </div>
         <div className="flex items-center space-x-2">
