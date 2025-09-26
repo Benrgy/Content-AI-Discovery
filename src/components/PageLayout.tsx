@@ -1,13 +1,13 @@
 "use client";
 
-import { cn } from "@/lib/utils"; // Import cn for conditional class merging
-import { ReactNode } from "react"; // Import ReactNode directly
+import { cn } from "@/lib/utils";
+import { type ReactNode } from "react"; // Add 'type' keyword
 
 interface PageLayoutProps {
   children: ReactNode;
   className?: string;
-  title?: string; // New prop for page title
-  description?: string; // New prop for page description
+  title?: string;
+  description?: string;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children, className, title, description }) => {

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Info } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { ElementType } from "react"; // Import ElementType directly
+import { type ElementType } from "react"; // Add 'type' keyword
 
 interface EmptyStateProps {
   title: string;
@@ -13,8 +13,8 @@ interface EmptyStateProps {
   icon?: ElementType;
   actionButton?: {
     text: string;
-    to?: string; // For internal links
-    onClick?: () => void; // For external actions
+    to?: string;
+    onClick?: () => void;
     tooltip?: string;
   };
 }
@@ -22,7 +22,7 @@ interface EmptyStateProps {
 const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   description,
-  icon: Icon = Info, // Default to Info icon
+  icon: Icon = Info,
   actionButton,
 }) => {
   return (
