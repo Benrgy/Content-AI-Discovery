@@ -6,11 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Copy, XCircle } from "lucide-react";
+import { Copy, XCircle, Loader2 } from "lucide-react"; // Import Loader2 icon
 import { showSuccess, showInfo } from "@/utils/toast";
 import { contentPlatforms } from "@/constants/platforms";
 import { contentTones, contentLengths } from "@/constants/generationOptions";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -143,7 +143,14 @@ const ContentGeneration = () => {
           </div>
 
           <Button onClick={handleGenerateContent} disabled={isLoading || !prompt.trim()}>
-            {isLoading ? "Generating..." : "Generate Content"}
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Generating...
+              </>
+            ) : (
+              "Generate Content"
+            )}
           </Button>
 
           {generatedContent && (
