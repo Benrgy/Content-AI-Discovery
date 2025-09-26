@@ -16,7 +16,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.2
     },
     imageUrl: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/1",
+    link: "https://www.linkedin.com/pulse/10-productivity-hacks-remote-workers-2024-alex-morgan/",
     publishedAt: "2024-05-15T10:30:00Z",
     author: {
       name: "Alex Morgan",
@@ -40,7 +40,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 5.3
     },
     imageUrl: "https://images.unsplash.com/photo-1611605698335-8b156eddfcd7?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/2",
+    link: "https://www.tiktok.com/@creator/video/7234567890123456789",
     publishedAt: "2024-05-18T14:20:00Z",
     author: {
       name: "Ryan Chen",
@@ -63,7 +63,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.8
     },
     imageUrl: "https://images.unsplash.com/photo-1555949963-aa79dce98d07?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/3",
+    link: "https://twitter.com/sophiawilliams/status/1234567890123456789",
     publishedAt: "2024-05-10T09:15:00Z",
     author: {
       name: "Sophia Williams",
@@ -86,7 +86,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.5
     },
     imageUrl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/4",
+    link: "https://www.instagram.com/p/ABC123DEF456/",
     publishedAt: "2024-05-12T11:45:00Z",
     author: {
       name: "Jamie Oliver",
@@ -110,7 +110,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 2.6
     },
     imageUrl: "https://images.unsplash.com/photo-1639322537228-fefc227777c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/5",
+    link: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     publishedAt: "2024-05-08T16:30:00Z",
     author: {
       name: "Tech Explained",
@@ -133,7 +133,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.2
     },
     imageUrl: "https://images.unsplash.com/photo-1557426272-0a6479ab1188?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/6",
+    link: "https://blog.example.com/seo-trends-2024",
     publishedAt: "2024-05-05T13:20:00Z",
     author: {
       name: "SEO Mastery",
@@ -157,7 +157,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 5.1
     },
     imageUrl: "https://images.unsplash.com/photo-1616469829941-c7200edec809?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/7",
+    link: "https://www.tiktok.com/@creativevisuals/video/7345678901234567890",
     publishedAt: "2024-05-20T10:00:00Z",
     author: {
       name: "Creative Visuals",
@@ -180,7 +180,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.8
     },
     imageUrl: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/8",
+    link: "https://mindmatters.blog/psychology-viral-content",
     publishedAt: "2024-05-14T08:45:00Z",
     author: {
       name: "Mind Matters",
@@ -203,7 +203,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 3.9
     },
     imageUrl: "https://images.unsplash.com/photo-1611944212129-29977ae1398c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/9",
+    link: "https://www.linkedin.com/pulse/building-personal-brand-linkedin-step-by-step-guide-career-growth/",
     publishedAt: "2024-05-16T15:10:00Z",
     author: {
       name: "Career Growth",
@@ -226,7 +226,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.7
     },
     imageUrl: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/10",
+    link: "https://www.instagram.com/p/DEF456GHI789/",
     publishedAt: "2024-05-19T12:30:00Z",
     author: {
       name: "Social Media Insights",
@@ -250,7 +250,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 2.4
     },
     imageUrl: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/11",
+    link: "https://www.youtube.com/watch?v=abc123def456",
     publishedAt: "2024-05-11T14:15:00Z",
     author: {
       name: "Video Creators Hub",
@@ -273,7 +273,7 @@ export const mockContent: ContentItem[] = [
       engagementRate: 4.9
     },
     imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2065&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    link: "https://example.com/content/12",
+    link: "https://twitter.com/futuretechtoday/status/9876543210987654321",
     publishedAt: "2024-05-17T09:40:00Z",
     author: {
       name: "Future Tech Today",
@@ -353,6 +353,12 @@ export const mockGeneratedContent = {
     hashtags: ["remote work", "productivity", "work from home", "time management", "digital workspace", "work-life balance"],
     cta: "Join our newsletter for weekly productivity insights delivered to your inbox.",
     productionNotes: "Format with clear headings and subheadings. Include 2-3 relevant images. Add internal links to related content. Optimize for SEO with target keyword 'remote work productivity hacks'."
+  },
+  linkedin: {
+    content: "🚀 After 5 years of remote work, here are the 10 productivity hacks that actually moved the needle:\n\n1️⃣ 90-minute focus blocks (game-changer!)\n2️⃣ Digital workspace organization\n3️⃣ The 2-minute rule for small tasks\n4️⃣ Time-blocking for deep work\n5️⃣ Pomodoro technique variations\n6️⃣ Environment optimization\n7️⃣ Workday shutdown ritual\n8️⃣ Communication boundaries\n9️⃣ Energy management over time management\n🔟 Regular productivity audits\n\nThe biggest impact? Hack #7 - creating a clear end to my workday. It prevented burnout and actually made me MORE productive during work hours.\n\nRemote work isn't just about flexibility - it's about intentional systems that support both performance and wellbeing.\n\nWhat's your #1 remote work productivity tip? 👇",
+    hashtags: ["#RemoteWork", "#Productivity", "#WorkFromHome", "#ProfessionalDevelopment", "#WorkLifeBalance"],
+    cta: "Follow for more remote work insights and career growth tips!",
+    productionNotes: "Use numbered list format for easy scanning. Include relevant emojis. Post during peak LinkedIn hours (8-10 AM or 12-2 PM). Engage with comments within first hour."
   }
 };
 

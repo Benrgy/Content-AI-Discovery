@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import ContentDetailView from "./ContentDetailView";
 import { ContentItem } from "@/types/content";
 
@@ -15,8 +15,10 @@ const ContentDetailModal = ({ content, isOpen, onClose }: ContentDetailModalProp
   
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-5xl w-[95vw] max-h-[90vh] overflow-y-auto p-6">
-        <ContentDetailView content={content} onClose={onClose} />
+      <DialogContent className="max-w-6xl w-[95vw] max-h-[90vh] overflow-y-auto p-0">
+        <div className="p-6">
+          <ContentDetailView content={content} onClose={onClose} />
+        </div>
       </DialogContent>
     </Dialog>
   );

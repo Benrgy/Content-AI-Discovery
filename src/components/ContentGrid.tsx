@@ -38,7 +38,9 @@ const ContentGrid = ({
   
   const handleCloseDetailModal = () => {
     setIsDetailModalOpen(false);
-    setSelectedContent(null);
+    setTimeout(() => {
+      setSelectedContent(null);
+    }, 300); // Wait for modal close animation
   };
   
   return (

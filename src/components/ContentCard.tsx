@@ -40,6 +40,11 @@ const ContentCard = (props: ContentCardProps) => {
     }
   };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    target.style.display = 'none';
+  };
+
   return (
     <Card 
       className={`flex flex-col h-full overflow-hidden transition-all duration-200 hover:shadow-md ${onViewDetails ? 'cursor-pointer' : ''}`}
@@ -51,6 +56,7 @@ const ContentCard = (props: ContentCardProps) => {
             src={imageUrl}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            onError={handleImageError}
           />
           <div className="absolute top-2 left-2 flex gap-2">
             <PlatformIcon platform={platform} className="bg-background/80 text-foreground" />

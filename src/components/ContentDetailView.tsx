@@ -12,7 +12,8 @@ import {
   BookmarkCheck, 
   Link2, 
   Sparkles,
-  User
+  User,
+  X
 } from "lucide-react";
 import { ContentItem } from "@/types/content";
 import { useSavedContent } from "@/hooks/use-saved-content";
@@ -55,14 +56,16 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
       <div className="lg:col-span-2 space-y-6">
         <Card>
           <CardHeader className="pb-2">
-            <div className="flex items-center gap-2 mb-2">
-              <PlatformIcon platform={content.platform} />
-              {content.category && (
-                <Badge variant="outline" className="capitalize">
-                  {content.category}
-                </Badge>
-              )}
-              <div className="flex items-center ml-auto">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <PlatformIcon platform={content.platform} />
+                {content.category && (
+                  <Badge variant="outline" className="capitalize">
+                    {content.category}
+                  </Badge>
+                )}
+              </div>
+              <div className="flex items-center gap-2">
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button 
@@ -82,6 +85,21 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
                     <p>{saved ? "Unsave content" : "Save content"}</p>
                   </TooltipContent>
                 </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={onClose}
+                      aria-label="Close modal"
+                    >
+                      <X className="h-5 w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Close</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
             </div>
             <CardTitle className="text-2xl">{content.title}</CardTitle>
@@ -97,6 +115,10 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
                 src={content.imageUrl} 
                 alt={content.title} 
                 className="w-full h-auto rounded-md object-cover max-h-[400px]"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                }}
               />
             </div>
           )}
@@ -155,7 +177,14 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
             <CardContent className="flex flex-col items-center text-center">
               <Avatar className="h-20 w-20 mb-4">
                 {content.author.avatar ? (
-                  <AvatarImage src={content.author.avatar} alt={content.author.name} />
+                  <AvatarImage 
+                    src={content.author.avatar} 
+                    alt={content.author.name}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
                 ) : (
                   <AvatarFallback>
                     <User className="h-8 w-8" />
@@ -169,10 +198,8 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
                 </p>
               )}
               <div className="mt-4 w-full">
-                <Button variant="outline" className="w-full" asChild>
-                  <a href="#" onClick={(e) => e.preventDefault()}>
-                    View Profile
-                  </a>
+                <Button variant="outline" className="w-full" disabled>
+                  View Profile (Demo)
                 </Button>
               </div>
             </CardContent>
@@ -197,12 +224,6 @@ const ContentDetailView = ({ content, onClose }: ContentDetailViewProps) => {
             </Button>
           </CardContent>
         </Card>
-        
-        <div className="mt-6">
-          <Button variant="outline" className="w-full" onClick={onClose}>
-            Back to Discovery
-          </Button>
-        </div>
       </div>
     </div>
   );
