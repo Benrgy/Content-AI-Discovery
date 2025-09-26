@@ -19,7 +19,8 @@ import {
   Loader2,
   Send,
   Clock,
-  User
+  User,
+  RefreshCw
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGitHubSync } from "@/hooks/use-github-sync";

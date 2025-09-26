@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { 
@@ -17,11 +18,14 @@ import {
   Upload,
   Clock,
   User,
-  GitBranch
+  GitBranch,
+  XCircle,
+  Loader2,
+  AlertCircle
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGitHubSync } from "@/hooks/use-github-sync";
-import { showSuccess, showError } from "@/utils/toast";
+import { showSuccess, showError, showInfo } from "@/utils/toast";
 import { formatRelativeTime } from "@/lib/utils";
 
 interface GitHubContentViewerProps {
@@ -254,9 +258,10 @@ const GitHubContentViewer = ({ filePath = 'content-ai-data.json', defaultContent
         )}
 
         <div>
-          <Label>File Content</Label>
+          <Label htmlFor="content-editor">File Content</Label>
           {isEditing ? (
             <Textarea
+              id="content-editor"
               value={formatJsonContent(content)}
               onChange={(e) => {
                 try {

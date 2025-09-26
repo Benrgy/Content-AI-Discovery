@@ -11,7 +11,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { 
   Github, 
   Play,
-  Settings,
+  Settings as SettingsIcon,
   FileText,
   Download,
   Upload,
@@ -19,7 +19,9 @@ import {
   XCircle,
   Loader2,
   Zap,
-  Workflow
+  Workflow,
+  Eye,
+  RefreshCw
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGitHubSync } from "@/hooks/use-github-sync";
@@ -257,7 +259,7 @@ jobs:
             onClick={() => setShowCreateWorkflow(!showCreateWorkflow)}
             className="gap-2"
           >
-            <Settings className="h-4 w-4" />
+            <SettingsIcon className="h-4 w-4" />
             Create Workflow
           </Button>
           <Button

@@ -14,12 +14,16 @@ import {
   Activity,
   BarChart3,
   Clock,
-  Download
+  Download,
+  XCircle,
+  Loader2,
+  User
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGitHubSync } from "@/hooks/use-github-sync";
 import { showSuccess, showError } from "@/utils/toast";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from "recharts";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface GitHubAnalyticsProps {
   repo?: string;

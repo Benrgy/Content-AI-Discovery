@@ -5,7 +5,7 @@ import GitHubSettings from "@/components/GitHubSettings";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
-  Settings, 
+  Settings as SettingsIcon, 
   Github, 
   User,
   Bell,
@@ -33,7 +33,7 @@ const Settings = () => {
         {/* General Settings */}
         <section>
           <div className="flex items-center gap-2 mb-4">
-            <Settings className="h-5 w-5" />
+            <SettingsIcon className="h-5 w-5" />
             <h2 className="text-xl font-semibold">General Settings</h2>
           </div>
           <Card>

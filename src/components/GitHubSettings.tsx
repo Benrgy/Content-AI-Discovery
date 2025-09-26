@@ -13,14 +13,16 @@ import {
   Save, 
   RefreshCw,
   GitBranch,
-  Settings,
+  Settings as SettingsIcon,
   CheckCircle,
-  XCircle
+  XCircle,
+  Loader2
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useGitHubSync } from "@/hooks/use-github-sync";
 import { showSuccess, showError } from "@/utils/toast";
 import { useLocalStorage } from "@/hooks/use-local-storage";
+import { Switch } from "@/components/ui/switch";
 
 const GitHubSettings = () => {
   const [token, setToken] = useLocalStorage<string>('github-token', '');
@@ -61,7 +63,7 @@ const GitHubSettings = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <Alert>
-          <Settings className="h-4 w-4" />
+          <SettingsIcon className="h-4 w-4" />
           <AlertTitle>GitHub Configuration</AlertTitle>
           <AlertDescription>
             Configure your GitHub integration for seamless content synchronization.
