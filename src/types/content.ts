@@ -1,5 +1,3 @@
-"use client";
-
 export interface ContentItem {
   id: string;
   title: string;
