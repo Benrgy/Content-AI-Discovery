@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto flex-grow"> {/* Added flex-grow */}
+    <div className="flex flex-col items-center justify-center text-center max-w-2xl mx-auto flex-grow">
       <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 dark:text-white leading-tight">
         Welcome to ContentAI
       </h1>

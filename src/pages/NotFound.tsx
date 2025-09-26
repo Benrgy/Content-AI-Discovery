@@ -13,11 +13,11 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg p-6 flex-grow"> {/* Added flex-grow */}
+    <div className="flex flex-col items-center justify-center rounded-lg p-6 flex-grow">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4">404</h1>
         <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">Oops! Page not found</p>
-        <Button asChild> {/* Use Button as a child of Link */}
+        <Button asChild>
           <Link to="/">
             Return to Home
           </Link>
