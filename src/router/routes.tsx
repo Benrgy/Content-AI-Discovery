@@ -23,7 +23,7 @@ export const appRoutes: AppRoute[] = [
   },
   {
     path: "/discover",
-    name: "Discover Content",
+    name: "Discover",
     element: <ContentDiscovery />,
     inNav: true,
   },
@@ -35,7 +35,7 @@ export const appRoutes: AppRoute[] = [
   },
   {
     path: "/generate",
-    name: "Generate Content",
+    name: "Generate",
     element: <ContentGeneration />,
     inNav: true,
   },
@@ -47,7 +47,7 @@ export const appRoutes: AppRoute[] = [
   },
   {
     path: "/saved",
-    name: "Saved Content",
+    name: "Saved",
     element: <SavedContent />,
     inNav: true,
   },

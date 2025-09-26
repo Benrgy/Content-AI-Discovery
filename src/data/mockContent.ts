@@ -120,10 +120,6 @@ export const mockContent: ContentItem[] = [
   }
 ];
 
-// Log the mock data to verify it's correct
-console.log("Mock content data loaded:", mockContent.length, "items");
-console.log("Sample item:", mockContent[0]);
-
 export const mockAnalyticsData: AnalyticsData = {
   totalEngagement: 156890,
   averagePerformanceScore: 85.6,

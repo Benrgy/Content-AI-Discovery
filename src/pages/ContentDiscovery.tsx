@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
 import PageLayout from "@/components/PageLayout";
 import ContentSearchControls from "@/components/ContentSearchControls";
 import AppliedFilters from "@/components/AppliedFilters";
 import FilterSidebar from "@/components/FilterSidebar";
 import ContentGrid from "@/components/ContentGrid";
+import { ContentItem } from "@/types/content";
 
 type SortOption = {
   label: string;
@@ -27,15 +28,18 @@ const sortOptions: SortOption[] = [
 ];
 
 const ContentDiscovery = () => {
+  // Search state
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // Filter sidebar state
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
   
-  // Filter states
+  // Filter states (for sidebar)
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [performanceScoreRange, setPerformanceScoreRange] = useState<[number, number]>([0, 100]);
   
-  // Applied filter states
+  // Applied filter states (active filters)
   const [appliedPlatforms, setAppliedPlatforms] = useState<string[]>([]);
   const [appliedCategories, setAppliedCategories] = useState<string[]>([]);
   const [appliedPerformanceRange, setAppliedPerformanceRange] = useState<[number, number]>([0, 100]);
@@ -43,159 +47,55 @@ const ContentDiscovery = () => {
   // Sorting state
   const [currentSort, setCurrentSort] = useState<SortOption>(sortOptions[0]);
 
+  // Data fetching
   const { data: contentData, isLoading, isError, refetch, isFetching } = useContentDiscoveryData();
 
-  // Handle platform filter change
-  const handlePlatformChange = (platform: string, checked: boolean) => {
-    setSelectedPlatforms((prev) =>
-      checked ? [...prev, platform] : prev.filter((p) => p !== platform)
-    );
-  };
-
-  // Handle category filter change
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    setSelectedCategories((prev) =>
-      checked ? [...prev, category] : prev.filter((c) => c !== category)
-    );
-  };
-
-  // Apply all filters
-  const handleApplyFilters = () => {
-    setAppliedPlatforms(selectedPlatforms);
-    setAppliedCategories(selectedCategories);
-    setAppliedPerformanceRange(performanceScoreRange);
-    setIsFilterSidebarOpen(false);
-  };
-
-  // Clear all filters
-  const handleClearFilters = () => {
-    setSelectedPlatforms([]);
-    setSelectedCategories([]);
-    setPerformanceScoreRange([0, 100]);
-    setAppliedPlatforms([]);
-    setAppliedCategories([]);
-    setAppliedPerformanceRange([0, 100]);
-    setSearchQuery(""); // Also clear search
-    setIsFilterSidebarOpen(false);
-  };
-
-  // Remove a single platform filter
-  const handleRemovePlatform = (platform: string) => {
-    setAppliedPlatforms(prev => prev.filter(p => p !== platform));
-    setSelectedPlatforms(prev => prev.filter(p => p !== platform));
-  };
-
-  // Remove a single category filter
-  const handleRemoveCategory = (category: string) => {
-    setAppliedCategories(prev => prev.filter(c => c !== category));
-    setSelectedCategories(prev => prev.filter(c => c !== category));
-  };
-
-  // Reset performance range filter
-  const handleResetPerformanceRange = () => {
-    setAppliedPerformanceRange([0, 100]);
-    setPerformanceScoreRange([0, 100]);
-  };
-
-  // Clear search
-  const handleClearSearch = () => {
-    console.log("Clearing search");
-    setSearchQuery("");
-  };
-
-  // Handle search change
-  const handleSearchChange = (query: string) => {
-    console.log("Search query changed to:", query);
-    setSearchQuery(query);
-  };
-
-  // Calculate total applied filters
-  const totalAppliedFilters = 
-    appliedPlatforms.length + 
-    appliedCategories.length + 
-    (appliedPerformanceRange[0] > 0 || appliedPerformanceRange[1] < 100 ? 1 : 0);
-
-  // Simple search function
-  const searchContent = (content: any, query: string) => {
+  // Search function
+  const searchInContent = (content: ContentItem, query: string): boolean => {
     if (!query || query.trim() === "") return true;
     
     const searchTerm = query.toLowerCase().trim();
-    console.log(`Searching for "${searchTerm}" in:`, content.title);
     
-    // Check title
-    if (content.title && content.title.toLowerCase().includes(searchTerm)) {
-      console.log("✅ Found in title");
-      return true;
-    }
+    // Search in title
+    if (content.title.toLowerCase().includes(searchTerm)) return true;
     
-    // Check description
-    if (content.description && content.description.toLowerCase().includes(searchTerm)) {
-      console.log("✅ Found in description");
-      return true;
-    }
+    // Search in description
+    if (content.description.toLowerCase().includes(searchTerm)) return true;
     
-    // Check tags
-    if (content.tags && Array.isArray(content.tags)) {
-      for (const tag of content.tags) {
-        if (tag.toLowerCase().includes(searchTerm)) {
-          console.log("✅ Found in tag:", tag);
-          return true;
-        }
-      }
-    }
+    // Search in tags
+    if (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchTerm))) return true;
     
-    // Check platform
-    if (content.platform && content.platform.toLowerCase().includes(searchTerm)) {
-      console.log("✅ Found in platform");
-      return true;
-    }
+    // Search in platform
+    if (content.platform.toLowerCase().includes(searchTerm)) return true;
     
-    // Check category
-    if (content.category && content.category.toLowerCase().includes(searchTerm)) {
-      console.log("✅ Found in category");
-      return true;
-    }
+    // Search in category
+    if (content.category && content.category.toLowerCase().includes(searchTerm)) return true;
     
-    // Check author
-    if (content.author && content.author.name && content.author.name.toLowerCase().includes(searchTerm)) {
-      console.log("✅ Found in author");
-      return true;
-    }
+    // Search in author name
+    if (content.author && content.author.name.toLowerCase().includes(searchTerm)) return true;
     
-    console.log("❌ Not found");
     return false;
   };
 
-  // Filter content
-  const getFilteredContent = () => {
-    console.log("=== FILTERING CONTENT ===");
-    console.log("Raw content data:", contentData);
-    console.log("Search query:", searchQuery);
-    
-    if (!contentData) {
-      console.log("No content data available");
-      return [];
-    }
+  // Filter and sort content
+  const processedContent = useMemo(() => {
+    if (!contentData) return [];
 
     let filtered = contentData;
 
     // Apply search filter
-    if (searchQuery && searchQuery.trim() !== "") {
-      console.log("Applying search filter...");
-      filtered = filtered.filter(content => searchContent(content, searchQuery));
-      console.log("After search filter:", filtered.length, "items");
+    if (searchQuery.trim()) {
+      filtered = filtered.filter(content => searchInContent(content, searchQuery));
     }
 
     // Apply platform filter
     if (appliedPlatforms.length > 0) {
       filtered = filtered.filter(content => appliedPlatforms.includes(content.platform));
-      console.log("After platform filter:", filtered.length, "items");
     }
 
     // Apply category filter
     if (appliedCategories.length > 0) {
       filtered = filtered.filter(content => content.category && appliedCategories.includes(content.category));
-      console.log("After category filter:", filtered.length, "items");
     }
 
     // Apply performance score filter
@@ -205,64 +105,109 @@ const ContentDiscovery = () => {
         return content.performanceScore >= appliedPerformanceRange[0] && 
                content.performanceScore <= appliedPerformanceRange[1];
       });
-      console.log("After performance filter:", filtered.length, "items");
     }
 
-    console.log("Final filtered results:", filtered.map(item => item.title));
-    return filtered;
-  };
-
-  // Sort content
-  const getSortedContent = (content: any[]) => {
-    const sorted = [...content].sort((a, b) => {
+    // Sort the filtered content
+    const sorted = [...filtered].sort((a, b) => {
       const { value, direction } = currentSort;
       
-      if (value === "performanceScore") {
-        const scoreA = a.performanceScore || 0;
-        const scoreB = b.performanceScore || 0;
-        return direction === "asc" ? scoreA - scoreB : scoreB - scoreA;
+      let aValue: number = 0;
+      let bValue: number = 0;
+      
+      switch (value) {
+        case "performanceScore":
+          aValue = a.performanceScore || 0;
+          bValue = b.performanceScore || 0;
+          break;
+        case "engagementRate":
+          aValue = a.engagement.engagementRate || 0;
+          bValue = b.engagement.engagementRate || 0;
+          break;
+        case "publishedAt":
+          aValue = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+          bValue = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+          break;
+        case "likes":
+          aValue = a.engagement.likes;
+          bValue = b.engagement.likes;
+          break;
+        case "comments":
+          aValue = a.engagement.comments;
+          bValue = b.engagement.comments;
+          break;
+        case "shares":
+          aValue = a.engagement.shares;
+          bValue = b.engagement.shares;
+          break;
       }
       
-      if (value === "engagementRate") {
-        const rateA = a.engagement.engagementRate || 0;
-        const rateB = b.engagement.engagementRate || 0;
-        return direction === "asc" ? rateA - rateB : rateB - rateA;
-      }
-      
-      if (value === "publishedAt") {
-        const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-        const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-        return direction === "asc" ? dateA - dateB : dateB - dateA;
-      }
-      
-      if (value === "likes") {
-        return direction === "asc" 
-          ? a.engagement.likes - b.engagement.likes 
-          : b.engagement.likes - a.engagement.likes;
-      }
-      
-      if (value === "comments") {
-        return direction === "asc" 
-          ? a.engagement.comments - b.engagement.comments 
-          : b.engagement.comments - a.engagement.comments;
-      }
-      
-      if (value === "shares") {
-        return direction === "asc" 
-          ? a.engagement.shares - b.engagement.shares 
-          : b.engagement.shares - a.engagement.shares;
-      }
-      
-      return 0;
+      return direction === "asc" ? aValue - bValue : bValue - aValue;
     });
 
     return sorted;
+  }, [contentData, searchQuery, appliedPlatforms, appliedCategories, appliedPerformanceRange, currentSort]);
+
+  // Event handlers
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
   };
 
-  const filteredContent = getFilteredContent();
-  const sortedContent = getSortedContent(filteredContent);
+  const handleClearSearch = () => {
+    setSearchQuery("");
+  };
 
-  // Reset filter selections when sidebar is opened
+  const handlePlatformChange = (platform: string, checked: boolean) => {
+    setSelectedPlatforms(prev =>
+      checked ? [...prev, platform] : prev.filter(p => p !== platform)
+    );
+  };
+
+  const handleCategoryChange = (category: string, checked: boolean) => {
+    setSelectedCategories(prev =>
+      checked ? [...prev, category] : prev.filter(c => c !== category)
+    );
+  };
+
+  const handleApplyFilters = () => {
+    setAppliedPlatforms(selectedPlatforms);
+    setAppliedCategories(selectedCategories);
+    setAppliedPerformanceRange(performanceScoreRange);
+    setIsFilterSidebarOpen(false);
+  };
+
+  const handleClearFilters = () => {
+    setSelectedPlatforms([]);
+    setSelectedCategories([]);
+    setPerformanceScoreRange([0, 100]);
+    setAppliedPlatforms([]);
+    setAppliedCategories([]);
+    setAppliedPerformanceRange([0, 100]);
+    setSearchQuery("");
+    setIsFilterSidebarOpen(false);
+  };
+
+  const handleRemovePlatform = (platform: string) => {
+    setAppliedPlatforms(prev => prev.filter(p => p !== platform));
+    setSelectedPlatforms(prev => prev.filter(p => p !== platform));
+  };
+
+  const handleRemoveCategory = (category: string) => {
+    setAppliedCategories(prev => prev.filter(c => c !== category));
+    setSelectedCategories(prev => prev.filter(c => c !== category));
+  };
+
+  const handleResetPerformanceRange = () => {
+    setAppliedPerformanceRange([0, 100]);
+    setPerformanceScoreRange([0, 100]);
+  };
+
+  // Calculate total applied filters
+  const totalAppliedFilters = 
+    appliedPlatforms.length + 
+    appliedCategories.length + 
+    (appliedPerformanceRange[0] > 0 || appliedPerformanceRange[1] < 100 ? 1 : 0);
+
+  // Sync filter selections when sidebar opens
   useEffect(() => {
     if (isFilterSidebarOpen) {
       setSelectedPlatforms(appliedPlatforms);
@@ -300,11 +245,11 @@ const ContentDiscovery = () => {
         totalAppliedFilters={totalAppliedFilters}
       />
 
-      {/* Results count and sort info */}
+      {/* Results count */}
       {!isLoading && !isError && (
         <div className="max-w-5xl mx-auto mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <p className="text-sm text-muted-foreground">
-            Showing {sortedContent.length} {sortedContent.length === 1 ? 'result' : 'results'}
+            Showing {processedContent.length} {processedContent.length === 1 ? 'result' : 'results'}
             {searchQuery && ` for "${searchQuery}"`}
           </p>
           <p className="text-sm text-muted-foreground">
@@ -313,19 +258,12 @@ const ContentDiscovery = () => {
         </div>
       )}
 
-      {/* Debug info */}
-      <div className="max-w-5xl mx-auto mb-4 p-2 bg-muted rounded text-xs">
-        <p>Debug: Search="{searchQuery}", Total={contentData?.length}, Filtered={sortedContent.length}</p>
-        <p>Loading: {isLoading.toString()}, Error: {isError.toString()}</p>
-        <p>Content loaded: {contentData ? "✅" : "❌"}</p>
-      </div>
-
       {/* Content Grid */}
       <ContentGrid
         isLoading={isLoading}
         isError={isError}
         isFetching={isFetching}
-        content={sortedContent}
+        content={processedContent}
         onRetry={refetch}
         onClearFilters={handleClearFilters}
       />

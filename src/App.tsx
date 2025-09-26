@@ -1,18 +1,30 @@
 "use client";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { appRoutes } from "@/router/routes";
 import Layout from "./components/Layout";
 import ErrorBoundary from "./components/ErrorBoundary";
+
+// Import all pages
+import Index from "./pages/Index";
+import ContentDiscovery from "./pages/ContentDiscovery";
+import ContentGeneration from "./pages/ContentGeneration";
+import SavedContent from "./pages/SavedContent";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import ContentDetail from "./pages/ContentDetail";
+import NotFound from "./pages/NotFound";
 
 const App = () => (
   <ErrorBoundary>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {appRoutes.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
+          <Route index element={<Index />} />
+          <Route path="discover" element={<ContentDiscovery />} />
+          <Route path="content/:id" element={<ContentDetail />} />
+          <Route path="generate" element={<ContentGeneration />} />
+          <Route path="analytics" element={<AnalyticsDashboard />} />
+          <Route path="saved" element={<SavedContent />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

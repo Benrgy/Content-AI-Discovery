@@ -49,27 +49,16 @@ const ContentSearchControls = ({
   onSortChange
 }: ContentSearchControlsProps) => {
   
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    console.log("🔍 Search input changed:", `"${value}"`);
-    onSearchChange(value);
-  };
-
-  const handleClearClick = () => {
-    console.log("🔍 Clear search clicked");
-    onClearSearch();
-  };
-
   return (
     <div className="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 w-full">
       <div className="relative flex-grow">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
         <Input
           type="text"
-          placeholder="Try: productivity, AI, TikTok, marketing, remote work..."
-          className="w-full pl-10 pr-10 py-2 rounded-md border border-input focus:ring-2 focus:ring-primary focus:border-transparent"
+          placeholder="Search content... (try: productivity, AI, TikTok, marketing)"
+          className="w-full pl-10 pr-10"
           value={searchQuery}
-          onChange={handleInputChange}
+          onChange={(e) => onSearchChange(e.target.value)}
           aria-label="Search for content"
         />
         {searchQuery && (
@@ -78,11 +67,11 @@ const ContentSearchControls = ({
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 text-muted-foreground hover:text-foreground"
-                onClick={handleClearClick}
-                aria-label="Clear search query"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
+                onClick={onClearSearch}
+                aria-label="Clear search"
               >
-                <XCircle className="h-5 w-5" />
+                <XCircle className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -99,19 +88,18 @@ const ContentSearchControls = ({
               variant="outline" 
               className="flex items-center gap-2" 
               onClick={onOpenFilters}
-              aria-label="Open filters"
             >
               <Filter className="h-4 w-4" />
               <span className="hidden sm:inline">Filters</span>
               {totalAppliedFilters > 0 && (
-                <Badge className="ml-1 bg-primary text-primary-foreground">
+                <Badge variant="secondary" className="ml-1">
                   {totalAppliedFilters}
                 </Badge>
               )}
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>Filter content by platform, category, and performance</p>
+            <p>Filter content</p>
           </TooltipContent>
         </Tooltip>
         
@@ -119,14 +107,14 @@ const ContentSearchControls = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="flex items-center gap-2" aria-label="Sort content">
+                <Button variant="outline" className="flex items-center gap-2">
                   <ArrowUpDown className="h-4 w-4" />
                   <span className="hidden sm:inline">Sort</span>
                 </Button>
               </DropdownMenuTrigger>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Sort content by different metrics</p>
+              <p>Sort content</p>
             </TooltipContent>
           </Tooltip>
           <DropdownMenuContent align="end" className="w-56">
@@ -135,7 +123,7 @@ const ContentSearchControls = ({
             {sortOptions.map((option) => (
               <DropdownMenuItem
                 key={`${option.value}-${option.direction}`}
-                className={currentSort.label === option.label ? "bg-accent text-accent-foreground" : ""}
+                className={currentSort.label === option.label ? "bg-accent" : ""}
                 onClick={() => onSortChange(option)}
               >
                 {option.label}
@@ -146,20 +134,15 @@ const ContentSearchControls = ({
         
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button 
-              variant="outline" 
-              className="flex items-center gap-2"
-              asChild
-              aria-label="View analytics dashboard"
-            >
-              <Link to="/analytics">
+            <Button variant="outline" asChild>
+              <Link to="/analytics" className="flex items-center gap-2">
                 <BarChart className="h-4 w-4" />
                 <span className="hidden sm:inline">Analytics</span>
               </Link>
             </Button>
           </TooltipTrigger>
           <TooltipContent>
-            <p>View performance analytics dashboard</p>
+            <p>View analytics</p>
           </TooltipContent>
         </Tooltip>
       </div>
