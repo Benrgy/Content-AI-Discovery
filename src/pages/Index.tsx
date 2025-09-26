@@ -12,13 +12,29 @@ import {
   Lightbulb, 
   Zap, 
   Clock, 
-  LineChart 
+  LineChart,
+  TrendingUp,
+  Users,
+  Target,
+  Award
 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import ContentRecommendations from "@/components/ContentRecommendations";
+import { useContentDiscoveryData } from "@/hooks/use-content-discovery-data";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const Index = () => {
   console.log("Index: Component rendering");
   
+  const { data: contentData, isLoading } = useContentDiscoveryData();
+  
+  const getTopRecommendations = () => {
+    if (!contentData) return [];
+    return contentData
+      .sort((a, b) => (b.performanceScore || 0) - (a.performanceScore || 0))
+      .slice(0, 3);
+  };
+
   return (
     <PageLayout
       className="items-center justify-center text-center max-w-5xl"
@@ -194,6 +210,22 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Top Performing Content Section */}
+      <div className="mb-12 w-full max-w-5xl">
+        <h2 className="text-2xl font-bold mb-6">Trending Content</h2>
+        {isLoading ? (
+          <div className="flex justify-center py-8">
+            <LoadingSpinner size="lg" text="Loading trending content..." />
+          </div>
+        ) : (
+          <ContentRecommendations
+            title="Top Performing Content"
+            description="Discover what's trending right now"
+            recommendations={getTopRecommendations()}
+          />
+        )}
       </div>
       
       <div className="bg-muted p-6 rounded-lg">
