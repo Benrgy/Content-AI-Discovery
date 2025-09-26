@@ -7,8 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Copy } from "lucide-react";
-import { showSuccess, showInfo } from "@/utils/toast"; // Import utility toast functions
-import { contentPlatforms } from "@/constants/platforms"; // Import the centralized platforms
+import { showSuccess, showInfo } from "@/utils/toast";
+import { contentPlatforms } from "@/constants/platforms";
+import { contentTones, contentLengths } from "@/constants/generationOptions"; // Import new constants
 
 const ContentGeneration = () => {
   const [prompt, setPrompt] = React.useState("");
@@ -30,13 +31,13 @@ const ContentGeneration = () => {
         `It's crafted to be engaging and relevant to your chosen parameters.`
       );
       setIsLoading(false);
-      showSuccess("Content generated successfully!"); // Using utility function
+      showSuccess("Content generated successfully!");
     }, 2000);
   };
 
   const handleCopyContent = () => {
     navigator.clipboard.writeText(generatedContent);
-    showInfo("Generated content copied to clipboard!"); // Using utility function
+    showInfo("Generated content copied to clipboard!");
   };
 
   return (
@@ -86,11 +87,11 @@ const ContentGeneration = () => {
                   <SelectValue placeholder="Select tone" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="professional">Professional</SelectItem>
-                  <SelectItem value="casual">Casual</SelectItem>
-                  <SelectItem value="humorous">Humorous</SelectItem>
-                  <SelectItem value="informative">Informative</SelectItem>
-                  <SelectItem value="inspirational">Inspirational</SelectItem>
+                  {contentTones.map((t) => (
+                    <SelectItem key={t.value} value={t.value}>
+                      {t.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
@@ -102,9 +103,11 @@ const ContentGeneration = () => {
                   <SelectValue placeholder="Select length" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="short">Short</SelectItem>
-                  <SelectItem value="medium">Medium</SelectItem>
-                  <SelectItem value="long">Long</SelectItem>
+                  {contentLengths.map((l) => (
+                    <SelectItem key={l.value} value={l.value}>
+                      {l.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
