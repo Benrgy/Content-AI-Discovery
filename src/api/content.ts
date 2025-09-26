@@ -8,13 +8,13 @@ import { ContentItem, AnalyticsData, ContentGenerationParams, GeneratedContent, 
 export const fetchContentDiscoveryData = async (): Promise<ContentItem[]> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // Simulate a random error for demonstration (2% chance)
-      if (Math.random() < 0.02) {
+      // Simulate a random error for demonstration (1% chance)
+      if (Math.random() < 0.01) {
         reject(new Error("Failed to fetch content. Please try again."));
       } else {
         resolve([...mockContent]); // Return a copy to avoid mutations
       }
-    }, 800); // Simulate 800ms loading time
+    }, 500); // Simulate 500ms loading time
   });
 };
 
@@ -24,13 +24,13 @@ export const fetchContentDiscoveryData = async (): Promise<ContentItem[]> => {
 export const fetchAnalyticsData = async (): Promise<AnalyticsData> => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      // Simulate a random error for demonstration (2% chance)
-      if (Math.random() < 0.02) {
+      // Simulate a random error for demonstration (1% chance)
+      if (Math.random() < 0.01) {
         reject(new Error("Failed to fetch analytics data. Please try again."));
       } else {
         resolve({ ...mockAnalyticsData }); // Return a copy
       }
-    }, 1000); // Simulate 1 second loading time
+    }, 800); // Simulate 800ms loading time
   });
 };
 
@@ -46,8 +46,8 @@ export const generateContent = async (params: ContentGenerationParams): Promise<
         return;
       }
 
-      // Simulate a random error for demonstration (3% chance)
-      if (Math.random() < 0.03) {
+      // Simulate a random error for demonstration (2% chance)
+      if (Math.random() < 0.02) {
         reject(new Error("Failed to generate content. Please try again."));
         return;
       }
@@ -104,8 +104,8 @@ export const generateImages = async (prompt: string): Promise<GeneratedImage[]> 
         return;
       }
 
-      // Simulate a random error for demonstration (3% chance)
-      if (Math.random() < 0.03) {
+      // Simulate a random error for demonstration (2% chance)
+      if (Math.random() < 0.02) {
         reject(new Error("Failed to generate images. Please try again."));
         return;
       }

@@ -111,8 +111,12 @@ const ContentDiscovery = () => {
   const filteredContent = (contentData || []).filter((content) => {
     // Search query filter
     const matchesSearch = 
+      searchQuery === "" ||
       content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      content.description.toLowerCase().includes(searchQuery.toLowerCase());
+      content.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))) ||
+      content.platform.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (content.category && content.category.toLowerCase().includes(searchQuery.toLowerCase()));
     
     // Platform filter
     const matchesPlatform = 
@@ -183,7 +187,7 @@ const ContentDiscovery = () => {
       setSelectedCategories(appliedCategories);
       setPerformanceScoreRange(appliedPerformanceRange);
     }
-  }, [isFilterSidebarOpen]);
+  }, [isFilterSidebarOpen, appliedPlatforms, appliedCategories, appliedPerformanceRange]);
 
   return (
     <PageLayout
@@ -219,6 +223,7 @@ const ContentDiscovery = () => {
         <div className="max-w-5xl mx-auto mb-4 flex justify-between items-center">
           <p className="text-sm text-muted-foreground">
             Showing {sortedContent.length} {sortedContent.length === 1 ? 'result' : 'results'}
+            {searchQuery && ` for "${searchQuery}"`}
           </p>
           <p className="text-sm text-muted-foreground">
             Sorted by: {currentSort.label}
