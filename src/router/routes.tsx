@@ -7,6 +7,7 @@ import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 import ContentDetail from "@/pages/ContentDetail";
 import Diagnostics from "@/pages/Diagnostics";
 import Settings from "@/pages/Settings";
+import GitHubIntegration from "@/pages/GitHubIntegration";
 import NotFound from "@/pages/NotFound";
 
 export interface AppRoute {
@@ -63,6 +64,12 @@ export const appRoutes: AppRoute[] = [
     path: "/diagnostics",
     name: "Diagnostics",
     element: <Diagnostics />,
+    inNav: false,
+  },
+  {
+    path: "/github",
+    name: "GitHub",
+    element: <GitHubIntegration />,
     inNav: false,
   },
   {
