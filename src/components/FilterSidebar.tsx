@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { contentPlatforms } from "@/constants/platforms"; // Import the centralized platforms
+import { contentPlatforms } from "@/constants"; // Import from the centralized constants
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"; // Import Tooltip components
 
 interface FilterSidebarProps {

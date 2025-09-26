@@ -8,8 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Copy, XCircle, Loader2 } from "lucide-react";
 import { showSuccess, showInfo } from "@/utils/toast";
-import { contentPlatforms } from "@/constants/platforms";
-import { contentTones, contentLengths } from "@/constants/generationOptions";
+import { contentPlatforms, contentTones, contentLengths } from "@/constants"; // Import from the centralized constants
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import PageLayout from "@/components/PageLayout"; // Import PageLayout
 
